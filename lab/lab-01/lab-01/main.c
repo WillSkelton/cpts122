@@ -1,7 +1,7 @@
 #include "functions.h"
 
 int main(void) {
-	partOne();
+	partTwo();
 	
 	return 0;
-}
+}	

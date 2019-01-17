@@ -29,3 +29,40 @@ char* stringReverse(char *str, int idx, int size) {
 
 	stringReverse(str, idx + 1, size);
 }
+
+void partTwo(void) {
+	char myString[17] = "My name is Will.";
+
+	char *token;
+
+	token = myStringToke(myString, ' ');
+	
+	while (token != NULL) {
+		printf("%s\n", token);
+		token = myStringToke(myString, ' ');
+	}
+
+	//printf("%s\n", mystring);
+
+	//mystringtoke(mystring, ' ');
+	//printf("%s\n", mystring);
+
+}
+
+char* myStringToke(char *str, char del) {
+	static int idx = 0;
+	char *tokePointer = NULL;
+
+	while(str[idx] != '\0') {
+		if (str[idx] == del) {
+			str[idx] = '\0';
+			++idx;
+			tokePointer = &str[idx];
+			//subString[i + 1] = '\0';
+			break;
+		}
+		++idx;
+	}
+	return tokePointer;
+	
+}
