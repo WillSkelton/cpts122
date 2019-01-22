@@ -23,4 +23,4 @@ void NewFitbitData(FitbitData *f);
 
 void parseLine(char *str, char *line);
 
-void traverseFile(FILE *infile, FitbitData fbd[1440]);
+void traverseFile(FILE *infile);

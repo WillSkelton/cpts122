@@ -2,17 +2,17 @@
 
 void NewFitbitData(FitbitData *f) {
 
-	FitbitData FBD;
-	for (int i = 0; i < PATIENTNAMELENGTH; ++i) FBD.patient[i] = '\0';
-	for (int i = 0; i < PATIENTMINUTES; ++i) FBD.minute[i] = '\0';
+	// FitbitData FBD;
+	for (int i = 0; i < PATIENTNAMELENGTH; ++i) f->patient[i] = '\0';
+	for (int i = 0; i < PATIENTMINUTES; ++i) f->minute[i] = '\0';
 
 
-	FBD.calories = 0.0;
-	FBD.distance = 0.0;
-	FBD.floors = 0;
-	FBD.heartRate = 0;
-	FBD.steps = 0;
-	FBD.sleepLevel = 0;
+	f->calories = 0.0;
+	f->distance = 0.0;
+	f->floors = 0;
+	f->heartRate = 0;
+	f->steps = 0;
+	f->sleepLevel = 0;
 }
 
 void parseLine(char *str, char *line) {
@@ -34,17 +34,19 @@ void parseLine(char *str, char *line) {
 	}
 }
 
-void traverseFile(FILE *infile, FitbitData fbd[1440]) {
+void traverseFile(FILE *infile) {
 
 	// Checks if file exists
 	if (infile != NULL) {
 
+		FitbitData FBD[1440];
 		char line[100];
-		static int i = 0;
+		int i = 0;
 		char c = ' ';
 		char *token;
 		char patientName[6];
-		char *x;
+		char *nameOnLine;
+
 
 
 		c = getc(infile);
@@ -56,24 +58,46 @@ void traverseFile(FILE *infile, FitbitData fbd[1440]) {
 			token = strtok(line, ",");
 			token = strtok(NULL, ",");
 			strcpy(patientName, token);
+			
+			// Throws away header line
 			fgets(line, 100, infile);
 
 			do {
 				
+				// Checks for EOF
 				c = getc(infile);
-				if (c != EOF) {
+
+				if (c != EOF) { // not EOF
+					
+					// Puts first char back into line after getc
 					line[0] = c;
 					fgets(&line[1], 100, infile);
 
-					x = strtok(line, ",");
-					++i;
+					//Gets the name on a certain line
+					nameOnLine = strtok(line, ",");
 
-					if (strcmp(x, patientName) == 0) {
+					// If line belongs to patient, add stuff to struct
+					if (strcmp(nameOnLine, patientName) == 0) {
 
-						printf("%d: %s\n", i, line);
+						
+
+						FitbitData lineData;
+						NewFitbitData(&lineData);
+						strncpy(lineData.patient, patientName, 10);
+
+						FBD[i] = lineData;
+
+						
+
+						NewFitbitData(&lineData);
+
+						printf("%d: %s\n", i, FBD[i].patient);
+						++i;
 					}
-
+					
 				}
+
+				
 
 			} while (c != EOF);
 
