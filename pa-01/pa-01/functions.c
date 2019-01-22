@@ -74,7 +74,8 @@ void traverseFile(FILE *infile) {
 					fgets(&line[1], 100, infile);
 
 					//Gets the name on a certain line
-					nameOnLine = strtok(line, ",");
+					token = strtok(line, ",");
+					nameOnLine = token;
 
 					// If line belongs to patient, add stuff to struct
 					if (strcmp(nameOnLine, patientName) == 0) {
@@ -83,11 +84,27 @@ void traverseFile(FILE *infile) {
 
 						FitbitData lineData;
 						NewFitbitData(&lineData);
-						strncpy(lineData.patient, patientName, 10);
+
+						// Patient
+						strncpy(lineData.patient, patientName, PATIENTNAMELENGTH);
+
+						// minute
+						token = strtok(NULL, ",");
+						strncpy(lineData.minute, token, PATIENTMINUTES);
+
+						// calories
+						token = strtok(NULL, "");            // Check if empty
+						if (token[0] == ',') {
+							strcpy(line, &token[1]);         // copies everything after the comma into line
+							token = strtok(line, ",");
+						}
+						else {
+							strcpy(line, token);
+							token = strtok(line, ",");
+							sscanf(line, "%lf", &lineData.calories);
+						}
 
 						FBD[i] = lineData;
-
-						
 
 						NewFitbitData(&lineData);
 
