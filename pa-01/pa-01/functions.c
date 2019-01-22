@@ -14,3 +14,22 @@ void NewFitbitData(FitbitData *f) {
 	FBD.steps = 0;
 	FBD.sleepLevel = 0;
 }
+
+void parseLine(char *str, char *line) {
+	char *token;
+
+	//token = strtok(line, ",");
+	//printf("Token: %s\n", token);
+	//while (token != NULL) {
+	//	token = strtok(NULL, ",");
+	//	printf("Token: `%s`\n", token);
+	//}
+	//fgets(line, 100, infile);
+	
+	token = strtok(line, ",");
+	printf("Token: %s\n", token);
+	while (token != NULL) {
+		token = strtok(NULL, ",");
+		printf("Token: `%s`\n", token);
+	}
+}

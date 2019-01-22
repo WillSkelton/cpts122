@@ -5,39 +5,27 @@ int main(int argc, char *argv[]) {
 	FitbitData *myFBD_p;
 	// NewFitbitData(myFBD_p);
 
-	FILE *infile = fopen("FitbitData.csv", "r");
+	//FILE *infile = fopen("FitbitData.csv", "r");
+	FILE *infile = fopen("test.csv", "r");
 	
 	// Checks if file exists
 	if (infile != NULL) {
-		char line[100];
-		char *token;
-		fgets(line, 100, infile);
-
-		token = strtok(line, ",");
-		printf("Token: %s\n", token);
-	
-		while (token != NULL) {
-			token = strtok(NULL, ",");
-			printf("Token: `%s`\n", token);
-		}
-
-		fgets(line, 100, infile);
-		token = strtok(line, ",");
-		printf("Token: %s\n", token);
-		while (token != NULL) {
-			token = strtok(NULL, ",");
-			printf("Token: `%s`\n", token);
-		}
-
-		/*for (int i = 0; i < 3; ++i) {
-			token = strtok(NULL, ",");
-			printf("Token: `%s`\n", token);
-
-			if (strcmp(token, "") != 0) {
-				printf("Y'all different\n");
-			}
-		}*/
 		
+		char line[100];
+		static int i = 0;
+		char c = ' ';
+
+		
+		do {
+			c = getc(infile);
+			if (c != EOF) {
+				line[0] = c;
+				fgets(&line[1], 100, infile);
+				printf("%d: %s", ++i, line);
+			}
+
+		} while (c != EOF);
+
 	}
 
 

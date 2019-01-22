@@ -20,3 +20,5 @@ typedef struct fitbit {
 } FitbitData;
 
 void NewFitbitData(FitbitData *f);
+
+void parseLine(char *line);
