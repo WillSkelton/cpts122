@@ -149,6 +149,7 @@
     <ClInclude Include="functions.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="assignment.md" />
     <None Include="FitbitData.csv" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

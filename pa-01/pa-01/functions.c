@@ -1,10 +1,16 @@
 #include "functions.h"
 
 void NewFitbitData(FitbitData *f) {
-	f->calories = 0.0;
-	f->distance = 0.0;
-	f->floors = 0;
-	f->heartRate = 0;
-	f->steps = 0;
-	f->sleepLevel = 0;
+
+	FitbitData FBD;
+	for (int i = 0; i < PATIENTNAMELENGTH; ++i) FBD.patient[i] = '\0';
+	for (int i = 0; i < PATIENTMINUTES; ++i) FBD.minute[i] = '\0';
+
+
+	FBD.calories = 0.0;
+	FBD.distance = 0.0;
+	FBD.floors = 0;
+	FBD.heartRate = 0;
+	FBD.steps = 0;
+	FBD.sleepLevel = 0;
 }
