@@ -20,3 +20,7 @@ typedef struct fitbit {
 } FitbitData;
 
 void NewFitbitData(FitbitData *f);
+
+void parseLine(char *str, char *line);
+
+void traverseFile(FILE *infile);
