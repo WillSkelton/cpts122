@@ -21,4 +21,6 @@ typedef struct fitbit {
 
 void NewFitbitData(FitbitData *f);
 
-void parseLine(char *line);
+void parseLine(char *str, char *line);
+
+void traverseFile(FILE *infile, FitbitData fbd[1440]);
