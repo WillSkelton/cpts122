@@ -93,6 +93,17 @@ void traverseFile(FILE *infile) {
 						strncpy(lineData.minute, token, PATIENTMINUTES);
 
 						// calories
+
+						/*
+						Okay Future Will, Here's how this works:
+						1.) if cell is empty (,,),
+							- (109) token looks like this ",calories...". Copy that into line w/o ','
+							- (110) set token and line to the next entry thus skipping the ",,"
+						2.) otherwise, if not empty,
+							- (113) token looks like this ",calories...". Copy that into line
+							- (114) remove calories from line
+							- (115) put line into struct
+						*/
 						token = strtok(NULL, "");            // Check if empty
 						if (token[0] == ',') {
 							strcpy(line, &token[1]);         // copies everything after the comma into line
