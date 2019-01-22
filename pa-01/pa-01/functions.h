@@ -1,4 +1,8 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#define PATIENTNAMELENGTH 10
+#define PATIENTMINUTES 9
 
 typedef enum sleep {
 	NONE = 0, ASLEEP = 1, AWAKE = 2, REALLYAWAKE = 3

@@ -34,7 +34,7 @@ void partTwo(void) {
 	char myString[17] = "My name is Will.";
 
 	char *token;
-
+	printf("%s\n", myString);
 	token = myStringToke(myString, ' ');
 	
 	while (token != NULL) {
