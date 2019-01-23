@@ -22,6 +22,8 @@ void clearStats(Stats *s) {
 	s->totalSteps = 0;
 	s->maxSteps = 0;
 	s->poorestSleepStreak = 0;
+	s->numLines = 0;
+	s->avgHeart = 0;
 }
 
 void parseLine(FitbitData *f, Stats *s, char* patientName) {
@@ -84,6 +86,7 @@ void parseLine(FitbitData *f, Stats *s, char* patientName) {
 		strcpy(line, token);
 		token = strtok(line, ",");
 		sscanf(line, "%d", &f->heartRate);
+		s->avgHeart += f->heartRate;
 	}
 
 	// Steps
@@ -115,6 +118,8 @@ void parseLine(FitbitData *f, Stats *s, char* patientName) {
 		}
 
 	}
+
+	s->numLines++;
 }
 
 void traverseFile(FILE *infile) {
@@ -125,15 +130,8 @@ void traverseFile(FILE *infile) {
 		FitbitData FBD[1500];
 		Stats stats;
 		clearStats(&stats);
-		char line[100];
-		int i = 0;
-		int danger = 3;
-		char c = ' ';
-		char *token;
-		char patientName[6];
-		char *nameOnLine;
-
-
+		char line[100], c = ' ', *token = NULL, patientName[6], *nameOnLine;
+		int i = 0, danger = 3;
 
 		c = getc(infile);
 		if (c != EOF) {
@@ -166,8 +164,6 @@ void traverseFile(FILE *infile) {
 					// If line belongs to patient, add stuff to struct
 					if (strcmp(nameOnLine, patientName) == 0) {
 
-						
-
 						FitbitData lineData;
 						NewFitbitData(&lineData);
 
@@ -179,13 +175,12 @@ void traverseFile(FILE *infile) {
 
 						//printf("%d: %lf\n", i+1, FBD[i].calories);
 						++i;
-
 					}
-					danger++;
-					//printf("%d\n", danger);
 				}		
 			} while (c != EOF);
-			printf("%d\n", stats.totalSteps);
+			
+			stats.avgHeart /= stats.numLines;
+			printf("%.2lf\n", stats.avgHeart);
 		}
 	}
 }

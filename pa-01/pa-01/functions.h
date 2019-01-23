@@ -26,6 +26,8 @@ typedef struct stats {
 	unsigned int totalSteps;
 	unsigned int maxSteps;
 	unsigned int poorestSleepStreak;
+	unsigned int numLines;
+	double avgHeart;
 } Stats;
 
 void NewFitbitData(FitbitData *f);
