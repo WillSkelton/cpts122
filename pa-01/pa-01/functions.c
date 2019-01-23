@@ -15,7 +15,16 @@ void NewFitbitData(FitbitData *f) {
 	f->sleepLevel = 0;
 }
 
-void parseLine(FitbitData *f, char* patientName) {
+void clearStats(Stats *s) {
+	s->totalCalories = 0.0;
+	s->totalDistance = 0.0;
+	s->floors = 0;
+	s->totalSteps = 0;
+	s->maxSteps = 0;
+	s->poorestSleepStreak = 0;
+}
+
+void parseLine(FitbitData *f, Stats *s, char* patientName) {
 	char *token;
 	char line[100];
 
@@ -36,6 +45,7 @@ void parseLine(FitbitData *f, char* patientName) {
 		strcpy(line, token);
 		token = strtok(line, ",");
 		sscanf(line, "%lf", &f->calories);
+		s->totalCalories += f->calories; // update total calories
 	}
 
 	// Distance
@@ -48,6 +58,7 @@ void parseLine(FitbitData *f, char* patientName) {
 		strcpy(line, token);
 		token = strtok(line, ",");
 		sscanf(line, "%lf", &f->distance);
+		s->totalDistance += f->distance;
 	}
 
 	// Floors
@@ -60,6 +71,7 @@ void parseLine(FitbitData *f, char* patientName) {
 		strcpy(line, token);
 		token = strtok(line, ",");
 		sscanf(line, "%d", &f->floors);
+		s->floors += f->floors;
 	}
 
 	// Heart
@@ -84,6 +96,9 @@ void parseLine(FitbitData *f, char* patientName) {
 		strcpy(line, token);
 		token = strtok(line, ",");
 		sscanf(line, "%d", &f->steps);
+		s->totalSteps += f->steps;
+
+		//ToDO: Do average steps
 	}
 
 	// Sleep Level
@@ -108,6 +123,8 @@ void traverseFile(FILE *infile) {
 	if (infile != NULL) {
 
 		FitbitData FBD[1500];
+		Stats stats;
+		clearStats(&stats);
 		char line[100];
 		int i = 0;
 		int danger = 3;
@@ -154,12 +171,8 @@ void traverseFile(FILE *infile) {
 						FitbitData lineData;
 						NewFitbitData(&lineData);
 
-						parseLine(&lineData, patientName);
+						parseLine(&lineData, &stats, patientName);
 						
-						if (i == 379) {
-							printf("\n");
-						}
-
 						FBD[i] = lineData;
 
 						NewFitbitData(&lineData);
@@ -167,13 +180,12 @@ void traverseFile(FILE *infile) {
 						//printf("%d: %lf\n", i+1, FBD[i].calories);
 						++i;
 
-						
 					}
 					danger++;
-					printf("%d\n", danger);
+					//printf("%d\n", danger);
 				}		
 			} while (c != EOF);
-			printf("done\n");
+			printf("%d\n", stats.totalSteps);
 		}
 	}
 }
