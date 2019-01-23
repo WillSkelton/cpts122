@@ -19,8 +19,25 @@ typedef struct fitbit {
 	Sleep sleepLevel;
 } FitbitData;
 
+typedef struct stats {
+	double totalCalories;
+	double totalDistance;
+	unsigned int floors;
+	unsigned int totalSteps;
+	unsigned int maxSteps;
+	unsigned int poorestSleepStreak;
+	unsigned int numLines;
+	double avgHeart;
+} Stats;
+
+
+
 void NewFitbitData(FitbitData *f);
 
-void parseLine(char *str, char *line);
+void clearStats(Stats *s);
+
+void parseLine(FitbitData *f, Stats *s, char* patientName);
 
 void traverseFile(FILE *infile);
+
+unsigned int checkForMaxSteps(unsigned int maxSteps, unsigned int steps);

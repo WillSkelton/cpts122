@@ -15,23 +15,116 @@ void NewFitbitData(FitbitData *f) {
 	f->sleepLevel = 0;
 }
 
-void parseLine(char *str, char *line) {
-	char *token;
+void clearStats(Stats *s) {
+	s->totalCalories = 0.0;
+	s->totalDistance = 0.0;
+	s->floors = 0;
+	s->totalSteps = 0;
+	s->maxSteps = 0;
+	s->poorestSleepStreak = 0;
+	s->numLines = 0;
+	s->avgHeart = 0;
+}
 
-	//token = strtok(line, ",");
-	//printf("Token: %s\n", token);
-	//while (token != NULL) {
-	//	token = strtok(NULL, ",");
-	//	printf("Token: `%s`\n", token);
-	//}
-	//fgets(line, 100, infile);
+unsigned int checkForMaxSteps(unsigned int maxSteps, unsigned int steps) {
 	
-	token = strtok(line, ",");
-	printf("Token: %s\n", token);
-	while (token != NULL) {
-		token = strtok(NULL, ",");
-		printf("Token: `%s`\n", token);
+	return ((steps >= maxSteps) ? steps : maxSteps);
+}
+
+void parseLine(FitbitData *f, Stats *s, char* patientName) {
+	char *token;
+	char line[100];
+
+	// Patient
+	strncpy(&f->patient, patientName, PATIENTNAMELENGTH);
+
+	// minute
+	token = strtok(NULL, ",");
+	strncpy(f->minute, token, PATIENTMINUTES);
+
+	// calories
+	token = strtok(NULL, "");            // Check if empty
+	if (token[0] == ',') {
+		strcpy(line, &token[1]);         // copies everything after the comma into line
+		token = strtok(line, ",");
 	}
+	else {
+		strcpy(line, token);
+		token = strtok(line, ",");
+		sscanf(line, "%lf", &f->calories);
+		s->totalCalories += f->calories; // update total calories
+	}
+
+	// Distance
+	token = strtok(NULL, "");
+	if (token[0] == ',') {
+		strcpy(line, &token[1]);         // copies everything after the comma into line
+		token = strtok(line, ",");
+	}
+	else {
+		strcpy(line, token);
+		token = strtok(line, ",");
+		sscanf(line, "%lf", &f->distance);
+		s->totalDistance += f->distance;
+	}
+
+	// Floors
+	token = strtok(NULL, "");
+	if (token[0] == ',') {
+		strcpy(line, &token[1]);         // copies everything after the comma into line
+		token = strtok(line, ",");
+	}
+	else {
+		strcpy(line, token);
+		token = strtok(line, ",");
+		sscanf(line, "%d", &f->floors);
+		s->floors += f->floors;
+	}
+
+	// Heart
+	token = strtok(NULL, "");
+	if (token[0] == ',') {
+		strcpy(line, &token[1]);         // copies everything after the comma into line
+		token = strtok(line, ",");
+	}
+	else {
+		strcpy(line, token);
+		token = strtok(line, ",");
+		sscanf(line, "%d", &f->heartRate);
+		s->avgHeart += f->heartRate;
+	}
+
+	// Steps
+	token = strtok(NULL, "");
+	if (token[0] == ',') {
+		strcpy(line, &token[1]);         // copies everything after the comma into line
+		token = strtok(line, ",");
+	}
+	else {
+		strcpy(line, token);
+		token = strtok(line, ",");
+		sscanf(line, "%d", &f->steps);
+		s->totalSteps += f->steps;
+
+		s->maxSteps = checkForMaxSteps(s->maxSteps, f->steps);
+	}
+
+	// Sleep Level
+	token = strtok(NULL, "");
+	if (token != NULL && token[0] == ',') {
+		strcpy(line, &token[1]);         // copies everything after the comma into line
+		token = strtok(line, ",");
+	}
+	else {
+		if (token != NULL) {
+			strcpy(line, token);
+			token = strtok(line, ",");
+			sscanf(line, "%d", &f->sleepLevel);
+		}
+
+	}
+
+	s->numLines++;
 }
 
 void traverseFile(FILE *infile) {
@@ -39,15 +132,11 @@ void traverseFile(FILE *infile) {
 	// Checks if file exists
 	if (infile != NULL) {
 
-		FitbitData FBD[1440];
-		char line[100];
-		int i = 0;
-		char c = ' ';
-		char *token;
-		char patientName[6];
-		char *nameOnLine;
-
-
+		FitbitData FBD[1500];
+		Stats stats;
+		clearStats(&stats);
+		char line[100], c = ' ', *token = NULL, patientName[6], *nameOnLine;
+		int i = 0, danger = 3;
 
 		c = getc(infile);
 		if (c != EOF) {
@@ -80,55 +169,23 @@ void traverseFile(FILE *infile) {
 					// If line belongs to patient, add stuff to struct
 					if (strcmp(nameOnLine, patientName) == 0) {
 
-						
-
 						FitbitData lineData;
 						NewFitbitData(&lineData);
 
-						// Patient
-						strncpy(lineData.patient, patientName, PATIENTNAMELENGTH);
-
-						// minute
-						token = strtok(NULL, ",");
-						strncpy(lineData.minute, token, PATIENTMINUTES);
-
-						// calories
-
-						/*
-						Okay Future Will, Here's how this works:
-						1.) if cell is empty (,,),
-							- (109) token looks like this ",calories...". Copy that into line w/o ','
-							- (110) set token and line to the next entry thus skipping the ",,"
-						2.) otherwise, if not empty,
-							- (113) token looks like this ",calories...". Copy that into line
-							- (114) remove calories from line
-							- (115) put line into struct
-						*/
-						token = strtok(NULL, "");            // Check if empty
-						if (token[0] == ',') {
-							strcpy(line, &token[1]);         // copies everything after the comma into line
-							token = strtok(line, ",");
-						}
-						else {
-							strcpy(line, token);
-							token = strtok(line, ",");
-							sscanf(line, "%lf", &lineData.calories);
-						}
-
+						parseLine(&lineData, &stats, patientName);
+						
 						FBD[i] = lineData;
 
 						NewFitbitData(&lineData);
 
-						printf("%d: %s\n", i, FBD[i].patient);
+						//printf("%d: %lf\n", i+1, FBD[i].calories);
 						++i;
 					}
-					
-				}
-
-				
-
+				}		
 			} while (c != EOF);
-
+			
+			stats.avgHeart /= stats.numLines;
+			printf("%d\n", stats.maxSteps);
 		}
 	}
 }
