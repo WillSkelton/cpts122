@@ -73,8 +73,8 @@ You must also define an array of FitbitData that can store 24 hours of minute da
 ### What are the other requirements?
 
 This program does not require any user input! However, you will need to display some results to the screen!
-- [ ] You must open “FitbitData.csv” for mode read; check for success
-- [ ] You must read each record in the file as a string, one line at a time; if the record does not belong to the target patient, then it should be discarded
+- [x] You must open “FitbitData.csv” for mode read; check for success
+- [x] You must read each record in the file as a string, one line at a time; if the record does not belong to the target patient, then it should be discarded
 - [ ] You must parse each record into the corresponding fields, and store into the FitbitData array; note: not all fields have values, some are “empty” or null; if some of the fields are “empty” or null, then you must perform data cleansing and insert values to construct a record that is consistent with the others; the data inserted should not represent valid values
 - [ ] You must compute the total calories burned, distance walked in miles, floors walked, and steps taken
 - [ ] You must compute average heartrate over the 24 hour period
