@@ -30,6 +30,8 @@ typedef struct stats {
 	double avgHeart;
 } Stats;
 
+
+
 void NewFitbitData(FitbitData *f);
 
 void clearStats(Stats *s);
@@ -38,3 +40,4 @@ void parseLine(FitbitData *f, Stats *s, char* patientName);
 
 void traverseFile(FILE *infile);
 
+unsigned int checkForMaxSteps(unsigned int maxSteps, unsigned int steps);

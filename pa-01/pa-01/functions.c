@@ -26,6 +26,11 @@ void clearStats(Stats *s) {
 	s->avgHeart = 0;
 }
 
+unsigned int checkForMaxSteps(unsigned int maxSteps, unsigned int steps) {
+	
+	return ((steps >= maxSteps) ? steps : maxSteps);
+}
+
 void parseLine(FitbitData *f, Stats *s, char* patientName) {
 	char *token;
 	char line[100];
@@ -101,7 +106,7 @@ void parseLine(FitbitData *f, Stats *s, char* patientName) {
 		sscanf(line, "%d", &f->steps);
 		s->totalSteps += f->steps;
 
-		//ToDO: Do average steps
+		s->maxSteps = checkForMaxSteps(s->maxSteps, f->steps);
 	}
 
 	// Sleep Level
@@ -180,7 +185,7 @@ void traverseFile(FILE *infile) {
 			} while (c != EOF);
 			
 			stats.avgHeart /= stats.numLines;
-			printf("%.2lf\n", stats.avgHeart);
+			printf("%d\n", stats.maxSteps);
 		}
 	}
 }
