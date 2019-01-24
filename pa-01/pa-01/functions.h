@@ -25,6 +25,7 @@ typedef struct stats {
 	unsigned int floors;
 	unsigned int totalSteps;
 	unsigned int maxSteps;
+	unsigned int currentSleepStreak;
 	unsigned int poorestSleepStreak;
 	unsigned int numLines;
 	double avgHeart;

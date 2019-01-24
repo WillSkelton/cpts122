@@ -83,7 +83,7 @@ This program does not require any user input! However, you will need to display 
   - [x]  steps taken
   - [x]  average heartrate over the 24 hour period
 - [x] You must report the max steps taken in one minute over the 24 hour period; if there are multiple minutes throughout the day where the max is discovered, then report the one that is the latest in the 24 hour period
-- [ ] You must report the longest consecutive range of poor sleep; a range is defined as one or more consecutive minutes where the sleepLevel > 1; the poorest sleep is not based on the length of the range, but the sum of the sleep levels in the range; the max sum of the ranges is considered the poorest sleep (report the starting and ending minutes of range)
+- [x] You must report the longest consecutive range of poor sleep; a range is defined as one or more consecutive minutes where the sleepLevel > 1; the poorest sleep is not based on the length of the range, but the sum of the sleep levels in the range; the max sum of the ranges is considered the poorest sleep (report the starting and ending minutes of range)
 - [ ] You must open “Results.csv” for mode write; this will either create a new .csv or overwrite an existing one
 - [ ] You must output two lines to “Results.csv” and to the screen in the following format:
   - [ ]  Line 1: Total Calories,Total Distance,Total Floors,Total Steps,Avg Heartrate,Max Steps,Sleep

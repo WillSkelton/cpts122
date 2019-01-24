@@ -22,6 +22,7 @@ void clearStats(Stats *s) {
 	s->totalSteps = 0;
 	s->maxSteps = 0;
 	s->poorestSleepStreak = 0;
+	s->currentSleepStreak = 0;
 	s->numLines = 0;
 	s->avgHeart = 0;
 }
@@ -29,6 +30,11 @@ void clearStats(Stats *s) {
 unsigned int checkForMaxSteps(unsigned int maxSteps, unsigned int steps) {
 	
 	return ((steps >= maxSteps) ? steps : maxSteps);
+}
+
+unsigned int checkForBadSleep(unsigned int streak, unsigned int currentStreak) {
+
+	return ((streak >= currentStreak) ? streak : currentStreak);
 }
 
 void parseLine(FitbitData *f, Stats *s, char* patientName) {
@@ -120,6 +126,15 @@ void parseLine(FitbitData *f, Stats *s, char* patientName) {
 			strcpy(line, token);
 			token = strtok(line, ",");
 			sscanf(line, "%d", &f->sleepLevel);
+
+			if (f->sleepLevel > 1) {
+				s->currentSleepStreak += f->sleepLevel;
+			}
+			else {
+				s->poorestSleepStreak = checkForBadSleep(s->poorestSleepStreak, s->currentSleepStreak);
+				s->currentSleepStreak = 0;
+				
+			}
 		}
 
 	}
@@ -190,7 +205,6 @@ void traverseFile(FILE *infile) {
 
 						NewFitbitData(&lineData);
 
-						
 						++i;
 					}
 				}
@@ -198,7 +212,7 @@ void traverseFile(FILE *infile) {
 			} while (c != EOF);
 			
 			stats.avgHeart /= stats.numLines;
-			printf("%d\n", stats.maxSteps);
+			printf("%d\n", stats.poorestSleepStreak);
 		}
 	}
 }
