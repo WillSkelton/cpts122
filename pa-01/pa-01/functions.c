@@ -136,6 +136,7 @@ void traverseFile(FILE *infile) {
 		Stats stats;
 		clearStats(&stats);
 		char line[100], c = ' ', *token = NULL, patientName[6], *nameOnLine;
+		static char lastLine[100];
 		int i = 0, danger = 3;
 
 		c = getc(infile);
@@ -162,8 +163,19 @@ void traverseFile(FILE *infile) {
 					line[0] = c;
 					fgets(&line[1], 100, infile);
 
+					if (strcmp(lastLine, line) == 0) {
+						strcpy(lastLine, line);
+						continue;
+					}
+					else {
+						strcpy(lastLine, line);
+						// printf("%d: %s", i, line);
+
+					}
+
 					//Gets the name on a certain line
 					token = strtok(line, ",");
+					
 					nameOnLine = token;
 
 					// If line belongs to patient, add stuff to struct
@@ -173,19 +185,30 @@ void traverseFile(FILE *infile) {
 						NewFitbitData(&lineData);
 
 						parseLine(&lineData, &stats, patientName);
-						
+
 						FBD[i] = lineData;
 
 						NewFitbitData(&lineData);
 
-						//printf("%d: %lf\n", i+1, FBD[i].calories);
+						
 						++i;
 					}
-				}		
+				}
+				
 			} while (c != EOF);
 			
 			stats.avgHeart /= stats.numLines;
 			printf("%d\n", stats.maxSteps);
 		}
 	}
+}
+
+int strlenrec(char *str) {
+	static int n = 0;
+	if (str[0] != '\0') {
+		++n;
+		strlenrec(&str[1]);
+	}
+	
+	return n;
 }

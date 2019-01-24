@@ -41,3 +41,5 @@ void parseLine(FitbitData *f, Stats *s, char* patientName);
 void traverseFile(FILE *infile);
 
 unsigned int checkForMaxSteps(unsigned int maxSteps, unsigned int steps);
+
+int strlenrec(char *str);
