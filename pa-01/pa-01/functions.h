@@ -20,6 +20,7 @@ typedef struct fitbit {
 } FitbitData;
 
 typedef struct stats {
+	char patientName[10];
 	double totalCalories;
 	double totalDistance;
 	unsigned int floors;
@@ -42,5 +43,7 @@ void parseLine(FitbitData *f, Stats *s, char* patientName);
 void traverseFile(FILE *infile);
 
 unsigned int checkForMaxSteps(unsigned int maxSteps, unsigned int steps);
+
+void printTheStuff(FitbitData FBD[1500], Stats *stats);
 
 int strlenrec(char *str);
