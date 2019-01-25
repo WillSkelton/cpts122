@@ -85,3 +85,27 @@ int deleteNodeRec(Node **nodePtr, Node **prevNode, Contact search) {
 
 	return idx;
 }
+
+int insertAtPosN(Node **listPtr, Contact newContact, int n) {
+	Node *tempMemPtr = NULL;
+	int success = 0;
+	static int i = 1;
+
+	tempMemPtr = makeNode(newContact);
+
+	if (tempMemPtr != NULL) {
+		while (i != n-1) {
+			if (i >= n) {
+				success = 1;
+				tempMemPtr->pNext = *listPtr;
+				*listPtr = tempMemPtr;
+			}
+			else if (i < n-1) {
+				++i;
+			}
+
+		}
+	}
+
+	return success;
+}

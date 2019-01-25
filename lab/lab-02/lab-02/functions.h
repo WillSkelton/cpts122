@@ -29,3 +29,5 @@ int insertAtFront(Node **listPtr, Contact newContact);
 void printListRec(Node *listPtr);
 
 int deleteNodeRec(Node **nodePtr, Node **prevNode, Contact search);
+
+int insertAtPosN(Node **listPtr, Contact newContact);
