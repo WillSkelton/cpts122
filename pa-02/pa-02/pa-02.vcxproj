@@ -142,6 +142,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <None Include="assignment.md" />
+    <None Include="readme.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="functions.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="functions.c" />
+    <ClCompile Include="main.c" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
