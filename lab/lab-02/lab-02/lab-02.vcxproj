@@ -19,9 +19,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{9C1A77A7-BD11-4199-8633-A3590A86B279}</ProjectGuid>
+    <ProjectGuid>{5AC27A10-F785-45E7-9B69-DE4937F161D5}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>pa01</RootNamespace>
+    <RootNamespace>lab02</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -147,12 +147,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="functions.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="assignment.md" />
-    <None Include="FitbitData.csv" />
-    <None Include="Results.csv" />
-    <None Include="test.csv" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

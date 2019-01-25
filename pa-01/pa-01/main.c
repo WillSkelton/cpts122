@@ -10,7 +10,6 @@ int main(int argc, char *argv[]) {
 
 	traverseFile(infile);
 
-
 	fclose(infile);
 	return 0;
 }

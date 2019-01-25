@@ -16,12 +16,14 @@ void NewFitbitData(FitbitData *f) {
 }
 
 void clearStats(Stats *s) {
+	for (int i = 0; i < PATIENTNAMELENGTH; ++i) s->patientName[i] = '\0';
 	s->totalCalories = 0.0;
 	s->totalDistance = 0.0;
 	s->floors = 0;
 	s->totalSteps = 0;
 	s->maxSteps = 0;
 	s->poorestSleepStreak = 0;
+	s->currentSleepStreak = 0;
 	s->numLines = 0;
 	s->avgHeart = 0;
 }
@@ -29,6 +31,11 @@ void clearStats(Stats *s) {
 unsigned int checkForMaxSteps(unsigned int maxSteps, unsigned int steps) {
 	
 	return ((steps >= maxSteps) ? steps : maxSteps);
+}
+
+unsigned int checkForBadSleep(unsigned int streak, unsigned int currentStreak) {
+
+	return ((streak >= currentStreak) ? streak : currentStreak);
 }
 
 void parseLine(FitbitData *f, Stats *s, char* patientName) {
@@ -120,10 +127,16 @@ void parseLine(FitbitData *f, Stats *s, char* patientName) {
 			strcpy(line, token);
 			token = strtok(line, ",");
 			sscanf(line, "%d", &f->sleepLevel);
+
+			if (f->sleepLevel > 1) {
+				s->currentSleepStreak += f->sleepLevel;
+			}
+			else {
+				s->poorestSleepStreak = checkForBadSleep(s->poorestSleepStreak, s->currentSleepStreak);
+				s->currentSleepStreak = 0;			
+			}
 		}
-
 	}
-
 	s->numLines++;
 }
 
@@ -136,6 +149,7 @@ void traverseFile(FILE *infile) {
 		Stats stats;
 		clearStats(&stats);
 		char line[100], c = ' ', *token = NULL, patientName[6], *nameOnLine;
+		static char lastLine[100];
 		int i = 0, danger = 3;
 
 		c = getc(infile);
@@ -147,6 +161,7 @@ void traverseFile(FILE *infile) {
 			token = strtok(line, ",");
 			token = strtok(NULL, ",");
 			strcpy(patientName, token);
+			strcpy(stats.patientName, patientName);
 			
 			// Throws away header line
 			fgets(line, 100, infile);
@@ -162,8 +177,19 @@ void traverseFile(FILE *infile) {
 					line[0] = c;
 					fgets(&line[1], 100, infile);
 
+					if (strcmp(lastLine, line) == 0) {
+						strcpy(lastLine, line);
+						continue;
+					}
+					else {
+						strcpy(lastLine, line);
+						// printf("%d: %s", i, line);
+
+					}
+
 					//Gets the name on a certain line
 					token = strtok(line, ",");
+					
 					nameOnLine = token;
 
 					// If line belongs to patient, add stuff to struct
@@ -173,19 +199,56 @@ void traverseFile(FILE *infile) {
 						NewFitbitData(&lineData);
 
 						parseLine(&lineData, &stats, patientName);
-						
+
 						FBD[i] = lineData;
 
 						NewFitbitData(&lineData);
 
-						//printf("%d: %lf\n", i+1, FBD[i].calories);
 						++i;
 					}
-				}		
+				}
+				
 			} while (c != EOF);
 			
-			stats.avgHeart /= stats.numLines;
-			printf("%d\n", stats.maxSteps);
+			stats.avgHeart /= stats.numLines;	
 		}
+		
+		printTheStuff(&FBD, &stats);
 	}
+}
+
+int strlenrec(char *str) {
+	static int n = 0;
+	if (str[0] != '\0') {
+		++n;
+		strlenrec(&str[1]);
+	}
+	
+	return n;
+}
+
+void printTheStuff(FitbitData FBD[1500], Stats *stats) {
+	FILE *outfile = fopen("Results.csv", "w");
+	
+	int i = 0;
+	double totalCalories = stats->totalCalories;
+	double totalDistance = stats->totalDistance;
+	unsigned int floors = stats->floors;
+	unsigned int totalSteps = stats->totalSteps;
+	unsigned int maxSteps = stats->maxSteps;
+	unsigned int streak = stats->poorestSleepStreak;
+	double avgHeart = stats->avgHeart;
+
+	fprintf(outfile, "Total Calories,Total Distance,Total Floors,Total Steps,Avg Heartrate,Max Steps,Sleep\n");
+	fprintf(outfile, "%lf,%lf,%d,%lf,%d,%d", totalCalories, totalDistance, totalSteps, avgHeart, maxSteps, streak);
+	
+	while (strcmp(FBD[i].patient, stats->patientName) == 0) {
+		fprintf(outfile, "\n%s,%s,%lf,%lf,%d,%d,%d,%d", FBD[i].patient, FBD[i].minute, FBD[i].calories,
+			FBD[i].distance, FBD[i].floors, FBD[i].heartRate, FBD[i].steps, FBD[i].sleepLevel);
+
+		++i;
+	}
+
+	fclose(outfile);
+
 }

@@ -83,14 +83,14 @@ This program does not require any user input! However, you will need to display 
   - [x]  steps taken
   - [x]  average heartrate over the 24 hour period
 - [x] You must report the max steps taken in one minute over the 24 hour period; if there are multiple minutes throughout the day where the max is discovered, then report the one that is the latest in the 24 hour period
-- [ ] You must report the longest consecutive range of poor sleep; a range is defined as one or more consecutive minutes where the sleepLevel > 1; the poorest sleep is not based on the length of the range, but the sum of the sleep levels in the range; the max sum of the ranges is considered the poorest sleep (report the starting and ending minutes of range)
-- [ ] You must open “Results.csv” for mode write; this will either create a new .csv or overwrite an existing one
-- [ ] You must output two lines to “Results.csv” and to the screen in the following format:
-  - [ ]  Line 1: Total Calories,Total Distance,Total Floors,Total Steps,Avg Heartrate,Max Steps,Sleep
-  - [ ]  Line 2: valueCalories,valueDistance,valueFloors,valueSteps,valueHeartrate,valueMax,valueSleepStart:valueSleepEnd
-  - [ ]  Lines 3 – N: the filtered, deduped, and cleansed data in the original FitbitData.csv format
+- [x] You must report the longest consecutive range of poor sleep; a range is defined as one or more consecutive minutes where the sleepLevel > 1; the poorest sleep is not based on the length of the range, but the sum of the sleep levels in the range; the max sum of the ranges is considered the poorest sleep (report the starting and ending minutes of range)
+- [x] You must open “Results.csv” for mode write; this will either create a new .csv or overwrite an existing one
+- [x] You must output two lines to “Results.csv” and to the screen in the following format:
+  - [x]  Line 1: Total Calories,Total Distance,Total Floors,Total Steps,Avg Heartrate,Max Steps,Sleep
+  - [x]  Line 2: valueCalories,valueDistance,valueFloors,valueSteps,valueHeartrate,valueMax,valueSleepStart:valueSleepEnd
+  - [x]  Lines 3 – N: the filtered, deduped, and cleansed data in the original FitbitData.csv format
 
-- [ ] You must close “FitbitData.csv” and “Results.csv”
+- [x] You must close “FitbitData.csv” and “Results.csv”
 
 ## IV. Submitting Assignments:
 Using the OSBLE+ MS VS plugin, please submit your solution. Please visit https://github.com/WSU-HELPLAB/OSBLE/wiki/Submitting-an-Assignment for more information about submitting using OSBLE+.

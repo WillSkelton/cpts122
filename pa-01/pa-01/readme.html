@@ -1,0 +1,592 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width initial-scale=1">
+<title>readme.md</title>
+<style type="text/css">
+.content {
+  padding: 86.45px 84px
+}
+</style>
+<style type="text/css">
+.content {
+  position: relative;
+  width: 100%;
+  margin: 0 auto;
+  max-width: 700px; /* 700px is the width of the post in Medium */
+}
+
+/* hide TOC(table of contents). it's height is calculated from the original container */
+.content--buffer .table-of-contents {
+  height: 0;
+}
+
+.content > :first-child,
+.content > :first-child > * /* nested blocks */ {
+  margin-top: 0;
+}
+
+.content > :last-child,
+.content > :last-child > * /* nested blocks */ {
+  margin-bottom: 0;
+}
+
+.mermaid {
+  margin-bottom:  1.9rem;
+}
+
+.page-break {
+  page-break-before: always;
+}
+
+@media print {
+  /* fix | code blocks in PDF export are trimmed */
+  .content pre {
+    white-space: pre-wrap;
+  }
+}
+</style>
+<style type="text/css">
+
+
+
+/*
+ * Read-only
+ *
+ * To add a theme:
+ *   1. Add a .css file to the same folder.
+ *   2. Restart the app. */
+
+::selection {
+  background: hsl(210, 40%, 90%);
+}
+
+:root {
+  --line-height: 1.9rem;
+
+  background: #fff;
+  color: #333;
+  font-family: "Roboto", sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  line-height:  1.9rem;
+}
+
+.content {
+  max-width: 626px;
+}
+
+/* Quotes
+   ---------------- */
+
+blockquote {
+  border-left: .2rem solid #ddd;
+  color: #999;
+  margin-left: 0;
+  padding-left: 1rem;
+  position: relative;
+}
+
+/* Headings
+   ---------------- */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Roboto";
+  font-weight: normal;
+  line-height: normal;
+  margin-bottom:  1.9rem;
+  margin-top: calc(1.5 *  1.9rem);
+}
+
+h1 {
+  font-size: 2rem;
+}
+
+h2 {
+  font-size: 1.7rem;
+}
+
+h3,
+h4,
+h5,
+h6 {
+  font-size: 1.4rem;
+}
+
+/* Paragraphs */
+
+p {
+  margin-bottom:  1.9rem;
+}
+
+/* Inlines
+   ---------------- */
+
+a[href] {
+  color: #79b;
+  text-decoration: none;
+}
+
+a[href] img {
+  /* hide link underline */
+  box-shadow: 0 10px 0 #fff;
+}
+
+kbd {
+  border: 2px solid #ddd;
+  border-bottom: 3px solid #ddd;
+  border-radius: 4px;
+  font-family: 'Fira Mono', monospace;
+  font-size: 1rem;
+  margin: 0 .2rem;
+  padding: .2rem .6rem;
+}
+
+strong {
+  font-weight: 500;
+}
+
+/* Media
+   ---------------- */
+
+img {
+  max-width: 100%;
+}
+
+/* Rules
+   ---------------- */
+
+hr {
+  border: none;
+  border-top: .2rem solid #ddd;
+  box-sizing: border-box;
+  height: 0;
+  padding: 0;
+  margin-bottom:  1.9rem;
+}
+
+/* Tables
+   ---------------- */
+
+table {
+  border-collapse: collapse;
+  border-top: .3rem solid #ddd;
+  margin-bottom:  1.9rem;
+  width: 100%;
+}
+
+table td,
+table th {
+  padding: calc( 1.9rem / 4) .6rem;
+}
+
+table td:first-child,
+table th:first-child {
+  padding-left: 0;
+}
+
+table td:last-child,
+table th:last-child {
+  padding-right: 0;
+}
+
+table th {
+  font-weight: normal;
+  text-align: left;
+}
+
+table tbody tr:first-child {
+  border-top: .2rem solid #ddd;
+}
+
+table tbody tr:last-child {
+  border-bottom: .3rem solid #ddd;
+}
+
+/* Unordered Lists
+   ---------------- */
+
+ul {
+  list-style: disc;
+  padding-left: 2.4rem;
+  margin-bottom:  1.9rem;
+}
+
+/* Ordered Lists
+   ---------------- */
+
+ol {
+  padding-left: 2.4rem;
+  margin-bottom:  1.9rem;
+}
+
+ol ul,
+ol ol,
+ul ol,
+ul ul {
+  margin-bottom: 0;
+  padding-left: 2.4rem;
+}
+
+ol ol,
+ul ol {
+  list-style-type: lower-roman;
+}
+
+/* Tasks
+   ---------------- */
+
+.task-list-item {
+  list-style-type: none;
+}
+
+.task-list-item input {
+  font-size: 1rem;
+  margin: 0 0 0 -1.6rem;
+  vertical-align: middle;
+  width: 1.3rem;
+}
+
+.task-list-item p {
+  margin-bottom: calc(.5 *  1.9rem);
+}
+
+/* Math
+   ---------------- */
+
+.katex-display {
+  padding: 0.6em 0;
+  font-size: 1.2em;
+  overflow-x: auto;
+  border-radius: 4px;
+  margin-bottom: 28px;
+  text-align: left;
+}
+
+.katex--error {
+  color: #777;
+}
+
+/* Code Blocks
+   ---------------- */
+
+code {
+  background: #f3f3f3;
+  border-radius: 2px;
+  color: #444;
+  font-family: 'Fira Mono', monospace;
+  font-size: .85em;
+  margin: 0 .2em;
+  padding: .1em .5em;
+}
+
+.content > pre {
+  background: #f3f3f3;
+  font-family: 'Fira Mono', monospace;
+  margin-bottom:  1.9rem;
+  padding: calc(.5 *  1.9rem) 1.2rem;
+  tab-size: 4;
+  overflow-x: auto;
+}
+
+.content > pre code {
+  background: none;
+  border: none;
+  color: #444;
+  margin: 0;
+  padding: 0;
+}
+
+/* Code
+   ---------------- */
+
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+  color: #aaa;
+}
+
+.token.operator,
+.token.punctuation {
+  color: #888;
+}
+
+.token.selector,
+.token.attr-name,
+.token.entity,
+.token.url {
+  color: #987;
+}
+
+.token.tag,
+.token.constant,
+.token.keyword {
+  color: #a7a;
+}
+
+.token.function,
+.token.attr-value {
+  color: #68a;
+}
+
+.token.number,
+.token.boolean,
+.token.regex,
+.token.string {
+  color: #6a8;
+}
+
+.token.variable,
+.token.property,
+.token.key {
+  color: #a66;
+}
+
+/* Print
+   ---------------- */
+
+@media print {
+  :root {
+    font-size: 14px !important;
+  }
+}
+
+</style>
+</head>
+<body>
+<h1 id="pa-01">PA-01</h1>
+<!-- [[toc]] -->
+<h2 id="enum-sleep">enum sleep</h2>
+<pre><code class="language-c"><span class="token keyword">typedef</span> <span class="token keyword">enum</span> sleep <span class="token punctuation">{</span>
+	NONE <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span> ASLEEP <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">,</span> AWAKE <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">,</span> REALLYAWAKE <span class="token operator">=</span> <span class="token number">3</span>
+<span class="token punctuation">}</span> Sleep<span class="token punctuation">;</span>
+</code></pre>
+<h2 id="struct-fitbit">struct fitbit</h2>
+<pre><code class="language-c"><span class="token keyword">typedef</span> <span class="token keyword">struct</span> fitbit <span class="token punctuation">{</span>
+	<span class="token keyword">char</span> patient<span class="token punctuation">[</span><span class="token number">10</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+	<span class="token keyword">char</span> minute<span class="token punctuation">[</span><span class="token number">9</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+	<span class="token keyword">double</span> calories<span class="token punctuation">;</span>
+	<span class="token keyword">double</span> distance<span class="token punctuation">;</span>
+	<span class="token keyword">unsigned</span> <span class="token keyword">int</span> floors<span class="token punctuation">;</span>
+	<span class="token keyword">unsigned</span> <span class="token keyword">int</span> heartRate<span class="token punctuation">;</span>
+	<span class="token keyword">unsigned</span> <span class="token keyword">int</span> steps<span class="token punctuation">;</span>
+	Sleep sleepLevel<span class="token punctuation">;</span>
+<span class="token punctuation">}</span> FitbitData<span class="token punctuation">;</span>
+</code></pre>
+<h2 id="struct-stats">struct stats</h2>
+<pre><code class="language-c"><span class="token keyword">typedef</span> <span class="token keyword">struct</span> stats <span class="token punctuation">{</span>
+	<span class="token keyword">char</span> patientName<span class="token punctuation">[</span><span class="token number">10</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+	<span class="token keyword">double</span> totalCalories<span class="token punctuation">;</span>
+	<span class="token keyword">double</span> totalDistance<span class="token punctuation">;</span>
+	<span class="token keyword">unsigned</span> <span class="token keyword">int</span> floors<span class="token punctuation">;</span>
+	<span class="token keyword">unsigned</span> <span class="token keyword">int</span> totalSteps<span class="token punctuation">;</span>
+	<span class="token keyword">unsigned</span> <span class="token keyword">int</span> maxSteps<span class="token punctuation">;</span>
+	<span class="token keyword">unsigned</span> <span class="token keyword">int</span> currentSleepStreak<span class="token punctuation">;</span>
+	<span class="token keyword">unsigned</span> <span class="token keyword">int</span> poorestSleepStreak<span class="token punctuation">;</span>
+	<span class="token keyword">unsigned</span> <span class="token keyword">int</span> numLines<span class="token punctuation">;</span>
+	<span class="token keyword">double</span> avgHeart<span class="token punctuation">;</span>
+<span class="token punctuation">}</span> Stats<span class="token punctuation">;</span>
+
+</code></pre>
+<h2 id="newfitbitdata">NewFitbitData</h2>
+<ul>
+<li>
+<h4 id="description">Description</h4>
+<p>The function <code>void NewFitbitData(FitbitData *f)</code> goes through all the properties on a FitbitData struct and sets all the <strong>integer</strong> values to <code>0</code>, <strong>double values</strong> to <code>0.0</code>, and <strong>strings</strong> to <code>"\0\0\0\0\0\0\0..."</code> thus creating a "fresh" struct.</p>
+</li>
+<li>
+<h4 id="declaration">Declaration</h4>
+</li>
+</ul>
+<pre><code class="language-c"><span class="token keyword">void</span> <span class="token function">NewFitbitData</span><span class="token punctuation">(</span>FitbitData <span class="token operator">*</span>f<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<ul>
+<li>
+<h4 id="parameters">Parameters</h4>
+<ul>
+<li>*<strong>f:</strong> A pointer to the <strong>FitbitData</strong> struct that needs to be initialized or reset.</li>
+</ul>
+</li>
+<li>
+<h4 id="return-value">Return Value</h4>
+<p>This function doesn't return anything.</p>
+</li>
+</ul>
+<h2 id="clearstats">clearStats</h2>
+<ul>
+<li>
+<h4 id="description-2">Description</h4>
+<p>The function <code>void clearStats(Stats *s)</code> goes through all the properties on a stats struct and sets all the <strong>integer</strong> values to <code>0</code>, <strong>double values</strong> to <code>0.0</code>, and <strong>strings</strong> to <code>"\0\0\0\0\0\0\0..."</code> thus creating a "fresh" struct.</p>
+</li>
+<li>
+<h4 id="declaration-2">Declaration</h4>
+</li>
+</ul>
+<pre><code class="language-c"><span class="token keyword">void</span> <span class="token function">clearStats</span><span class="token punctuation">(</span>Stats <span class="token operator">*</span>s<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<ul>
+<li>
+<h4 id="parameters-2">Parameters</h4>
+<ul>
+<li>*<strong>s:</strong> A pointer to the <strong>stats</strong> struct that needs to be initialized or reset.</li>
+</ul>
+</li>
+<li>
+<h4 id="return-value-2">Return Value</h4>
+<p>This function doesn't return anything.</p>
+</li>
+</ul>
+<h2 id="parseline">parseLine</h2>
+<ul>
+<li>
+<h4 id="description-3">Description</h4>
+<p>The function <code>void parseLine(FitbitData *f, Stats *s, char* patientName)</code> uses <code>strtok()</code> from string.h to parse a line that looks like: <code>12cx7,0:04:00,0.968900,0.000000,0,70,0,1</code> and stores the values in the respective properties on the FitbitData struct pointed to by <code>f</code>. Along the way, it updates the properties of the Stats struct pointed to by <code>s</code>.</p>
+</li>
+<li>
+<h4 id="preconditions">Preconditions</h4>
+<p>This function can only called once the first two lines of the fitbit file have been removed from the buffer and the patient name has been stored in the stats struct pointed to by <code>s</code>.</p>
+</li>
+<li>
+<h4 id="declaration-3">Declaration</h4>
+</li>
+</ul>
+<pre><code class="language-c"><span class="token keyword">void</span> <span class="token function">parseLine</span><span class="token punctuation">(</span>FitbitData <span class="token operator">*</span>f<span class="token punctuation">,</span> Stats <span class="token operator">*</span>s<span class="token punctuation">,</span> <span class="token keyword">char</span><span class="token operator">*</span> patientName<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<ul>
+<li>
+<h4 id="parameters-3">Parameters</h4>
+<ul>
+<li>FitbitData *f: pointer to a FitbitData struct</li>
+<li>Stats *s: pointer to a Stats struct</li>
+<li>char *patientName: string containing the name of the owner of the file</li>
+</ul>
+</li>
+<li>
+<h4 id="return-value-3">Return Value</h4>
+<ul>
+<li>This function doesn't return anything.</li>
+</ul>
+</li>
+</ul>
+<h2 id="traversefile">traverseFile</h2>
+<ul>
+<li>
+<h4 id="description-4">Description</h4>
+This function iterates through the lines of a file and does 4 things:
+<ol>
+<li>Gets the patient name from the file</li>
+<li>Passes each following line off to <code>void parseLine(FitbitData *f, Stats *s, char* patientName)</code> to be stored in a FitbitData struct</li>
+<li>Saves the struct to an array for later use</li>
+<li>Calls <code>void printTheStuff(FitbitData FBD[1500], Stats *stats)</code></li>
+</ol>
+</li>
+<li>
+<h4 id="declaration-4">Declaration</h4>
+</li>
+</ul>
+<pre><code class="language-c"><span class="token keyword">void</span> <span class="token function">traverseFile</span><span class="token punctuation">(</span>FILE <span class="token operator">*</span>infile<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<ul>
+<li>
+<h4 id="parameters-4">Parameters</h4>
+<ul>
+<li>FILE *infile: pointer to a file that's been opened to read</li>
+</ul>
+</li>
+<li>
+<h4 id="return-value-4">Return Value</h4>
+<ul>
+<li>This function doesn't return anything.</li>
+</ul>
+</li>
+</ul>
+<h2 id="checkformaxsteps">checkForMaxSteps</h2>
+<ul>
+<li>
+<h4 id="description-5">Description</h4>
+This function checks to see if the step count on the current line is the largest in the file.</li>
+<li>
+<h4 id="declaration-5">Declaration</h4>
+</li>
+</ul>
+<pre><code class="language-c"><span class="token keyword">unsigned</span> <span class="token keyword">int</span> <span class="token function">checkForMaxSteps</span><span class="token punctuation">(</span><span class="token keyword">unsigned</span> <span class="token keyword">int</span> maxSteps<span class="token punctuation">,</span> <span class="token keyword">unsigned</span> <span class="token keyword">int</span> steps<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<ul>
+<li>
+<h4 id="parameters-5">Parameters</h4>
+<ul>
+<li>unsigned int maxSteps: Largest step count</li>
+<li>unsigned int steps: current step count</li>
+</ul>
+</li>
+<li>
+<h4 id="return-value-5">Return Value</h4>
+<ul>
+<li>the larger of the two arguments</li>
+</ul>
+</li>
+</ul>
+<h2 id="checkforbadsleep">checkForBadSleep</h2>
+<ul>
+<li>
+<h4 id="description-6">Description</h4>
+<p>This function checks to see if the current bad sleep streak is the largest in the file.</p>
+</li>
+<li>
+<h4 id="declaration-6">Declaration</h4>
+</li>
+</ul>
+<pre><code class="language-c"><span class="token keyword">unsigned</span> <span class="token keyword">int</span> <span class="token function">checkForBadSleep</span><span class="token punctuation">(</span><span class="token keyword">unsigned</span> <span class="token keyword">int</span> streak<span class="token punctuation">,</span> <span class="token keyword">unsigned</span> <span class="token keyword">int</span> currentStreak<span class="token punctuation">)</span>
+</code></pre>
+<ul>
+<li>
+<h4 id="parameters-6">Parameters</h4>
+<ul>
+<li>unsigned int streak: Largest bad sleep streak</li>
+<li>unsigned int currentStreak: current bad sleep streak</li>
+</ul>
+</li>
+<li>
+<h4 id="return-value-6">Return Value</h4>
+<ul>
+<li>the larger of the two arguments</li>
+</ul>
+</li>
+</ul>
+<h2 id="printthestuff">printTheStuff</h2>
+<ul>
+<li>
+<h4 id="description-7">Description</h4>
+<p>This function prints all the stats (max steps, total calories, etc) to a file called <code>Results.csv</code>. Then, it loops through the array of FitbitData structs and prints the cleaned up data to the file as well.</p>
+</li>
+<li>
+<h4 id="declaration-7">Declaration</h4>
+</li>
+</ul>
+<pre><code class="language-c"><span class="token keyword">void</span> <span class="token function">printTheStuff</span><span class="token punctuation">(</span>FitbitData FBD<span class="token punctuation">[</span><span class="token number">1500</span><span class="token punctuation">]</span><span class="token punctuation">,</span> Stats <span class="token operator">*</span>stats<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<ul>
+<li>
+<h4 id="parameters-7">Parameters</h4>
+<ul>
+<li>An array of FitbitData Structs of length 1500</li>
+<li>A pointer to the stats struct that contains all of the stats</li>
+</ul>
+</li>
+<li>
+<h4 id="return-value-7">Return Value</h4>
+<ul>
+<li>This function doesn't return anything.</li>
+</ul>
+</li>
+</ul>
+
+</body>
+</html>

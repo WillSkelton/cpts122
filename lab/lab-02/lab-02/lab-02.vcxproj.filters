@@ -27,18 +27,4 @@
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
-  <ItemGroup>
-    <None Include="FitbitData.csv">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="assignment.md">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="test.csv">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="Results.csv">
-      <Filter>Resource Files</Filter>
-    </None>
-  </ItemGroup>
 </Project>
