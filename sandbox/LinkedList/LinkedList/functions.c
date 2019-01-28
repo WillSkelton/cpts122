@@ -114,3 +114,60 @@ int getLength(Node *listPtr, int startIdx) {
 	return tempIdx;
 }
 
+Node* getElementAtIndex(Node **listPtr, int searchIdx) {
+	int curIdx = 0;
+	Node *found = NULL;
+	
+	found = *listPtr;
+
+	while ((found != NULL) && (found->pNext != NULL)) {
+
+		if (curIdx == searchIdx) {
+			break;
+		}
+
+		found = found->pNext;
+
+		++curIdx;
+	}
+
+	return found;
+
+}
+
+void fisherYatesShuffle(Node **listPtr) {
+	
+	Node *iterator = NULL;
+	Node *tempNext = NULL;
+	Node *tempPrev = NULL;
+	Node *iPtr = NULL;
+	Node *jPtr = NULL;
+	
+	int iIdx = 0;
+	int jIdx = 0;
+
+	int length = getLength(*listPtr, 0);
+
+	iterator = *listPtr;
+
+	while((listPtr != NULL) && (iterator != NULL)) {
+		
+		iPtr = iterator;
+		iterator = iterator->pNext;
+
+		tempNext = iterator->pNext;
+		tempPrev = iterator->pPrev;
+
+		jPtr = getElementAtIndex(listPtr, rand() % length-1);
+
+		iPtr->pNext = jPtr->pNext;
+		iPtr->pPrev = jPtr->pPrev;
+
+		jPtr->pNext = tempNext;
+		jPtr->pPrev = tempPrev;
+
+
+		
+		++iIdx;
+	}
+}
