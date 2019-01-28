@@ -23,7 +23,10 @@ void initList(Node **listPtr);
 
 Node* newNode(Item newItem);
 
-void printList(Node *listPtr);
+void printListL2R(Node *listPtr);
+
+void printListR2L(Node *listPtr);
 
 int prepend(Node **listPtr, Item newItem);
 
+int append(Node **listPtr, Item newItem);

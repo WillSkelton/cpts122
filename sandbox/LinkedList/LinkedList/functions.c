@@ -21,10 +21,25 @@ Node* newNode(Item newItem) {
 }
 
 void printListL2R(Node *listPtr) {
-	
-	while (listPtr->pNext != NULL) {
-		printf("---> %s ", listPtr->item.desc);
+	printf("---> ");
+
+	if (listPtr != NULL) {
+
+		printf("%s ", listPtr->item.desc);
+		printListL2R(listPtr->pNext);
 	}
+}
+
+void printListR2L(Node *listPtr) {
+
+	if (listPtr != NULL) {
+		
+		printListR2L(listPtr->pNext);
+		printf("<--- ");
+		printf("%s ", listPtr->item.desc);
+	}
+
+	//printf("\n");
 
 }
 
@@ -39,9 +54,12 @@ int prepend(Node **listPtr, Item newItem) {
 	if (tempPtr != NULL) {
 		success = 1;
 
-		(*listPtr)->pPrev = tempPtr;
-
+		if (*listPtr != NULL) {
+			(*listPtr)->pPrev = tempPtr;
+		}
+		
 		tempPtr->pNext = *listPtr;
+
 		*listPtr = tempPtr;
 
 	}
@@ -49,3 +67,32 @@ int prepend(Node **listPtr, Item newItem) {
 	return success;
 }
 
+int append(Node **listPtr, Item newItem) {
+
+	Node *tempPtr = NULL;
+	Node *curNode = NULL;
+	Node *prevNode = NULL;
+
+	int success = 0;
+
+	tempPtr = newNode(newItem);
+		
+	if (tempPtr != NULL) {
+		success = 1;
+
+		curNode = *listPtr;
+
+		while (curNode->pNext != NULL) {
+			curNode = curNode->pNext;
+		}
+
+		if (*listPtr != NULL) {
+			tempPtr->pPrev = curNode;
+		}
+
+		tempPtr->pNext = NULL;
+		curNode->pNext = tempPtr;
+	}
+
+	return success;
+}
