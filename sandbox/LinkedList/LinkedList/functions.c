@@ -101,3 +101,16 @@ int append(Node **listPtr, Item newItem) {
 
 	return success; 
 }
+
+int getLength(Node *listPtr, int startIdx) {
+
+	int tempIdx = startIdx;;
+
+	if (listPtr != NULL) {
+		tempIdx = getLength(listPtr->pNext, tempIdx + 1);
+	}
+	
+
+	return tempIdx;
+}
+

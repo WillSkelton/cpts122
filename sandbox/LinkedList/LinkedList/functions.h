@@ -30,3 +30,5 @@ void printListR2L(Node *listPtr);
 int prepend(Node **listPtr, Item newItem);
 
 int append(Node **listPtr, Item newItem);
+
+int getLength(Node *listPtr);
