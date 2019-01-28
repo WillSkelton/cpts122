@@ -82,17 +82,22 @@ int append(Node **listPtr, Item newItem) {
 
 		curNode = *listPtr;
 
-		while (curNode->pNext != NULL) {
+		while ((curNode != NULL) && (curNode->pNext != NULL)) {
 			curNode = curNode->pNext;
 		}
 
 		if (*listPtr != NULL) {
 			tempPtr->pPrev = curNode;
+
+			tempPtr->pNext = NULL;
+			curNode->pNext = tempPtr;
+		}
+		else {
+			*listPtr = tempPtr;
 		}
 
-		tempPtr->pNext = NULL;
-		curNode->pNext = tempPtr;
+		
 	}
 
-	return success;
+	return success; 
 }
