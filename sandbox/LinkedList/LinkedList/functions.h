@@ -37,3 +37,5 @@ int getLength(Node *listPtr, int startIdx);
 Node* getElementAtIndex(Node **listPtr, int searchIdx);
 
 void fisherYatesShuffle(Node **listPtr);
+
+void debugPtr(Node *listPtr);

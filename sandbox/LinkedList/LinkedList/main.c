@@ -32,9 +32,9 @@ int main(void) {
 	prepend(&ToDo, item7);
 
 
-	printf("%s\n", getElementAtIndex(&ToDo, 3)->item.desc);
+	// printf("%s\n", getElementAtIndex(&ToDo, 3)->item.desc);
 
-	printListL2R(ToDo);
+	//printListL2R(ToDo);
 	printf("\n");
 	
 	fisherYatesShuffle(&ToDo);

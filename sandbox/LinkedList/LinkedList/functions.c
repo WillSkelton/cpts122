@@ -136,38 +136,71 @@ Node* getElementAtIndex(Node **listPtr, int searchIdx) {
 }
 
 void fisherYatesShuffle(Node **listPtr) {
-	
+	// Node *head = NULL;
 	Node *iterator = NULL;
-	Node *tempNext = NULL;
-	Node *tempPrev = NULL;
+	Node *iNext = NULL;
+	Node *iPrev = NULL;
+	Node *jNext = NULL;
+	Node *jPrev = NULL;
 	Node *iPtr = NULL;
 	Node *jPtr = NULL;
 	
-	int iIdx = 0;
-	int jIdx = 0;
+	int idx = 0;
 
 	int length = getLength(*listPtr, 0);
 
 	iterator = *listPtr;
 
-	while((listPtr != NULL) && (iterator != NULL)) {
+	for (idx = 0; idx < length + 1; ++idx) {
 		
+	
 		iPtr = iterator;
-		iterator = iterator->pNext;
+		//jPtr = getElementAtIndex(listPtr, rand() % length-1);
+		jPtr = getElementAtIndex(listPtr, 5);
+		
+		iPrev = iPtr->pPrev;
+		iNext = iPtr->pNext;
 
-		tempNext = iterator->pNext;
-		tempPrev = iterator->pPrev;
+		jPrev = jPtr->pPrev;
+		jNext = jPtr->pNext;
 
-		jPtr = getElementAtIndex(listPtr, rand() % length-1);
 
-		iPtr->pNext = jPtr->pNext;
-		iPtr->pPrev = jPtr->pPrev;
+		// Move i to j
+		if (jPrev != NULL) jPrev->pNext = iPtr;
+		if (jNext != NULL) jNext->pPrev = iPtr;
+		iPtr->pPrev = jPrev;
+		iPtr->pNext = jNext;
 
-		jPtr->pNext = tempNext;
-		jPtr->pPrev = tempPrev;
+		// Move j to i
+		if (iPrev != NULL) iPrev->pNext = jPtr;
+		if (iNext != NULL) iNext->pPrev = jPtr;
+		jPtr->pPrev = iPrev;
+		jPtr->pNext = iNext;
+		
 
+		if (idx == 0) {
+			*listPtr = jPtr;
+		}
 
 		
-		++iIdx;
+		//printListL2R(*listPtr);
+
+		//debugPtr(*listPtr);
+		printf("\n");
+		iterator = jPtr->pNext;
+
+		
+
 	}
+
+	
+}
+
+void debugPtr(Node *listPtr) {
+
+	if (listPtr != NULL) {
+		printf("%s --> ", listPtr->item.desc);
+		debugPtr(listPtr->pNext);
+	}
+
 }
