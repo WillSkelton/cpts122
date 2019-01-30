@@ -32,6 +32,18 @@ int main(void) {
 	prepend(&ToDo, item7);
 
 
+	prepend(&empty, item0);
+	prepend(&empty, item1);
+	prepend(&empty, item2);
+	prepend(&empty, item3);
+
+	prepend(&empty, item4);
+	prepend(&empty, item5);
+	prepend(&empty, item6);
+	//prepend(&empty, item7);
+
+	printf("%d\n", listCompare(ToDo,empty));
+
 	// printf("%s\n", getElementAtIndex(&ToDo, 3)->item.desc);
 
 	//printListL2R(ToDo);
