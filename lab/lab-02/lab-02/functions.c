@@ -93,6 +93,8 @@ int insertAtPosN(Node **listPtr, Contact newContact, int n) {
 
 	tempMemPtr = makeNode(newContact);
 
+
+
 	if (tempMemPtr != NULL) {
 		while (i != n-1) {
 			if (i >= n) {
