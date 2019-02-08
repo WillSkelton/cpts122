@@ -34,7 +34,7 @@ int main(void) {
 
 	printf("\nAfter:\n");
 
-	deleteItem(&list, &test1);
+	deleteAllByArtist(&list, "Electric Six");
 	printListL2R(list.head);
 
 	printf("\n");

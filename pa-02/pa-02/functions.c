@@ -134,13 +134,79 @@ int pop(List *list) {
 	return success;
 }
 
-int deleteAtIndex(List *list, int idx) {
+int deleteAllByArtist(List *list, char *artistName) {
 	int success = 0;
+	int isMatch = 0;
+
+	unsigned int numberDeleted = 0;
+
+	Node *tempNext = NULL;
+	Node *tempPrev = NULL;
+
+	Node *compare = (list->head != NULL) ? list->head : NULL;
+	Node *temp = NULL;
+
+	if (compare != NULL) {
+		success = -1;
+
+		for (int i = 0; i < list->length; ++i) {
+			
+			isMatch = strcmp(artistName, compare->record.artist);
+
+			if (isMatch == 0) {
+				success = 1;
+
+				// Relink backwards
+				if (tempNext != NULL) tempNext->pPrev = tempPrev;
+
+				// Relink Forwards
+				if (tempPrev != NULL) tempPrev->pNext = tempNext;
+
+				// Readjust Head if neccesary
+				if (compare->record.id == list->head->record.id) {
+					list->head = list->head->pNext;
+				}
+
+				// Readjust Tail if neccesary
+				if (compare->record.id == list->tail->record.id) {
+					list->tail = list->tail->pPrev;
+				}
+
+				if (success == 1) {
+					// Hold onto next song
+					temp = compare->pNext;
+
+					// free deleted song from heap
+					free(compare);
+
+					// Adjust list length
+					++numberDeleted;
+				}
+				// move onto next song
+				compare = temp;
+		
+				// Keep track of songs on either side
+				tempNext = (compare != NULL) ? compare->pNext : NULL;
+				tempPrev = (compare != NULL) ? compare->pPrev : NULL;
+			}
+			else {
+
+				// move on
+				compare = compare->pNext;
+
+				tempNext = compare->pNext;
+				tempPrev = compare->pPrev;
+
+			}
+		}
+	}
+
+	list->length -= numberDeleted;
 
 	return success;
 }
 
-int deleteItem(List *list, Record *record) {
+int deleteSong(List *list, Record *record) {
 	int success = 0;
 
 	Node *tempNext = NULL;
@@ -150,6 +216,7 @@ int deleteItem(List *list, Record *record) {
 
 	for (int i = 0; i < list->length; ++i) {
 		if (compare->record.id == record->id) {
+			success = 1;
 			break;
 		}
 		else {
@@ -172,7 +239,11 @@ int deleteItem(List *list, Record *record) {
 		list->tail = list->tail->pPrev;
 	}
 
-	free(compare);
+	if (success == 1) {
+		free(compare);
+		list->length--;
+	}
+	
 
 	return success;
 }
@@ -210,7 +281,7 @@ Node* getElementAtIndex(Node **listPtr, int searchIdx) {
 
 }
 
-void fisherYatesShuffle(Node **listPtr) {
+void willSkeltonPoppinHopper(List *list) {
 	Node *iterator = NULL;
 	Node *startPtr = NULL;
 	Node *swapPtr = NULL;
@@ -218,19 +289,11 @@ void fisherYatesShuffle(Node **listPtr) {
 	Node *shuffled;
 	initList(&shuffled);
 
-	int idx = 0, length = getLength(*listPtr, 0), randoCalrissian = 0;
+	int idx = 0, length = list->length, randoCalrissian = 0;
 
 
-	iterator = *listPtr;
+	iterator = list->head;
 
-	for (idx = 0; idx < length; ++idx) {
-		randoCalrissian = rand() % length - idx;
-
-		//printf("%s\n", iterator->record.artist);
-
-
-		iterator = iterator->pNext;
-	}
 
 }
 

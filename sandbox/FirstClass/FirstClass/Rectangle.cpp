@@ -1,6 +1,11 @@
 #include "Rectangle.h"
 
 
+Rectangle::Rectangle() {
+	mLength = 0;
+	mWidth = 0;
+}
+
 int Rectangle::getLength() {
 	
 	return mLength;

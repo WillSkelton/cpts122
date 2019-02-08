@@ -55,9 +55,9 @@ int prepend(List *list, Record *newRecord);
 
 int append(List *list, Record *newRecord);
 
-int deleteAtIndex(List *list, int idx);
+int deleteAllByArtist(List *list, char *artistName);
 
-int deleteItem(List *list, Record *record);
+int deleteSong(List *list, Record *record);
 
 int pop(List *list);
 

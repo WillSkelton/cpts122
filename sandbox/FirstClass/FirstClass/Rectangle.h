@@ -6,6 +6,8 @@ class Rectangle {
 
 public:
 
+	Rectangle();
+
 	int getLength();
 	int getWidth();
 
