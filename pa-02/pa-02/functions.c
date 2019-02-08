@@ -194,8 +194,8 @@ int deleteAllByArtist(List *list, char *artistName) {
 				// move on
 				compare = compare->pNext;
 
-				tempNext = compare->pNext;
-				tempPrev = compare->pPrev;
+				tempNext = (compare != NULL) ? compare->pNext : NULL;
+				tempPrev = (compare != NULL) ? compare->pPrev : NULL;
 
 			}
 		}
@@ -222,8 +222,8 @@ int deleteSong(List *list, Record *record) {
 		else {
 			compare = compare->pNext;
 
-			tempNext = compare->pNext;
-			tempPrev = compare->pPrev;
+			tempNext = (compare != NULL) ? compare->pNext : NULL;
+			tempPrev = (compare != NULL) ? compare->pPrev : NULL;
 		}
 	}
 
