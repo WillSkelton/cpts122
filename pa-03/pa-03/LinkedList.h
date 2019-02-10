@@ -52,6 +52,10 @@ void printListL2R(Node *nodePtr);
 
 void printListR2L(Node *nodePtr);
 
+void printListTop2Bottom(Node *nodePtr);
+
+void printAllByArtist(Node *nodePtr, char *artist);
+
 int prepend(List *list, Record *newRecord);
 
 int append(List *list, Record *newRecord);

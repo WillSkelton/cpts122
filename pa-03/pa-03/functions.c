@@ -4,6 +4,8 @@ void menuREPL(void) {
 	List playlist;
 	initList(&playlist);
 
+	FILE *infile = NULL;
+
 	int choice = -1;
 	
 	do {
@@ -14,18 +16,52 @@ void menuREPL(void) {
 
 		switch (choice) {
 		case 1:
-			load(&playlist);
-			system("pause");
+
+			//infile = fopen("musicPlayList.csv", "r");
+			
+			infile = fopen("music.csv", "r");
+
+
+
+			if (infile != NULL) {
+				load(&playlist, infile);
+				
+				fclose(infile);
+			}
+
+			else {
+				printMessage("No Save File yet.");
+				system("pause");
+
+			}
+
 			break;
 
 
 
 		case 2:
-			store();
+			store(&playlist);
 			break;
 
 		case 3:
-			display();
+
+			infile = fopen("musicPlayList.csv", "r");
+			
+			if (infile != NULL && playlist.head != NULL) {
+				display(&playlist);
+				
+				fclose(infile);
+				
+			}
+
+			else {
+				printMessage("No Save File yet.");
+			}
+
+
+
+			system("pause");
+			
 			break;
 
 		case 4:
@@ -133,19 +169,9 @@ void printMenu(void) {
 	printf(">>> ");
 }
 
-void load(List *playlist) {
-
-	FILE *infile = fopen("music.csv", "r");
+void load(List *playlist, FILE *infile) {
 
 	Record tempRecord;
-	char artist[30];
-	char album[30];
-	char song[30];
-	char genre[15];
-	int minutes = 0;
-	int seconds = 0;
-	int timesPlayed = 0;
-	Rating rating;
 
 	char firstChar = ' ';
 	char *token = NULL;
@@ -165,73 +191,7 @@ void load(List *playlist) {
 
 		fgets(&line[1], 100, infile);
 
-		// Get Artist Name
-		if (firstChar == '\"') {
-
-			// Clear "s
-			token = strtok(line, "\"");
-
-			// move name into placeholder
-			strcpy(artist, token);
-
-			// Skip to next item
-			token = strtok(NULL, "");
-
-		}
-		else {
-			// Get Name
-			token = strtok(line, ",");
-
-			// move name into placeholder
-			strcpy(artist, token);
-
-			// Skip to next item
-			token = strtok(NULL, "");
-		}
-
-		// Get Album
-		strcpy(line, token);
-		token = strtok(line, ",");
-		strcpy(album, token);
-		token = strtok(NULL, "");
-
-		// Get Song Name
-		strcpy(line, token);
-		token = strtok(line, ",");
-		strcpy(song, token);
-		token = strtok(NULL, "");
-
-		// Get Genre
-		strcpy(line, token);
-		token = strtok(line, ",");
-		strcpy(genre, token);
-		token = strtok(NULL, "");
-
-		// Get Minutes
-		strcpy(line, token);
-		token = strtok(line, ":");
-		minutes = atoi(line);
-		token = strtok(NULL, "");
-
-		// Get Seconds
-		strcpy(line, token);
-		token = strtok(line, ",");
-		seconds = atoi(line);
-		token = strtok(NULL, "");
-
-		// Get Times Played
-		strcpy(line, token);
-		token = strtok(line, ",");
-		timesPlayed = atoi(line);
-		token = strtok(NULL, "");
-
-		// Get Rating
-		strcpy(line, token);
-		token = strtok(line, ",");
-		rating = atoi(line);
-		token = strtok(NULL, "");
-
-		newRecord(&tempRecord, artist, album, song, genre, minutes, seconds, timesPlayed, rating);
+		parseLine(&tempRecord, line);
 
 		append(playlist, &tempRecord);
 
@@ -240,11 +200,148 @@ void load(List *playlist) {
 
 }
 
-void store(void) {
+void parseLine(Node *tempRecord, char line[100]) {
+
+	char artist[30];
+	char album[30];
+	char song[30];
+	char genre[15];
+	int minutes = 0;
+	int seconds = 0;
+	int timesPlayed = 0;
+	Rating rating;
+
+
+	char *token = NULL;
+
+	// Get Artist Name
+	if (line[0] == '\"') {
+
+		// Clear "s
+		token = strtok(line, "\"");
+
+		// move name into placeholder
+		strcpy(artist, token);
+
+		// Skip to next item
+		token = strtok(NULL, "");
+
+	}
+	else {
+		// Get Name
+		token = strtok(line, ",");
+
+		// move name into placeholder
+		strcpy(artist, token);
+
+		// Skip to next item
+		token = strtok(NULL, "");
+	}
+
+	// Get Album
+	strcpy(line, token);
+	token = strtok(line, ",");
+	strcpy(album, token);
+	token = strtok(NULL, "");
+
+	// Get Song Name
+	strcpy(line, token);
+	token = strtok(line, ",");
+	strcpy(song, token);
+	token = strtok(NULL, "");
+
+	// Get Genre
+	strcpy(line, token);
+	token = strtok(line, ",");
+	strcpy(genre, token);
+	token = strtok(NULL, "");
+
+	// Get Minutes
+	strcpy(line, token);
+	token = strtok(line, ":");
+	minutes = atoi(line);
+	token = strtok(NULL, "");
+
+	// Get Seconds
+	strcpy(line, token);
+	token = strtok(line, ",");
+	seconds = atoi(line);
+	token = strtok(NULL, "");
+
+	// Get Times Played
+	strcpy(line, token);
+	token = strtok(line, ",");
+	timesPlayed = atoi(line);
+	token = strtok(NULL, "");
+
+	// Get Rating
+	strcpy(line, token);
+	token = strtok(line, ",");
+	rating = atoi(line);
+	token = strtok(NULL, "");
+
+	newRecord(tempRecord, artist, album, song, genre, minutes, seconds, timesPlayed, rating);
 
 }
 
-void display(void) {
+void store(List *playlist) {
+	FILE *outfile = fopen("musicPlayList.csv", "w");
+
+	Node *tempNode = playlist->head;
+
+	if (tempNode != NULL) {
+	
+		for (int i = 0; i < playlist->length; ++i) {
+			if (strstr(tempNode->record.artist, ", ") != NULL) {
+				fprintf(outfile, "\"%s\",", tempNode->record.artist);
+			}
+			else {
+				fprintf(outfile, "%s,", tempNode->record.artist);
+			}
+
+			fprintf(outfile, "%s,", tempNode->record.album);
+			fprintf(outfile, "%s,", tempNode->record.song);
+			fprintf(outfile, "%s,", tempNode->record.genre);
+			fprintf(outfile, "%d:%d,", tempNode->record.duration.min, tempNode->record.duration.sec);
+			fprintf(outfile, "%d,", tempNode->record.timesPlayed);
+			fprintf(outfile, "%d\n", tempNode->record.rating);
+			
+
+
+			// fprintf(outfile, "\n");
+			tempNode = tempNode->pNext;
+		}
+	
+	}
+
+	fclose(outfile);
+}
+
+void display(List *playlist) {
+
+	int choice = inputCheck(1, 2, printDisplayOptions);
+	char lastName[30];
+
+	switch (choice) {
+	case 1:
+		printListTop2Bottom(playlist->head);
+		break;
+
+	case 2:
+
+		printf("Please enter Artist Last or Only Name (ie RZA):\n");
+		printf(">>> ");
+		scanf("%s", lastName);
+		
+		printAllByArtist(playlist->head, lastName);
+		break;
+	}
+	
+}
+
+void printDisplayOptions(void) {
+	printf("1.) Show All Records\n");
+	printf("2.) Show All Records By Artist\n");
 
 }
 

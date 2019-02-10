@@ -18,11 +18,15 @@ void printMessage(char *message);
 
 void printMenu(void);
 
-void load(List *listplaylist);
+void load(List *listplaylist, FILE *infile);
 
-void store(void);
+void parseLine(Node *tempRecord, char line[100]);
 
-void display(void);
+void store(List *playlist);
+
+void display(List *playlist);
+
+void printDisplayOptions(void);
 
 void insert(void);
 

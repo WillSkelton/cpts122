@@ -153,6 +153,7 @@
   <ItemGroup>
     <None Include="assignment.md" />
     <None Include="music.csv" />
+    <None Include="musicPlayList.csv" />
     <None Include="readme.md" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
