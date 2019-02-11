@@ -32,7 +32,9 @@ void insert(void);
 
 void delete(void);
 
-void edit(void);
+void edit(List *playlist);
+
+void printAttributes(void);
 
 void sort(void);
 

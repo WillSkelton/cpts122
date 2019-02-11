@@ -97,11 +97,11 @@ void printAllByArtist(Node *nodePtr, char *artist) {
 	if (nodePtr != NULL) {
 
 		strcpy(temp, nodePtr->record.artist);
-		token = strtok(temp, ",");
+		// token = strtok(temp, ",");
 
-		if (strcmp(artist, temp) == 0) {
+		if (strcmp(artist, nodePtr->record.artist) == 0) {
 
-			printf("-> ");
+			printf("-> Song ID: %d | ", nodePtr->record.id);
 
 
 			if (strstr(nodePtr->record.artist, ", ") != NULL) {
@@ -271,6 +271,24 @@ int deleteAllByArtist(List *list, char *artistName) {
 	list->length -= numberDeleted;
 
 	return success;
+}
+
+Node* findByID(List *list, unsigned long id) {
+	Node *tempNode = NULL;
+
+	if (list->head != NULL) {
+		tempNode = list->head;
+		for (int i = 0; i < list->length; ++i) {
+			if (tempNode->record.id == id) {
+				break;
+			}
+			else {
+				tempNode = tempNode->pNext;
+			}
+		}
+	}
+
+	return tempNode;
 }
 
 int deleteSong(List *list, Record *record) {

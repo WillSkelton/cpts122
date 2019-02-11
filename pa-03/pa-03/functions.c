@@ -44,24 +44,15 @@ void menuREPL(void) {
 			break;
 
 		case 3:
-
 			infile = fopen("musicPlayList.csv", "r");
-			
 			if (infile != NULL && playlist.head != NULL) {
 				display(&playlist);
-				
-				fclose(infile);
-				
+				fclose(infile);	
 			}
-
 			else {
 				printMessage("No Save File yet.");
 			}
-
-
-
 			system("pause");
-			
 			break;
 
 		case 4:
@@ -73,7 +64,7 @@ void menuREPL(void) {
 			break;
 
 		case 6:
-			edit();
+			edit(&playlist);
 			break;
 
 		case 7:
@@ -177,27 +168,27 @@ void load(List *playlist, FILE *infile) {
 	char *token = NULL;
 	char line[100];
 
+	if (playlist->head == NULL) {
+
+		do {
+
+			firstChar = getc(infile);
+
+			if (firstChar == EOF) {
+				break;
+			}
+
+			line[0] = firstChar;
+
+			fgets(&line[1], 100, infile);
+
+			parseLine(&tempRecord, line);
+
+			append(playlist, &tempRecord);
 
 
-	do {
-
-		firstChar = getc(infile);
-
-		if (firstChar == EOF) {
-			break;
-		}
-
-		line[0] = firstChar;
-
-		fgets(&line[1], 100, infile);
-
-		parseLine(&tempRecord, line);
-
-		append(playlist, &tempRecord);
-
-
-	} while (firstChar != EOF);
-
+		} while (firstChar != EOF);
+	}
 }
 
 void parseLine(Node *tempRecord, char line[100]) {
@@ -320,7 +311,7 @@ void store(List *playlist) {
 void display(List *playlist) {
 
 	int choice = inputCheck(1, 2, printDisplayOptions);
-	char lastName[30];
+	char name[30];
 
 	switch (choice) {
 	case 1:
@@ -329,11 +320,13 @@ void display(List *playlist) {
 
 	case 2:
 
-		printf("Please enter Artist Last or Only Name (ie RZA):\n");
+		printf("Please enter Artist's Name as (Last, First) or Only Name (ie RZA):\n");
 		printf(">>> ");
-		scanf("%s", lastName);
+		getchar();
+		fgets(name, 30, stdin);
+		strtok(name, "\n");
 		
-		printAllByArtist(playlist->head, lastName);
+		printAllByArtist(playlist->head, name);
 		break;
 	}
 	
@@ -353,8 +346,130 @@ void delete(void) {
 
 }
 
-void edit(void) {
+void edit(List *playlist) {
 
+	char name[30];
+	char album[30];
+	char song[30];
+	char genre[15];
+	int minute = 0;
+	int second = 0;
+	int timesPlayed;
+	Rating rating;
+
+	int choice = 0;
+	Node *songToEdit = NULL;
+
+	printf("Please enter Artist's Name as (Last, First) or Only Name (ie RZA):\n");
+	printf(">>> ");
+	getchar();
+	fgets(name, 30, stdin);
+	strtok(name, "\n");
+
+	printAllByArtist(playlist->head, name);
+
+	printf("Please enter the ID of the song you'd like to edit:\n");
+	printf(">>> ");
+	scanf("%d", &choice);
+
+	songToEdit = findByID(playlist, choice);
+
+	printf("\nFound it! The song name is '%s'\n", songToEdit->record.song);
+
+	do {
+		choice = inputCheck(1, 9, printAttributes);
+		
+		if (choice == 9) {
+			break;
+		}
+
+		switch (choice) {
+		case 1:
+			printf("Please enter Artist's new name as (Last, First) or Only Name (ie RZA):\n");
+			printf(">>> ");
+			getchar();
+			fgets(name, 30, stdin);
+			strtok(name, "\n");
+			strcpy(songToEdit->record.artist, name);
+			break;
+
+		case 2:
+			printf("Please enter new album name:\n");
+			printf(">>> ");
+			getchar();
+			fgets(album, 30, stdin);
+			strtok(album, "\n");
+			strcpy(songToEdit->record.album, album);
+			break;
+
+		case 3:
+			printf("Please enter new song name:\n");
+			printf(">>> ");
+			getchar();
+			fgets(song, 30, stdin);
+			strtok(song, "\n");
+			strcpy(songToEdit->record.song, song);
+			break;
+
+		case 4:
+			printf("Please enter new genre:\n");
+			printf(">>> ");
+			getchar();
+			fgets(genre, 30, stdin);
+			strtok(genre, "\n");
+			strcpy(songToEdit->record.genre, genre);
+			break;
+
+		case 5:
+			printf("Please enter new minutes value:\n");
+			printf(">>> ");
+			scanf("%d", &minute);
+			songToEdit->record.duration.min = minute;
+			break;
+
+		case 6:
+			printf("Please enter new soconds value:\n");
+			printf(">>> ");
+			scanf("%d", &second);
+			songToEdit->record.duration.sec = second;
+			break;
+
+		case 7:
+			printf("Please enter new number of times played:\n");
+			printf(">>> ");
+			scanf("%d", &timesPlayed);
+			songToEdit->record.timesPlayed = timesPlayed;
+			break;
+
+		case 8:
+			printf("Please enter new rating:\n");
+			printf(">>> ");
+			scanf("%d", &rating);
+			songToEdit->record.rating = rating;
+			break;
+
+		case 9:
+			break;
+
+		}
+
+	} while (choice != 9);
+
+	system("pause");
+}
+
+void printAttributes(void) {
+	printf("1.) Artist\n");
+	printf("2.) Album\n");
+	printf("3.) Song\n");
+	printf("4.) Genre\n");
+	printf("5.) Minutes\n");
+	printf("6.) Seconds\n");
+	printf("7.) Times Played\n");
+	printf("8.) Rating\n");
+	printf("9.) Done\n");
+	printf(">>> ");
+	
 }
 
 void sort(void) {

@@ -62,6 +62,9 @@ int append(List *list, Record *newRecord);
 
 int deleteAllByArtist(List *list, char *artistName);
 
+Node * findByID(List *list, unsigned long id);
+
+
 int deleteSong(List *list, Record *record);
 
 int pop(List *list);
@@ -69,8 +72,6 @@ int pop(List *list);
 int getLength(Node *listPtr, int startIdx);
 
 Node* getElementAtIndex(Node **listPtr, int searchIdx);
-
-void fisherYatesShuffle(Node **listPtr);
 
 void debugPtr(Node *listPtr);
 
