@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
+#include <windows.h>
 
 
 typedef enum rating {
@@ -55,6 +56,8 @@ void printListR2L(Node *nodePtr);
 void printListTop2Bottom(Node *nodePtr);
 
 int printAllByArtist(Node *nodePtr, char *artist);
+
+void printOneRecord(Node *nodePtr);
 
 int prepend(List *list, Record *newRecord);
 

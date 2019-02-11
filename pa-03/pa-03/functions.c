@@ -75,7 +75,7 @@ void menuREPL(void) {
 			rate(&playlist);
 			break;
 		case 9:
-			play();
+			play(&playlist);
 			break;
 
 		case 10:
@@ -513,7 +513,32 @@ void printStarOptions(void) {
 
 }
 
-void play(void) {
+void play(List *playlist) {
+	
+	Node *tempNode = NULL;
+
+	int min = 0;
+	int sec = 0;
+
+	if (playlist->head != NULL) {
+
+		tempNode = playlist->head;
+
+		for (int i = 0; i < playlist->length; ++i) {
+			system("cls");
+			min = (1000 * 60 * tempNode->record.duration.min) * TIMESCALE;
+			sec = (1000 * tempNode->record.duration.sec) * TIMESCALE;
+
+			printOneRecord(tempNode);
+
+			Sleep(min + sec);
+
+			tempNode = tempNode->pNext;
+		}
+	}
+}
+
+void playSong(Record song) {
 
 }
 

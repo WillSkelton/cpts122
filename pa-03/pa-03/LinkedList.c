@@ -128,6 +128,34 @@ int printAllByArtist(Node *nodePtr, char *artist) {
 	return numResults;
 }
 
+void printOneRecord(Node *nodePtr) {
+
+	char *token = NULL;
+	char temp[30];
+
+	if (nodePtr != NULL) {
+
+		strcpy(temp, nodePtr->record.artist);
+		// token = strtok(temp, ",");
+
+		printf("-> Song ID: %d | ", nodePtr->record.id);
+
+
+		if (strstr(nodePtr->record.artist, ", ") != NULL) {
+			printf("\"%s\",", nodePtr->record.artist);			}
+		else {
+			printf(" %s,", nodePtr->record.artist);
+		}
+
+		printf("%s,", nodePtr->record.album);
+		printf("%s,", nodePtr->record.song);
+		printf("%s,", nodePtr->record.genre);
+		printf("%d:%d,", nodePtr->record.duration.min, nodePtr->record.duration.sec);
+		printf("%d,", nodePtr->record.timesPlayed);
+		printf("%d\n", nodePtr->record.rating);	
+	}
+}
+
 int prepend(List *list, Record *newRecord) {
 	
 	Node *tempPtr = NULL;

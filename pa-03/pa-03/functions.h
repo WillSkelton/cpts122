@@ -6,6 +6,8 @@
 
 #include "LinkedList.h"
 
+#define TIMESCALE 1/100
+
 
 
 void menuREPL(void);
@@ -44,7 +46,9 @@ void rate(List *playlist);
 
 void printStarOptions(void);
 
-void play(void);
+void play(List *playlist);
+
+void playSong(Record song);
 
 void shuffle(void);
 
