@@ -38,7 +38,11 @@ void printAttributes(void);
 
 void sort(void);
 
-void rate(void);
+Node* findSongByArtist(List *playlist);
+
+void rate(List *playlist);
+
+void printStarOptions(void);
 
 void play(void);
 

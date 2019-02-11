@@ -89,8 +89,9 @@ void printListTop2Bottom(Node *nodePtr) {
 	}
 }
 
-void printAllByArtist(Node *nodePtr, char *artist) {
+int printAllByArtist(Node *nodePtr, char *artist) {
 
+	int numResults= 0;
 	char *token = NULL;
 	char temp[30];
 
@@ -100,7 +101,7 @@ void printAllByArtist(Node *nodePtr, char *artist) {
 		// token = strtok(temp, ",");
 
 		if (strcmp(artist, nodePtr->record.artist) == 0) {
-
+			numResults = 1;
 			printf("-> Song ID: %d | ", nodePtr->record.id);
 
 
@@ -120,9 +121,11 @@ void printAllByArtist(Node *nodePtr, char *artist) {
 
 		}
 
-		printAllByArtist(nodePtr->pNext, artist);
+		numResults += printAllByArtist(nodePtr->pNext, artist);
 
 	}
+
+	return numResults;
 }
 
 int prepend(List *list, Record *newRecord) {

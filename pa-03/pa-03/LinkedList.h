@@ -54,7 +54,7 @@ void printListR2L(Node *nodePtr);
 
 void printListTop2Bottom(Node *nodePtr);
 
-void printAllByArtist(Node *nodePtr, char *artist);
+int printAllByArtist(Node *nodePtr, char *artist);
 
 int prepend(List *list, Record *newRecord);
 

@@ -17,9 +17,9 @@ void menuREPL(void) {
 		switch (choice) {
 		case 1:
 
-			//infile = fopen("musicPlayList.csv", "r");
+			infile = fopen("musicPlayList.csv", "r");
 			
-			infile = fopen("music.csv", "r");
+			//infile = fopen("music.csv", "r");
 
 
 
@@ -72,7 +72,7 @@ void menuREPL(void) {
 			break;
 
 		case 8:
-			rate();
+			rate(&playlist);
 			break;
 		case 9:
 			play();
@@ -358,102 +358,88 @@ void edit(List *playlist) {
 	Rating rating;
 
 	int choice = 0;
-	Node *songToEdit = NULL;
+	Node *songToEdit = findSongByArtist(playlist);
 
-	printf("Please enter Artist's Name as (Last, First) or Only Name (ie RZA):\n");
-	printf(">>> ");
-	getchar();
-	fgets(name, 30, stdin);
-	strtok(name, "\n");
+	if (songToEdit != NULL) {
+		do {
+			choice = inputCheck(1, 9, printAttributes);
 
-	printAllByArtist(playlist->head, name);
+			if (choice == 9) {
+				break;
+			}
 
-	printf("Please enter the ID of the song you'd like to edit:\n");
-	printf(">>> ");
-	scanf("%d", &choice);
+			switch (choice) {
+			case 1:
+				printf("Please enter Artist's new name as (Last, First) or Only Name (ie RZA):\n");
+				printf(">>> ");
+				getchar();
+				fgets(name, 30, stdin);
+				strtok(name, "\n");
+				strcpy(songToEdit->record.artist, name);
+				break;
 
-	songToEdit = findByID(playlist, choice);
+			case 2:
+				printf("Please enter new album name:\n");
+				printf(">>> ");
+				getchar();
+				fgets(album, 30, stdin);
+				strtok(album, "\n");
+				strcpy(songToEdit->record.album, album);
+				break;
 
-	printf("\nFound it! The song name is '%s'\n", songToEdit->record.song);
+			case 3:
+				printf("Please enter new song name:\n");
+				printf(">>> ");
+				getchar();
+				fgets(song, 30, stdin);
+				strtok(song, "\n");
+				strcpy(songToEdit->record.song, song);
+				break;
 
-	do {
-		choice = inputCheck(1, 9, printAttributes);
-		
-		if (choice == 9) {
-			break;
-		}
+			case 4:
+				printf("Please enter new genre:\n");
+				printf(">>> ");
+				getchar();
+				fgets(genre, 30, stdin);
+				strtok(genre, "\n");
+				strcpy(songToEdit->record.genre, genre);
+				break;
 
-		switch (choice) {
-		case 1:
-			printf("Please enter Artist's new name as (Last, First) or Only Name (ie RZA):\n");
-			printf(">>> ");
-			getchar();
-			fgets(name, 30, stdin);
-			strtok(name, "\n");
-			strcpy(songToEdit->record.artist, name);
-			break;
+			case 5:
+				printf("Please enter new minutes value:\n");
+				printf(">>> ");
+				scanf("%d", &minute);
+				songToEdit->record.duration.min = minute;
+				break;
 
-		case 2:
-			printf("Please enter new album name:\n");
-			printf(">>> ");
-			getchar();
-			fgets(album, 30, stdin);
-			strtok(album, "\n");
-			strcpy(songToEdit->record.album, album);
-			break;
+			case 6:
+				printf("Please enter new soconds value:\n");
+				printf(">>> ");
+				scanf("%d", &second);
+				songToEdit->record.duration.sec = second;
+				break;
 
-		case 3:
-			printf("Please enter new song name:\n");
-			printf(">>> ");
-			getchar();
-			fgets(song, 30, stdin);
-			strtok(song, "\n");
-			strcpy(songToEdit->record.song, song);
-			break;
+			case 7:
+				printf("Please enter new number of times played:\n");
+				printf(">>> ");
+				scanf("%d", &timesPlayed);
+				songToEdit->record.timesPlayed = timesPlayed;
+				break;
 
-		case 4:
-			printf("Please enter new genre:\n");
-			printf(">>> ");
-			getchar();
-			fgets(genre, 30, stdin);
-			strtok(genre, "\n");
-			strcpy(songToEdit->record.genre, genre);
-			break;
+			case 8:
+				printf("Please enter new rating:\n");
+				printf(">>> ");
+				scanf("%d", &rating);
+				songToEdit->record.rating = rating;
+				break;
 
-		case 5:
-			printf("Please enter new minutes value:\n");
-			printf(">>> ");
-			scanf("%d", &minute);
-			songToEdit->record.duration.min = minute;
-			break;
+			case 9:
+				break;
 
-		case 6:
-			printf("Please enter new soconds value:\n");
-			printf(">>> ");
-			scanf("%d", &second);
-			songToEdit->record.duration.sec = second;
-			break;
+			}
 
-		case 7:
-			printf("Please enter new number of times played:\n");
-			printf(">>> ");
-			scanf("%d", &timesPlayed);
-			songToEdit->record.timesPlayed = timesPlayed;
-			break;
-
-		case 8:
-			printf("Please enter new rating:\n");
-			printf(">>> ");
-			scanf("%d", &rating);
-			songToEdit->record.rating = rating;
-			break;
-
-		case 9:
-			break;
-
-		}
-
-	} while (choice != 9);
+		} while (choice != 9);
+	}
 
 	system("pause");
 }
@@ -476,7 +462,54 @@ void sort(void) {
 
 }
 
-void rate(void) {
+Node* findSongByArtist(List *playlist) {
+	
+	int numResults = 0;
+	int choice = 0;
+	char name[30];
+
+	Node *songToEdit = NULL;
+
+	printf("Please enter Artist's Name as (Last, First) or Only Name (ie RZA):\n");
+	printf(">>> ");
+	getchar();
+	fgets(name, 30, stdin);
+	strtok(name, "\n");
+
+	
+	numResults = printAllByArtist(playlist->head, name);
+	if (numResults > 0) {
+		printf("Please enter the ID of the song you'd like to edit:\n");
+		printf(">>> ");
+		scanf("%d", &choice);
+
+		songToEdit = findByID(playlist, choice);
+	}
+	else {
+		songToEdit = NULL;
+		printMessage("Could not find any songs by that artist");
+	}
+
+	return songToEdit;
+}
+
+void rate(List *playlist) {
+	Node *songToEdit = findSongByArtist(playlist);
+
+	int choice = inputCheck(1, 5, printStarOptions);
+
+	if (songToEdit != NULL) {
+		songToEdit->record.rating = choice;
+	}
+}
+
+void printStarOptions(void) {
+	printf("1.) 1 Star\n");
+	printf("2.) 2 Stars\n");
+	printf("3.) 3 Stars\n");
+	printf("4.) 4 Stars\n");
+	printf("5.) 5 Stars\n");
+	printf(">>> ");
 
 }
 
