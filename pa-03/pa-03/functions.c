@@ -20,25 +20,16 @@ void menuREPL(void) {
 			infile = fopen("musicPlayList.csv", "r");
 			
 			//infile = fopen("music.csv", "r");
-
-
-
 			if (infile != NULL) {
 				load(&playlist, infile);
 				
 				fclose(infile);
 			}
-
 			else {
 				printMessage("No Save File yet.");
 				system("pause");
-
 			}
-
 			break;
-
-
-
 		case 2:
 			store(&playlist);
 			break;
@@ -56,7 +47,7 @@ void menuREPL(void) {
 			break;
 
 		case 4:
-			insert();
+			insert(&playlist);
 			break;
 
 		case 5:
@@ -338,8 +329,70 @@ void printDisplayOptions(void) {
 
 }
 
-void insert(void) {
+void insert(List *playlist) {
+	char artist[30];
+	char album[30];
+	char song[30];
+	char genre[15];
+	int minute = 0;
+	int second = 0;
+	int timesPlayed = 0;
+	Rating rating = 0;
 
+	Record recordToAdd;
+
+	printf("Please enter Artist's new name as (Last, First) or Only Name (ie RZA):\n");
+	printf(">>> ");
+	getchar();
+	fgets(artist, 30, stdin);
+	strtok(artist, "\n");
+	recordToAdd.artist[0] = ' ';
+	strcpy(recordToAdd.artist, artist);
+	
+	printf("Please enter new album name:\n");
+	printf(">>> ");
+	getchar();
+	fgets(album, 30, stdin);
+	strtok(album, "\n");
+	strcpy(recordToAdd.album, album);
+
+	printf("Please enter new song name:\n");
+	printf(">>> ");
+	getchar();
+	fgets(song, 30, stdin);
+	strtok(song, "\n");
+	strcpy(recordToAdd.song, song);
+			
+	printf("Please enter new genre:\n");
+	printf(">>> ");
+	getchar();
+	fgets(genre, 30, stdin);
+	strtok(genre, "\n");
+	strcpy(recordToAdd.genre, genre);
+	
+	printf("Please enter new minutes value:\n");
+	printf(">>> ");
+	scanf("%d", &minute);
+	recordToAdd.duration.min = minute;
+	
+	printf("Please enter new soconds value:\n");
+	printf(">>> ");
+	scanf("%d", &second);
+	recordToAdd.duration.sec = second;
+
+	printf("Please enter new number of times played:\n");
+	printf(">>> ");
+	scanf("%d", &timesPlayed);
+	recordToAdd.timesPlayed = timesPlayed;
+	
+	printf("Please enter new rating:\n");
+	printf(">>> ");
+	scanf("%d", &rating);
+	recordToAdd.rating = rating;
+
+	newRecord(&recordToAdd, artist, album, song, genre, minute, second, timesPlayed, rating);
+
+	prepend(playlist, &recordToAdd);
 }
 
 void del(List *playlist) {

@@ -30,7 +30,7 @@ void display(List *playlist);
 
 void printDisplayOptions(void);
 
-void insert(void);
+void insert(List *playlist);
 
 void del(List *playlist);
 
