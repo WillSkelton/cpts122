@@ -60,7 +60,7 @@ void menuREPL(void) {
 			break;
 
 		case 5:
-			delete();
+			del(&playlist);
 			break;
 
 		case 6:
@@ -342,7 +342,19 @@ void insert(void) {
 
 }
 
-void delete(void) {
+void del(List *playlist) {
+	Node *songToDelete = NULL;
+	Node *song = NULL;
+
+	if (playlist->head != NULL) {
+		
+		songToDelete = findSongBySongName(playlist);
+
+
+		deleteSong(playlist, &songToDelete->record);
+
+
+	}
 
 }
 
@@ -493,6 +505,23 @@ Node* findSongByArtist(List *playlist) {
 	return songToEdit;
 }
 
+Node* findSongBySongName(List *playlist) {
+
+	char song[30];
+
+	Node *songToEdit = NULL;
+
+	printf("Please enter song name:\n");
+	printf(">>> ");
+	getchar();
+	fgets(song, 30, stdin);
+	strtok(song, "\n");
+
+	songToEdit = findBySongName(playlist, song);
+
+	return songToEdit;
+}
+
 void rate(List *playlist) {
 	Node *songToEdit = findSongByArtist(playlist);
 
@@ -528,18 +557,60 @@ void play(List *playlist) {
 			system("cls");
 			min = (1000 * 60 * tempNode->record.duration.min) * TIMESCALE;
 			sec = (1000 * tempNode->record.duration.sec) * TIMESCALE;
-
+			
+			printf("Current Song:\n");
 			printOneRecord(tempNode);
 
-			Sleep(min + sec);
 
-			tempNode = tempNode->pNext;
+			if (tempNode->pNext != NULL) {
+				tempNode = tempNode->pNext;
+				printf("Up Next: \n");
+				printOneRecord(tempNode);
+				
+				
+			}
+			/*else {
+				printf("Here");
+			}*/
+			printf("%d:%d: ", tempNode->record.duration.min, tempNode->record.duration.sec);
+			loadingBar(min + sec);
+			printf("--- 0:00\n");
+			Sleep((min + sec) / 5);
 		}
+		system("pause");
+
 	}
 }
 
-void playSong(Record song) {
+void loadingBar(int time) {
+	Sleep(time / 10);
+	printf("---");
 
+	Sleep(time / 10);
+	printf("---");
+
+	Sleep(time / 10);
+	printf("---");
+
+	Sleep(time / 10);
+	printf("---");
+
+	Sleep(time / 10);
+	printf("---");
+
+	Sleep(time / 10);
+	printf("---");
+
+	Sleep(time / 10);
+	printf("---");
+
+	Sleep(time / 10);
+	printf("---");
+
+	Sleep(time / 10);
+	printf("---");
+
+	Sleep(time / 10);
 }
 
 void shuffle(void) {
@@ -551,42 +622,24 @@ void exit(void) {
 }
 
 void test(void) {
-	List list;
+	List playlist;
+	initList(&playlist);
 
-	initList(&list);
+	//Record test1;
+	//newRecord(&test1, "Black Keys", "Attack and Release", "All You Ever Wanted", "Blues", 2, 56, 200, 5);
 
-	Record test1;
+	//Record test2;
+	//newRecord(&test2, "Black Keys", "Attack and Release", "I Got Mine", "Blues", 3, 59, 500, 5);
 
-	newRecord(&test1, "Black Keys", "Attack and Release", "All You Ever Wanted", "Blues", 2, 56, 200, 5);
+	//Record test3;
+	//newRecord(&test3, "Electric Six", "Fire", "Formula 409", "Rock", 3, 59, 700, 5);
+	
+	FILE *infile = fopen("musicPlayList.csv", "r");
 
-	//newRecord(&test1, "Black Keys",	"Attack and Release", "All You Ever Wanted", "Blues", {2, 56 }, 200, 5);
+	load(&playlist, infile);
 
-	Record test2;
-	newRecord(&test2, "Black Keys", "Attack and Release", "I Got Mine", "Blues", 3, 59, 500, 5);
+	display(&playlist);
 
-	Record test3;
-	newRecord(&test3, "Electric Six", "Fire", "Formula 409", "Rock", 3, 59, 700, 5);
-
-
-	append(&list, &test1);
-	//printListL2R(list.head);
-
-	//printf("\n");
-
-	prepend(&list, &test2);
-	//printListL2R(list.head);
-
-	printf("Before:\n");
-
-	prepend(&list, &test3);
-	printListL2R(list.head);
-
-	printf("\nAfter:\n");
-
-	deleteAllByArtist(&list, "Black Keys");
-	printListL2R(list.head);
-
-	printf("\n");
-
+	printf("");
 
 }

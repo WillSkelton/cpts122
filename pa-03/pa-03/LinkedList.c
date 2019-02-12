@@ -197,19 +197,23 @@ int append(List *list, Record *newRecord) {
 	
 	if (tempPtr != NULL) {
 
-		success = 1;
-		
+		// If list isn't empty
 		if (list->tail != NULL) {
+			// Reroute pointers
 			list->tail->pNext = tempPtr;
+			tempPtr->pPrev = list->tail;
+
+			// point tail at new tail
+			list->tail = tempPtr;
+
+			list->length++;
 		}
+		// List is empty
 		else {
 			list->head = tempPtr;
+			list->tail = list->head;
+			list->length++;
 		}
-		
-		
-		list->tail = tempPtr;
-
-		list->length++;
 	}
 
 	
@@ -311,6 +315,24 @@ Node* findByID(List *list, unsigned long id) {
 		tempNode = list->head;
 		for (int i = 0; i < list->length; ++i) {
 			if (tempNode->record.id == id) {
+				break;
+			}
+			else {
+				tempNode = tempNode->pNext;
+			}
+		}
+	}
+
+	return tempNode;
+}
+
+Node* findBySongName(List *list, char *searchName) {
+	Node *tempNode = NULL;
+
+	if (list->head != NULL) {
+		tempNode = list->head;
+		for (int i = 0; i < list->length; ++i) {
+			if (strcmp(tempNode->record.song, searchName) == 0) {
 				break;
 			}
 			else {

@@ -67,6 +67,7 @@ int deleteAllByArtist(List *list, char *artistName);
 
 Node * findByID(List *list, unsigned long id);
 
+Node* findBySongName(List *list, char *searchName);
 
 int deleteSong(List *list, Record *record);
 

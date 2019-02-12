@@ -32,7 +32,9 @@ void printDisplayOptions(void);
 
 void insert(void);
 
-void delete(void);
+void del(List *playlist);
+
+Node* findSongBySongName(List *playlist);
 
 void edit(List *playlist);
 
@@ -48,7 +50,7 @@ void printStarOptions(void);
 
 void play(List *playlist);
 
-void playSong(Record song);
+void loadingBar(int time);
 
 void shuffle(void);
 
