@@ -465,3 +465,86 @@ int listCompare(Node *l1, Node *l2) {
 
 	return same;
 }
+
+void bubbleSortArtist(List *list) {
+
+	int isSorted = checkIfArtistSorted(list);
+
+	Node *node = (list->head != NULL) ? list->head : NULL;
+
+	Node *temp = NULL;
+
+
+	while (checkIfArtistSorted(list) == 0){
+		
+		while ((node != NULL) && (node->pNext != NULL)) {
+			if (node->record.artist[0] > node->pNext->record.artist[0]) {
+
+				temp = node->pNext;
+				
+
+
+				node->pPrev = node->pNext;
+				node->pNext = temp->pNext;
+
+				
+
+			}
+		}
+	}
+
+}
+
+int checkIfArtistSorted(List *list) {
+	int isSorted = 0;
+	
+	Node *temp = (list->head != NULL) ? list->head : NULL;
+
+	while (temp != NULL && temp->pNext != NULL) {
+		if (temp->record.artist[0] > temp->pNext->record.artist[0]) {
+			isSorted = 0;
+			break;
+		}
+		else {
+			isSorted = 1;
+			temp = temp->pNext;
+		}
+	}
+
+	return isSorted;
+
+}
+
+void swap2Nodes(List *list, Node *a) {
+	Node *b = a->pNext;
+	
+	Node *aPrev = a->pPrev;
+
+	if (a == list->head) {
+		list->head = b;
+	}
+
+	// 1: Link a to c
+	a->pNext = b->pNext;
+
+	// 2: link a to b
+	a->pPrev = b;
+
+	// 3: link c to a
+	a->pNext->pPrev = a;
+
+	// 4: link b to a
+	b->pNext = a;
+
+	// 5: link b to thing before a
+	b->pPrev = aPrev;
+
+	// 6: link thing before a to b
+	if (aPrev != NULL) aPrev->pNext = b;
+	
+
+	if (a->pNext == list->tail) list->tail = a->pNext;
+	printf("\n");
+	//printListTop2Bottom(b);
+
+}

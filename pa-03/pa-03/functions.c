@@ -622,9 +622,6 @@ void play(List *playlist) {
 				
 				
 			}
-			/*else {
-				printf("Here");
-			}*/
 			printf("%d:%d: ", tempNode->record.duration.min, tempNode->record.duration.sec);
 			loadingBar(min + sec);
 			printf("--- 0:00\n");
@@ -687,12 +684,20 @@ void test(void) {
 	//Record test3;
 	//newRecord(&test3, "Electric Six", "Fire", "Formula 409", "Rock", 3, 59, 700, 5);
 	
-	FILE *infile = fopen("musicPlayList.csv", "r");
+	FILE *infile = fopen("test.csv", "r");
 
 	load(&playlist, infile);
 
 	display(&playlist);
 
-	printf("");
+	swap2Nodes(&playlist, playlist.head);
 
+	printf("\n");
+
+	display(&playlist);
+	
+	printf("\n");
+
+
+	fclose(infile);
 }

@@ -2,7 +2,9 @@
 
 int main(void) {
 
-	menuREPL();
-	//test();
+	//menuREPL();
+	test();
+
+
 	return 0;
 }

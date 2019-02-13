@@ -80,3 +80,7 @@ Node* getElementAtIndex(Node **listPtr, int searchIdx);
 void debugPtr(Node *listPtr);
 
 int listCompare(Node *l1, Node *l2);
+
+int checkIfArtistSorted(List *list);
+
+void swap2Nodes(List *list, Node *n1);
