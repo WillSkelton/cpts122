@@ -69,6 +69,7 @@ void printListTop2Bottom(Node *nodePtr) {
 	printf("-> ");
 
 	if (nodePtr != NULL) {
+		printf(" ID: %d | ", nodePtr->record.id);
 
 		if (strstr(nodePtr->record.artist, ", ") != NULL) {
 			printf("\"%s\",", nodePtr->record.artist);
@@ -468,60 +469,73 @@ int listCompare(Node *l1, Node *l2) {
 
 void bubbleSortArtist(List *list) {
 
-	int isSorted = checkIfArtistSorted(list);
+	printListTop2Bottom(list->head);
 
-	Node *node = (list->head != NULL) ? list->head : NULL;
+	printf("\n");
 
-	Node *temp = NULL;
+	swap2Nodes(list, list->head->pNext, list->head->pNext->pNext->pNext);
 
+	printListTop2Bottom(list->head);
 
-	while (checkIfArtistSorted(list) == 0){
-		
-		while ((node != NULL) && (node->pNext != NULL)) {
-			if (node->record.artist[0] > node->pNext->record.artist[0]) {
-
-				temp = node->pNext;
-				
-
-
-				node->pPrev = node->pNext;
-				node->pNext = temp->pNext;
-
-				
-
-			}
-		}
-	}
+	printf("\n");
 
 }
 
 int checkIfArtistSorted(List *list) {
 	int isSorted = 0;
 	
-	Node *temp = (list->head != NULL) ? list->head : NULL;
-
-	while (temp != NULL && temp->pNext != NULL) {
-		if (temp->record.artist[0] > temp->pNext->record.artist[0]) {
-			isSorted = 0;
-			break;
-		}
-		else {
-			isSorted = 1;
-			temp = temp->pNext;
-		}
-	}
-
-	return isSorted;
+	
 
 }
 
-void swap2Nodes(List *list, Node *a) {
-	Node *b = a->pNext;
+void swap2Nodes(List *list, Node *a, Node *b) {
+	// Node *b = a->pNext;
 	
+	Node *aPrev = a->pPrev;
+	Node *aNext = a->pNext;
+
+	Node *bPrev = b->pPrev;
+	Node *bNext = b->pNext;
+
+	if (a == list->head) {
+		list->head = b;
+	}
+	
+	if (a == list->tail) {
+		list->tail = b;
+	}
+
+	// Relink a
+	a->pNext = bNext;
+	a->pPrev = bPrev;
+
+	if (a->pNext != NULL) a->pNext->pPrev = a;
+	if (a->pPrev != NULL) a->pPrev->pNext = a;
+
+	// Relink b
+	b->pNext = aNext;
+	b->pPrev = aPrev;
+
+	if (b->pNext != NULL) b->pNext->pPrev = b;
+	if (b->pPrev != NULL) b->pPrev->pNext = b;
+
+	printf("\n");
+	// printListTop2Bottom(list->head);
+
+}
+
+void swap2NodesSimple(List *list, Node *a) {
+	// Node *b = a->pNext;
+
+	Node *b = a->pNext;
 	Node *aPrev = a->pPrev;
 
 	if (a == list->head) {
 		list->head = b;
+	}
+
+	if (a == list->tail) {
+		list->tail = b;
 	}
 
 	// 1: Link a to c
@@ -541,9 +555,9 @@ void swap2Nodes(List *list, Node *a) {
 
 	// 6: link thing before a to b
 	if (aPrev != NULL) aPrev->pNext = b;
-	
 
-	if (a->pNext == list->tail) list->tail = a->pNext;
+
+	// if (a->pNext == list->tail) list->tail = a->pNext;
 	printf("\n");
 	//printListTop2Bottom(b);
 

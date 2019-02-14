@@ -59,7 +59,7 @@ void menuREPL(void) {
 			break;
 
 		case 7:
-			sort();
+			sort(&playlist);
 			break;
 
 		case 8:
@@ -523,8 +523,9 @@ void printAttributes(void) {
 	
 }
 
-void sort(void) {
-
+void sort(List *playlist) {
+	bubbleSortArtist(playlist);
+	system("pause");
 }
 
 Node* findSongByArtist(List *playlist) {
@@ -690,7 +691,7 @@ void test(void) {
 
 	display(&playlist);
 
-	swap2Nodes(&playlist, playlist.head);
+	swap2Nodes(&playlist, playlist.head, playlist.head->pNext);
 
 	printf("\n");
 

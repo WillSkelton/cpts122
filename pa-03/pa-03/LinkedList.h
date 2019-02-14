@@ -83,4 +83,4 @@ int listCompare(Node *l1, Node *l2);
 
 int checkIfArtistSorted(List *list);
 
-void swap2Nodes(List *list, Node *n1);
+void swap2Nodes(List *list, Node *a, Node *b);

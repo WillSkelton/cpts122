@@ -40,7 +40,7 @@ void edit(List *playlist);
 
 void printAttributes(void);
 
-void sort(void);
+void sort(List *playlist);
 
 Node* findSongByArtist(List *playlist);
 
