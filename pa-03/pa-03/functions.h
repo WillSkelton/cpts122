@@ -52,6 +52,8 @@ void printStarOptions(void);
 
 void play(List *playlist);
 
+void shufflePlay(List *playlist);
+
 void loadingBar(int time);
 
 void shuffle(void);

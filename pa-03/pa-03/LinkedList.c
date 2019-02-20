@@ -399,11 +399,11 @@ int getLength(Node *listPtr, int startIdx) {
 	return tempIdx;
 }
 
-Node* getElementAtIndex(Node **listPtr, int searchIdx) {
+Node* getElementAtIndex(List *list, int searchIdx) {
 	int curIdx = 0;
 	Node *found = NULL;
 	
-	found = *listPtr;
+	found = list->head;
 
 	while ((found != NULL) && (found->pNext != NULL)) {
 

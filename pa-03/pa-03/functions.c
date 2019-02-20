@@ -8,6 +8,8 @@ void menuREPL(void) {
 
 	int choice = -1;
 	
+	srand((unsigned int)time(NULL));
+
 	do {
 		system("cls");
 		choice = inputCheck(1, 11, printMenu);
@@ -70,7 +72,7 @@ void menuREPL(void) {
 			break;
 
 		case 10:
-			shuffle();
+			shufflePlay(&playlist);
 			break;
 
 		case 11:
@@ -668,6 +670,55 @@ void play(List *playlist) {
 
 	}
 }
+
+void shufflePlay(List *playlist) {
+
+	Node *tempNode = NULL;
+
+	int min = 0;
+	int sec = 0;
+
+	int direction = 0;
+
+	if (playlist->head != NULL) {
+
+		tempNode = getElementAtIndex(playlist, rand() % playlist->length - 1);
+
+		for (int i = 0; i < playlist->length; ++i) {
+			system("cls");
+			min = (1000 * 60 * tempNode->record.duration.min) * TIMESCALE;
+			sec = (1000 * tempNode->record.duration.sec) * TIMESCALE;
+
+			printf("Current Song:\n");
+			printOneRecord(tempNode);
+
+			tempNode = getElementAtIndex(playlist, rand() % playlist->length - 1);
+			printf("Up Next: \n");
+			printOneRecord(tempNode);
+
+			//if (tempNode->pNext != NULL) {
+			//	// Iterate
+			//	tempNode = getElementAtIndex(playlist, rand() % playlist->length - 1);
+			//	printf("Up Next: \n");
+			//	printOneRecord(tempNode);
+			//}
+			//else {
+			//	// Iterate
+			//	tempNode = getElementAtIndex(playlist, rand() % playlist->length - 1);
+			//}
+
+			printf("%d:%d: ", tempNode->record.duration.min, tempNode->record.duration.sec);
+			loadingBar(min + sec);
+			printf("--- 0:00\n");
+			Sleep((min + sec) / 5);
+
+			
+		}
+		system("pause");
+
+	}
+}
+
 
 void loadingBar(int time) {
 	Sleep(time / 10);

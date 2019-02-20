@@ -75,7 +75,7 @@ int pop(List *list);
 
 int getLength(Node *listPtr, int startIdx);
 
-Node* getElementAtIndex(Node **listPtr, int searchIdx);
+Node* getElementAtIndex(List *list, int searchIdx);
 
 void debugPtr(Node *listPtr);
 
