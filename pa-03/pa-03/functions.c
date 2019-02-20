@@ -524,7 +524,7 @@ void printAttributes(void) {
 }
 
 void sort(List *playlist) {
-	bubbleSortArtist(playlist);
+	bubbleSortRating(playlist);
 	//swap2NodesSimple(playlist, playlist->head);
 	//swap2Nodes(playlist, playlist->head, playlist->head->pNext);
 

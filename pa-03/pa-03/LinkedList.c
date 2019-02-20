@@ -71,7 +71,7 @@ void printListTop2Bottom(Node *nodePtr) {
 	if (nodePtr != NULL) {
 		printf(" ID: %d | ", nodePtr->record.id);
 
-		if (strstr(nodePtr->record.artist, ", ") != NULL) {
+		/*if (strstr(nodePtr->record.artist, ", ") != NULL) {
 			printf("\"%s\",", nodePtr->record.artist);
 		}
 		else {
@@ -81,7 +81,7 @@ void printListTop2Bottom(Node *nodePtr) {
 		printf("%s,", nodePtr->record.album);
 		printf("%s,", nodePtr->record.song);
 		printf("%s,", nodePtr->record.genre);
-		printf("%d:%d,", nodePtr->record.duration.min, nodePtr->record.duration.sec);
+		printf("%d:%d,", nodePtr->record.duration.min, nodePtr->record.duration.sec);*/
 		printf("%d,", nodePtr->record.timesPlayed);
 		printf("%d\n", nodePtr->record.rating);
 
@@ -499,12 +499,12 @@ void bubbleSortArtist(List *list) {
 
 			tempNode = list->head;
 
-			printListTop2Bottom(list->head);
-			printf("\n====================\n");
-
 		} while (isSorted != 1);
 	}
+
 	printf("Done!\n");
+	printListTop2Bottom(list->head);
+	printf("\n====================\n");
 }
 
 int checkIfArtistSorted(List *list) {
@@ -516,6 +516,260 @@ int checkIfArtistSorted(List *list) {
 		for (int i = 0; i < list->length; ++i) {
 			if (tempNode->pNext != NULL) {
 				if (strcmp(tempNode->record.artist, tempNode->pNext->record.artist) < 1) {
+					tempNode = tempNode->pNext;
+					isSorted = 1;
+					continue;
+				}
+				else {
+					isSorted = 0;
+					break;
+				}
+			}
+		}
+	}
+	return isSorted;
+}
+
+void bubbleSortSong(List *list) {
+	int isSorted = 0;
+	int compare = 0;
+	Node *tempNode = (list->head != NULL) ? list->head : NULL;
+
+	if (tempNode != NULL) {
+		do {
+
+			isSorted = checkIfSongSorted(list);
+
+			for (int i = 0; i < list->length; ++i) {
+
+				if (tempNode->pNext != NULL) {
+					compare = strcmp(tempNode->record.song, tempNode->pNext->record.song);
+
+					if (compare <= 0) {
+						tempNode = tempNode->pNext;
+						continue;
+					}
+
+					/*else if (compare == 0) {
+					tempNode = tempNode->pNext;
+					}*/
+
+					else {
+						swap2NodesSimple(list, tempNode);
+					}
+				}
+			}
+
+			tempNode = list->head;
+			printListTop2Bottom(list->head);
+			printf("\n====================\n");
+		} while (isSorted != 1);
+	}
+
+	printf("Done!\n");
+
+}
+
+int checkIfSongSorted(List *list) {
+	int isSorted = 0;
+
+	Node *tempNode = (list->head != NULL) ? list->head : NULL;
+
+	if (tempNode != NULL) {
+		for (int i = 0; i < list->length; ++i) {
+			if (tempNode->pNext != NULL) {
+				if (strcmp(tempNode->record.song, tempNode->pNext->record.song) < 1) {
+					tempNode = tempNode->pNext;
+					isSorted = 1;
+					continue;
+				}
+				else {
+					isSorted = 0;
+					break;
+				}
+			}
+		}
+	}
+	return isSorted;
+}
+
+void bubbleSortAlbum(List *list) {
+	int isSorted = 0;
+	int compare = 0;
+	Node *tempNode = (list->head != NULL) ? list->head : NULL;
+
+	if (tempNode != NULL) {
+		do {
+
+			isSorted = checkIfAlbumSorted(list);
+
+			for (int i = 0; i < list->length; ++i) {
+
+				if (tempNode->pNext != NULL) {
+					compare = strcmp(tempNode->record.album, tempNode->pNext->record.album);
+
+					if (compare <= 0) {
+						tempNode = tempNode->pNext;
+						continue;
+					}
+
+					/*else if (compare == 0) {
+					tempNode = tempNode->pNext;
+					}*/
+
+					else {
+						swap2NodesSimple(list, tempNode);
+					}
+				}
+			}
+
+			tempNode = list->head;
+
+		} while (isSorted != 1);
+	}
+
+	printf("Done!\n");
+	printListTop2Bottom(list->head);
+	printf("\n====================\n");
+}
+
+int checkIfAlbumSorted(List *list) {
+	int isSorted = 0;
+
+	Node *tempNode = (list->head != NULL) ? list->head : NULL;
+
+	if (tempNode != NULL) {
+		for (int i = 0; i < list->length; ++i) {
+			if (tempNode->pNext != NULL) {
+				if (strcmp(tempNode->record.album, tempNode->pNext->record.album) < 1) {
+					tempNode = tempNode->pNext;
+					isSorted = 1;
+					continue;
+				}
+				else {
+					isSorted = 0;
+					break;
+				}
+			}
+		}
+	}
+	return isSorted;
+}
+
+void bubbleSortTimesPlayed(List *list) {
+	int isSorted = 0;
+	int compare = 0;
+	Node *tempNode = (list->head != NULL) ? list->head : NULL;
+
+	if (tempNode != NULL) {
+		do {
+
+			isSorted = checkIfTimesPlayedSorted(list);
+
+			for (int i = 0; i < list->length; ++i) {
+
+				if (tempNode->pNext != NULL) {
+					compare = (tempNode->record.timesPlayed >= tempNode->pNext->record.timesPlayed) ? 0 : 1;
+
+					if (compare == 0) {
+						tempNode = tempNode->pNext;
+						continue;
+					}
+
+					/*else if (compare == 0) {
+					tempNode = tempNode->pNext;
+					}*/
+
+					else {
+						swap2NodesSimple(list, tempNode);
+					}
+				}
+			}
+
+			tempNode = list->head;
+			printListTop2Bottom(list->head);
+			printf("\n====================\n");
+		} while (isSorted != 1);
+	}
+
+	printf("Done!\n");
+	printListTop2Bottom(list->head);
+	printf("\n====================\n");
+}
+
+int checkIfTimesPlayedSorted(List *list) {
+	int isSorted = 0;
+
+	Node *tempNode = (list->head != NULL) ? list->head : NULL;
+
+	if (tempNode != NULL) {
+		for (int i = 0; i < list->length; ++i) {
+			if (tempNode->pNext != NULL) {
+				if (tempNode->record.timesPlayed >= tempNode->pNext->record.timesPlayed) {
+					tempNode = tempNode->pNext;
+					isSorted = 1;
+					continue;
+				}
+				else {
+					isSorted = 0;
+					break;
+				}
+			}
+		}
+	}
+	return isSorted;
+}
+
+void bubbleSortRating(List *list) {
+	int isSorted = 0;
+	int compare = 0;
+	Node *tempNode = (list->head != NULL) ? list->head : NULL;
+
+	if (tempNode != NULL) {
+		do {
+
+			isSorted = checkIfRatingSorted(list);
+
+			for (int i = 0; i < list->length; ++i) {
+
+				if (tempNode->pNext != NULL) {
+					compare = (tempNode->record.rating >= tempNode->pNext->record.rating) ? 0 : 1;
+
+					if (compare == 0) {
+						tempNode = tempNode->pNext;
+						continue;
+					}
+
+					/*else if (compare == 0) {
+					tempNode = tempNode->pNext;
+					}*/
+
+					else {
+						swap2NodesSimple(list, tempNode);
+					}
+				}
+			}
+
+			tempNode = list->head;
+			printListTop2Bottom(list->head);
+			printf("\n====================\n");
+		} while (isSorted != 1);
+	}
+
+	printf("Done!\n");
+	printListTop2Bottom(list->head);
+	printf("\n====================\n");
+}
+
+int checkIfRatingSorted(List *list) {
+	int isSorted = 0;
+
+	Node *tempNode = (list->head != NULL) ? list->head : NULL;
+
+	if (tempNode != NULL) {
+		for (int i = 0; i < list->length; ++i) {
+			if (tempNode->pNext != NULL) {
+				if (tempNode->record.rating >= tempNode->pNext->record.rating) {
 					tempNode = tempNode->pNext;
 					isSorted = 1;
 					continue;
@@ -561,7 +815,6 @@ void swap2Nodes(List *list, Node *a, Node *b) {
 	if (b->pNext != NULL) b->pNext->pPrev = b;
 	if (b->pPrev != NULL) b->pPrev->pNext = b;
 
-	printf("\n");
 	// printListTop2Bottom(list->head);
 
 }
@@ -595,7 +848,6 @@ void swap2NodesSimple(List *list, Node *a) {
 
 
 	if (a->pNext == list->tail) list->tail = a->pNext;
-	printf("\n");
 	//printListTop2Bottom(b);
 
 }
