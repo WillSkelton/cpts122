@@ -524,11 +524,44 @@ void printAttributes(void) {
 }
 
 void sort(List *playlist) {
-	bubbleSortRating(playlist);
-	//swap2NodesSimple(playlist, playlist->head);
-	//swap2Nodes(playlist, playlist->head, playlist->head->pNext);
+	
+	int choice = inputCheck(1, 5, printSortOptions);
+
+	switch (choice) {
+	case 1:
+		bubbleSortArtist(playlist);
+		break;
+
+	case 2:
+		bubbleSortSong(playlist);
+		break;
+
+	case 3:
+		bubbleSortAlbum(playlist);
+		break;
+
+	case 4:
+		bubbleSortTimesPlayed(playlist);
+		break;
+
+	case 5:
+		bubbleSortRating(playlist);
+
+		break;
+	}
+
+	
 
 	system("pause");
+}
+
+void printSortOptions(void) {
+	printf("1.) Sort by Artist\n");
+	printf("2.) Sort by Song\n");
+	printf("3.) Sort by Album\n");
+	printf("4.) Sort by Times Played\n");
+	printf("5.) Sort by Rating\n");
+	printf(">>> ");
 }
 
 Node* findSongByArtist(List *playlist) {

@@ -42,6 +42,8 @@ void printAttributes(void);
 
 void sort(List *playlist);
 
+void printSortOptions(void);
+
 Node* findSongByArtist(List *playlist);
 
 void rate(List *playlist);

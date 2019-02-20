@@ -71,7 +71,7 @@ void printListTop2Bottom(Node *nodePtr) {
 	if (nodePtr != NULL) {
 		printf(" ID: %d | ", nodePtr->record.id);
 
-		/*if (strstr(nodePtr->record.artist, ", ") != NULL) {
+		if (strstr(nodePtr->record.artist, ", ") != NULL) {
 			printf("\"%s\",", nodePtr->record.artist);
 		}
 		else {
@@ -81,7 +81,7 @@ void printListTop2Bottom(Node *nodePtr) {
 		printf("%s,", nodePtr->record.album);
 		printf("%s,", nodePtr->record.song);
 		printf("%s,", nodePtr->record.genre);
-		printf("%d:%d,", nodePtr->record.duration.min, nodePtr->record.duration.sec);*/
+		printf("%d:%d,", nodePtr->record.duration.min, nodePtr->record.duration.sec);
 		printf("%d,", nodePtr->record.timesPlayed);
 		printf("%d\n", nodePtr->record.rating);
 
@@ -503,8 +503,6 @@ void bubbleSortArtist(List *list) {
 	}
 
 	printf("Done!\n");
-	printListTop2Bottom(list->head);
-	printf("\n====================\n");
 }
 
 int checkIfArtistSorted(List *list) {
@@ -561,8 +559,7 @@ void bubbleSortSong(List *list) {
 			}
 
 			tempNode = list->head;
-			printListTop2Bottom(list->head);
-			printf("\n====================\n");
+			
 		} while (isSorted != 1);
 	}
 
@@ -629,8 +626,7 @@ void bubbleSortAlbum(List *list) {
 	}
 
 	printf("Done!\n");
-	printListTop2Bottom(list->head);
-	printf("\n====================\n");
+	
 }
 
 int checkIfAlbumSorted(List *list) {
@@ -687,14 +683,11 @@ void bubbleSortTimesPlayed(List *list) {
 			}
 
 			tempNode = list->head;
-			printListTop2Bottom(list->head);
-			printf("\n====================\n");
+			
 		} while (isSorted != 1);
 	}
 
 	printf("Done!\n");
-	printListTop2Bottom(list->head);
-	printf("\n====================\n");
 }
 
 int checkIfTimesPlayedSorted(List *list) {
@@ -751,14 +744,10 @@ void bubbleSortRating(List *list) {
 			}
 
 			tempNode = list->head;
-			printListTop2Bottom(list->head);
-			printf("\n====================\n");
 		} while (isSorted != 1);
 	}
 
 	printf("Done!\n");
-	printListTop2Bottom(list->head);
-	printf("\n====================\n");
 }
 
 int checkIfRatingSorted(List *list) {

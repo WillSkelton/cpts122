@@ -81,7 +81,25 @@ void debugPtr(Node *listPtr);
 
 int listCompare(Node *l1, Node *l2);
 
+void bubbleSortArtist(List *list);
+
 int checkIfArtistSorted(List *list);
+
+void bubbleSortSong(List *list);
+
+int checkIfSongSorted(List *list);
+
+void bubbleSortAlbum(List *list);
+
+int checkIfAlbumSorted(List *list);
+
+void bubbleSortTimesPlayed(List *list);
+
+int checkIfTimesPlayedSorted(List *list);
+
+void bubbleSortRating(List *list);
+
+int checkIfRatingSorted(List *list);
 
 void swap2Nodes(List *list, Node *a, Node *b);
 
