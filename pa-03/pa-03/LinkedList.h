@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
+#include <windows.h>
 
 
 typedef enum rating {
@@ -52,11 +53,21 @@ void printListL2R(Node *nodePtr);
 
 void printListR2L(Node *nodePtr);
 
+void printListTop2Bottom(Node *nodePtr);
+
+int printAllByArtist(Node *nodePtr, char *artist);
+
+void printOneRecord(Node *nodePtr);
+
 int prepend(List *list, Record *newRecord);
 
 int append(List *list, Record *newRecord);
 
 int deleteAllByArtist(List *list, char *artistName);
+
+Node * findByID(List *list, unsigned long id);
+
+Node* findBySongName(List *list, char *searchName);
 
 int deleteSong(List *list, Record *record);
 
@@ -64,10 +75,32 @@ int pop(List *list);
 
 int getLength(Node *listPtr, int startIdx);
 
-Node* getElementAtIndex(Node **listPtr, int searchIdx);
-
-void fisherYatesShuffle(Node **listPtr);
+Node* getElementAtIndex(List *list, int searchIdx);
 
 void debugPtr(Node *listPtr);
 
 int listCompare(Node *l1, Node *l2);
+
+void bubbleSortArtist(List *list);
+
+int checkIfArtistSorted(List *list);
+
+void bubbleSortSong(List *list);
+
+int checkIfSongSorted(List *list);
+
+void bubbleSortAlbum(List *list);
+
+int checkIfAlbumSorted(List *list);
+
+void bubbleSortTimesPlayed(List *list);
+
+int checkIfTimesPlayedSorted(List *list);
+
+void bubbleSortRating(List *list);
+
+int checkIfRatingSorted(List *list);
+
+void swap2Nodes(List *list, Node *a, Node *b);
+
+void swap2NodesSimple(List *list, Node *a);

@@ -6,6 +6,8 @@
 
 #include "LinkedList.h"
 
+#define TIMESCALE 1/100
+
 
 
 void menuREPL(void);
@@ -18,23 +20,41 @@ void printMessage(char *message);
 
 void printMenu(void);
 
-void load(List *listplaylist);
+void load(List *listplaylist, FILE *infile);
 
-void store(void);
+void parseLine(Node *tempRecord, char line[100]);
 
-void display(void);
+void store(List *playlist);
 
-void insert(void);
+void display(List *playlist);
 
-void delete(void);
+void printDisplayOptions(void);
 
-void edit(void);
+void insert(List *playlist);
 
-void sort(void);
+void del(List *playlist);
 
-void rate(void);
+Node* findSongBySongName(List *playlist);
 
-void play(void);
+void edit(List *playlist);
+
+void printAttributes(void);
+
+void sort(List *playlist);
+
+void printSortOptions(void);
+
+Node* findSongByArtist(List *playlist);
+
+void rate(List *playlist);
+
+void printStarOptions(void);
+
+void play(List *playlist);
+
+void shufflePlay(List *playlist);
+
+void loadingBar(int time);
 
 void shuffle(void);
 

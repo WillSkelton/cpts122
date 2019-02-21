@@ -6,6 +6,16 @@ Rectangle::Rectangle() {
 	mWidth = 0;
 }
 
+Rectangle::Rectangle(int length, int width) {
+	mLength = length;
+	mWidth = width;
+}
+
+Rectangle::~Rectangle() {
+	mLength;
+	mWidth;
+}
+
 int Rectangle::getLength() {
 	
 	return mLength;
@@ -13,7 +23,7 @@ int Rectangle::getLength() {
 
 int Rectangle::getWidth() {
 	
-	return mLength;
+	return mWidth;
 }
 
 void Rectangle::setLength(int length) {

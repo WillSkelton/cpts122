@@ -19,9 +19,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{8D7734D5-587C-4863-B270-D8EFB087A4B9}</ProjectGuid>
+    <ProjectGuid>{CD73F615-410E-46E2-9502-078B5987A6EA}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>pa03</RootNamespace>
+    <RootNamespace>Queue</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -142,20 +142,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="functions.c" />
-    <ClCompile Include="LinkedList.c" />
-    <ClCompile Include="main.c" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="Node.cpp" />
+    <ClCompile Include="queue.cpp" />
+    <ClCompile Include="Test.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="functions.h" />
-    <ClInclude Include="LinkedList.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="assignment.md" />
-    <None Include="music.csv" />
-    <None Include="musicPlayList.csv" />
-    <None Include="readme.md" />
-    <None Include="test.csv" />
+    <ClInclude Include="Node.h" />
+    <ClInclude Include="queue.h" />
+    <ClInclude Include="Test.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
