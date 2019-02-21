@@ -679,20 +679,54 @@ void shufflePlay(List *playlist) {
 	int sec = 0;
 
 	int direction = 0;
+	int shift = 0;
 
 	if (playlist->head != NULL) {
 
 		tempNode = getElementAtIndex(playlist, rand() % playlist->length - 1);
 
 		for (int i = 0; i < playlist->length; ++i) {
+
+			shift = rand() % playlist->length - 1;
+			
+			// 0 = left
+			// 1 = right
+			direction = rand() % 2;
+
 			system("cls");
 			min = (1000 * 60 * tempNode->record.duration.min) * TIMESCALE;
 			sec = (1000 * tempNode->record.duration.sec) * TIMESCALE;
 
 			printf("Current Song:\n");
 			printOneRecord(tempNode);
+			
 
-			tempNode = getElementAtIndex(playlist, rand() % playlist->length - 1);
+			for (int k = 0; k < shift; ++k) {
+				//direction = 1;
+				switch (direction) {
+				case 0:
+					if (tempNode->pPrev != NULL) {
+						tempNode = tempNode->pPrev;
+					}
+					else {
+						direction = (direction == 0) ? 1 : 0;
+					}
+					break;
+
+				case 1:
+					if (tempNode->pNext != NULL) {
+						tempNode = tempNode->pNext;
+					}
+					else {
+						direction = (direction == 1) ? 0 : 1;
+					}
+					break;
+
+				}
+			}
+
+
+			//tempNode = getElementAtIndex(playlist, rand() % playlist->length - 1);
 			printf("Up Next: \n");
 			printOneRecord(tempNode);
 
