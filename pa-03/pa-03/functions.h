@@ -60,4 +60,10 @@ void shuffle(void);
 
 void exit(void);
 
-void test(void);
+void runTests(void);
+
+void testInsert(void);
+
+void testDelete(void);
+
+void testSuffle(void);
