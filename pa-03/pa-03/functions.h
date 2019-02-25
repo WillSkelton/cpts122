@@ -52,7 +52,7 @@ void printStarOptions(void);
 
 void play(List *playlist);
 
-void shufflePlay(List *playlist);
+int shufflePlay(List *playlist);
 
 void loadingBar(int time);
 

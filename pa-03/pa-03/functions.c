@@ -674,21 +674,30 @@ void play(List *playlist) {
 	}
 }
 
-void shufflePlay(List *playlist) {
+int shufflePlay(List *playlist) {
 
 	Node *tempNode = NULL;
-
+	int testSuccess = 0;
 	int min = 0;
 	int sec = 0;
+	int randIndex = 0;
+	
+	int testArray[3] = { 0 };
+
 
 	int direction = 0;
 	int shift = 0;
 
 	if (playlist->head != NULL) {
+		randIndex = rand() % (playlist->length);
+		tempNode = getElementAtIndex(playlist, randIndex);
 
-		tempNode = getElementAtIndex(playlist, rand() % playlist->length - 1);
 
 		for (int i = 0; i < playlist->length; ++i) {
+			
+			if (tempNode != NULL && i < 3) {
+				testArray[i] = tempNode->record.id;
+			}
 
 			shift = rand() % playlist->length - 1;
 			
@@ -754,6 +763,16 @@ void shufflePlay(List *playlist) {
 		system("pause");
 
 	}
+
+	tempNode = playlist->head;
+	for (int i = 0; i < 3; ++i) {
+
+		if (i != testArray[i]) {
+			testSuccess++;
+		}
+	}
+
+	return testSuccess > 1;
 }
 
 void loadingBar(int time) {
@@ -798,9 +817,9 @@ void exit(void) {
 void runTests(void) {
 
 	printf("===================== Tests: =====================\n");
+	testSuffle();
 	testInsert();
 	testDelete();
-	testSuffle();
 }
 
 void testInsert(void) {
@@ -856,5 +875,25 @@ void testDelete(void) {
 }
 
 void testSuffle(void) {
+	printf("----------------- Test Shuffle: -----------------\n");
+	List playlist;
+	initList(&playlist);
 
+
+	Record test;
+	newRecord(&test, "Killah, Ghostface", "The Lost Tapes", "Buckingham Palace", "Rap", 3, 16, -1, 6);
+	Record test2;
+	newRecord(&test2, "Drake", "YOU WELCOME", "The Motto", "Rap", 4, 13, 7, 4);
+	Record test3;
+	newRecord(&test3, "Perri, Christina", "HEAD OF HEART", "Trust", "Pop", 2, 35, 3, 5);
+
+	prepend(&playlist, &test);
+	prepend(&playlist, &test2);
+	prepend(&playlist, &test3);
+
+
+	int success = shufflePlay(&playlist);
+
+	printf("## Shuffle Works:\n");
+	printf("  - Played Out of Order | %s\n", (success) ? "Passed" : "Failed");
 }
