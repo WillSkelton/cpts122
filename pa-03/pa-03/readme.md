@@ -1,6 +1,11 @@
 # Programming Assignment 3:
 
-## functions.h:
+## Table of Contents
+1. [ functions ](#functions)
+2. [ Linked List functions ](#linked-list)
+
+<a name="functions"></a>
+## functions:
 
 #### menuREPL
 - Description: Main menu for the program.
@@ -253,3 +258,6 @@ void testDelete(void);
 ```c
 void testSuffle(void);
 ```
+
+<a name="linked-list"></a>
+## Linked List functions
