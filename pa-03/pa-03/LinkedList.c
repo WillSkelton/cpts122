@@ -18,8 +18,8 @@ void newRecord(Record *r, char artist[30], char album[30], char song[30], char g
 	
 	Duration d = { minutes, seconds };
 	r->duration = d;
-	r->timesPlayed = timesPlayed;
-	r->rating = rating;
+	r->timesPlayed = (timesPlayed >= 0) ? timesPlayed : 0;
+	r->rating = (rating >= 0 && rating <= 5) ? rating : 0;
 	r->id = id;
 
 	++id;

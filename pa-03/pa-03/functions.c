@@ -7,24 +7,24 @@ void menuREPL(void) {
 	FILE *infile = NULL;
 
 	int choice = -1;
-	
+
 	srand((unsigned int)time(NULL));
 
 	do {
 		system("cls");
-		choice = inputCheck(1, 11, printMenu);
-		
+		choice = inputCheck(1, 12, printMenu);
+
 		//choice = 1;
 
 		switch (choice) {
 		case 1:
 
 			infile = fopen("musicPlayList.csv", "r");
-			
+
 			//infile = fopen("music.csv", "r");
 			if (infile != NULL) {
 				load(&playlist, infile);
-				
+
 				fclose(infile);
 			}
 			else {
@@ -40,7 +40,7 @@ void menuREPL(void) {
 			infile = fopen("musicPlayList.csv", "r");
 			if (infile != NULL && playlist.head != NULL) {
 				display(&playlist);
-				fclose(infile);	
+				fclose(infile);
 			}
 			else {
 				printMessage("No Save File yet.");
@@ -76,15 +76,15 @@ void menuREPL(void) {
 			break;
 
 		case 11:
+			runTests();
+			break;
+
+		case 12:
 			exit();
 			break;
 		}
 
 	} while (choice != 11);
-}
-
-int getUserInput(void) {
-
 }
 
 void printBorder(int size, int length) {
@@ -149,7 +149,8 @@ void printMenu(void) {
 	printf("8. ) Rate\n");
 	printf("9. ) Play\n");
 	printf("10.) Shuffle\n");
-	printf("11.) Exit\n");
+	printf("11.) Run Tests\n");
+	printf("12.) Exit\n");
 	printf(">>> ");
 }
 
@@ -256,12 +257,17 @@ void parseLine(Node *tempRecord, char line[100]) {
 	strcpy(line, token);
 	token = strtok(line, ",");
 	timesPlayed = atoi(line);
+
+	timesPlayed = (timesPlayed >= 0) ? timesPlayed : 0;
+
 	token = strtok(NULL, "");
 
 	// Get Rating
 	strcpy(line, token);
 	token = strtok(line, ",");
 	rating = atoi(line);
+
+	rating = (rating <= 5 && rating >= 0) ? rating : 0;
 	token = strtok(NULL, "");
 
 	newRecord(tempRecord, artist, album, song, genre, minutes, seconds, timesPlayed, rating);
@@ -274,7 +280,7 @@ void store(List *playlist) {
 	Node *tempNode = playlist->head;
 
 	if (tempNode != NULL) {
-	
+
 		for (int i = 0; i < playlist->length; ++i) {
 			if (strstr(tempNode->record.artist, ", ") != NULL) {
 				fprintf(outfile, "\"%s\",", tempNode->record.artist);
@@ -289,13 +295,13 @@ void store(List *playlist) {
 			fprintf(outfile, "%d:%d,", tempNode->record.duration.min, tempNode->record.duration.sec);
 			fprintf(outfile, "%d,", tempNode->record.timesPlayed);
 			fprintf(outfile, "%d\n", tempNode->record.rating);
-			
+
 
 
 			// fprintf(outfile, "\n");
 			tempNode = tempNode->pNext;
 		}
-	
+
 	}
 
 	fclose(outfile);
@@ -318,11 +324,11 @@ void display(List *playlist) {
 		getchar();
 		fgets(name, 30, stdin);
 		strtok(name, "\n");
-		
+
 		printAllByArtist(playlist->head, name);
 		break;
 	}
-	
+
 }
 
 void printDisplayOptions(void) {
@@ -350,7 +356,7 @@ void insert(List *playlist) {
 	strtok(artist, "\n");
 	recordToAdd.artist[0] = ' ';
 	strcpy(recordToAdd.artist, artist);
-	
+
 	printf("Please enter new album name:\n");
 	printf(">>> ");
 	getchar();
@@ -364,19 +370,19 @@ void insert(List *playlist) {
 	fgets(song, 30, stdin);
 	strtok(song, "\n");
 	strcpy(recordToAdd.song, song);
-			
+
 	printf("Please enter new genre:\n");
 	printf(">>> ");
 	getchar();
 	fgets(genre, 30, stdin);
 	strtok(genre, "\n");
 	strcpy(recordToAdd.genre, genre);
-	
+
 	printf("Please enter new minutes value:\n");
 	printf(">>> ");
 	scanf("%d", &minute);
 	recordToAdd.duration.min = minute;
-	
+
 	printf("Please enter new soconds value:\n");
 	printf(">>> ");
 	scanf("%d", &second);
@@ -386,7 +392,7 @@ void insert(List *playlist) {
 	printf(">>> ");
 	scanf("%d", &timesPlayed);
 	recordToAdd.timesPlayed = timesPlayed;
-	
+
 	printf("Please enter new rating:\n");
 	printf(">>> ");
 	scanf("%d", &rating);
@@ -400,17 +406,10 @@ void insert(List *playlist) {
 void del(List *playlist) {
 	Node *songToDelete = NULL;
 	Node *song = NULL;
-
 	if (playlist->head != NULL) {
-		
 		songToDelete = findSongBySongName(playlist);
-
-
 		deleteSong(playlist, &songToDelete->record);
-
-
 	}
-
 }
 
 void edit(List *playlist) {
@@ -522,11 +521,11 @@ void printAttributes(void) {
 	printf("8.) Rating\n");
 	printf("9.) Done\n");
 	printf(">>> ");
-	
+
 }
 
-void sort(List *playlist) {
-	
+void so	rt(List *playlist) {
+
 	int choice = inputCheck(1, 5, printSortOptions);
 
 	switch (choice) {
@@ -552,7 +551,7 @@ void sort(List *playlist) {
 		break;
 	}
 
-	
+
 
 	system("pause");
 }
@@ -567,7 +566,7 @@ void printSortOptions(void) {
 }
 
 Node* findSongByArtist(List *playlist) {
-	
+
 	int numResults = 0;
 	int choice = 0;
 	char name[30];
@@ -580,7 +579,7 @@ Node* findSongByArtist(List *playlist) {
 	fgets(name, 30, stdin);
 	strtok(name, "\n");
 
-	
+
 	numResults = printAllByArtist(playlist->head, name);
 	if (numResults > 0) {
 		printf("Please enter the ID of the song you'd like to edit:\n");
@@ -635,7 +634,7 @@ void printStarOptions(void) {
 }
 
 void play(List *playlist) {
-	
+
 	Node *tempNode = NULL;
 
 	int min = 0;
@@ -649,7 +648,7 @@ void play(List *playlist) {
 			system("cls");
 			min = (1000 * 60 * tempNode->record.duration.min) * TIMESCALE;
 			sec = (1000 * tempNode->record.duration.sec) * TIMESCALE;
-			
+
 			printf("Current Song:\n");
 			printOneRecord(tempNode);
 
@@ -658,8 +657,8 @@ void play(List *playlist) {
 				tempNode = tempNode->pNext;
 				printf("Up Next: \n");
 				printOneRecord(tempNode);
-				
-				
+
+
 			}
 			printf("%d:%d: ", tempNode->record.duration.min, tempNode->record.duration.sec);
 			loadingBar(min + sec);
@@ -671,24 +670,33 @@ void play(List *playlist) {
 	}
 }
 
-void shufflePlay(List *playlist) {
+int shufflePlay(List *playlist) {
 
 	Node *tempNode = NULL;
-
+	int testSuccess = 0;
 	int min = 0;
 	int sec = 0;
+	int randIndex = 0;
+
+	int testArray[3] = { 0 };
+
 
 	int direction = 0;
 	int shift = 0;
 
 	if (playlist->head != NULL) {
+		randIndex = rand() % (playlist->length);
+		tempNode = getElementAtIndex(playlist, randIndex);
 
-		tempNode = getElementAtIndex(playlist, rand() % playlist->length - 1);
 
 		for (int i = 0; i < playlist->length; ++i) {
 
+			if (tempNode != NULL && i < 3) {
+				testArray[i] = tempNode->record.id;
+			}
+
 			shift = rand() % playlist->length - 1;
-			
+
 			// 0 = left
 			// 1 = right
 			direction = rand() % 2;
@@ -699,7 +707,7 @@ void shufflePlay(List *playlist) {
 
 			printf("Current Song:\n");
 			printOneRecord(tempNode);
-			
+
 
 			for (int k = 0; k < shift; ++k) {
 				//direction = 1;
@@ -746,13 +754,22 @@ void shufflePlay(List *playlist) {
 			printf("--- 0:00\n");
 			Sleep((min + sec) / 5);
 
-			
+
 		}
 		system("pause");
 
 	}
-}
 
+	tempNode = playlist->head;
+	for (int i = 0; i < 3; ++i) {
+
+		if (i != testArray[i]) {
+			testSuccess++;
+		}
+	}
+
+	return testSuccess > 1;
+}
 
 void loadingBar(int time) {
 	Sleep(time / 10);
@@ -785,41 +802,90 @@ void loadingBar(int time) {
 	Sleep(time / 10);
 }
 
-void shuffle(void) {
-
-}
-
 void exit(void) {
-
+	printf("Goodbye!\n");
 }
 
-void test(void) {
+void runTests(void) {
+
+	printf("===================== Tests: =====================\n");
+	testSuffle();
+	testInsert();
+	testDelete();
+}
+
+void testInsert(void) {
+	printf("----------------- Test Insert: -----------------\n");
 	List playlist;
 	initList(&playlist);
 
-	//Record test1;
-	//newRecord(&test1, "Black Keys", "Attack and Release", "All You Ever Wanted", "Blues", 2, 56, 200, 5);
 
-	//Record test2;
-	//newRecord(&test2, "Black Keys", "Attack and Release", "I Got Mine", "Blues", 3, 59, 500, 5);
+	Record test;
+	newRecord(&test, "Killah, Ghostface", "The Lost Tapes", "Buckingham Palace", "Rap", 3, 16, -1, 6);
 
-	//Record test3;
-	//newRecord(&test3, "Electric Six", "Fire", "Formula 409", "Rock", 3, 59, 700, 5);
-	
-	FILE *infile = fopen("test.csv", "r");
+	append(&playlist, &test);
+	printf("## Update Head:\n");
+	printf("  - Head Updated         | %s\n", (playlist.head->record.id == test.id) ? "Passed" : "Failed");
 
-	load(&playlist, infile);
+	printf("## Update Tail:\n");
+	printf("  - Tail Updated         | %s\n", (playlist.tail->record.id == test.id) ? "Passed" : "Failed");
 
-	display(&playlist);
+	printf("## Clense Data:\n");
+	printf("  - Times Played Updated | %s\n", (playlist.head->record.timesPlayed != -1) ? "Passed" : "Failed");
+	printf("  - Rating Updated       | %s\n",
+		((playlist.head->record.rating >=0 ) && (playlist.head->record.rating <= 5)) ? "Passed" : "Failed");
 
-	swap2Nodes(&playlist, playlist.head, playlist.head->pNext);
+}
 
-	printf("\n");
+void testDelete(void) {
+	printf("----------------- Test Delete: -----------------\n");
 
-	display(&playlist);
-	
-	printf("\n");
+	List playlist;
+	initList(&playlist);
+
+	Record test;
+	newRecord(&test, "Killah, Ghostface", "The Lost Tapes", "Buckingham Palace", "Rap", 3, 16, -1, 6);
+
+	append(&playlist, &test);
 
 
-	fclose(infile);
+	deleteSong(&playlist, &test);
+
+	printf("## Update Head:\n");
+	printf("  - Head Updated         | %s\n", (playlist.head == NULL) ? "Passed" : "Failed");
+
+	printf("## Update Tail:\n");
+	printf("  - Tail Updated         | %s\n", (playlist.tail == NULL) ? "Passed" : "Failed");
+
+/*
+	printf("## Clense Data:\n");
+	printf("  - Times Played Updated | %s\n", (playlist.head->record.timesPlayed != -1) ? "Passed" : "Failed");
+	printf("  - Rating Updated       | %s\n",
+		((playlist.head->record.rating >= 0) && (playlist.head->record.rating <= 5)) ? "Passed" : "Failed");
+*/
+
+}
+
+void testSuffle(void) {
+	printf("----------------- Test Shuffle: -----------------\n");
+	List playlist;
+	initList(&playlist);
+
+
+	Record test;
+	newRecord(&test, "Killah, Ghostface", "The Lost Tapes", "Buckingham Palace", "Rap", 3, 16, -1, 6);
+	Record test2;
+	newRecord(&test2, "Drake", "YOU WELCOME", "The Motto", "Rap", 4, 13, 7, 4);
+	Record test3;
+	newRecord(&test3, "Perri, Christina", "HEAD OF HEART", "Trust", "Pop", 2, 35, 3, 5);
+
+	prepend(&playlist, &test);
+	prepend(&playlist, &test2);
+	prepend(&playlist, &test3);
+
+
+	int success = shufflePlay(&playlist);
+
+	printf("## Shuffle Works:\n");
+	printf("  - Played Out of Order | %s\n", (success) ? "Passed" : "Failed");
 }
