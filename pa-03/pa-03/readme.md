@@ -1,6 +1,11 @@
 # Programming Assignment 3:
 
-## functions.h:
+## Table of Contents
+1. [ functions ](#functions)
+2. [ Linked List functions ](#linked-list)
+
+<a name="functions"></a>
+## functions:
 
 #### menuREPL
 - Description: Main menu for the program.
@@ -253,3 +258,121 @@ void testDelete(void);
 ```c
 void testSuffle(void);
 ```
+
+<a name="linked-list"></a>
+## Linked List functions
+
+#### Rating Enum:
+```c
+typedef enum rating {
+	NONE = 0, ONESTAR = 1, TWOSTAR = 2, THREESTAR = 3, FOURSTAR = 4, FIVESTAR = 5
+} Rating;
+```
+
+#### Duration Struct
+```c
+typedef struct duration {
+	int min;
+	int sec;
+} Duration;
+```
+
+#### Record Struct
+```c
+typedef struct record {
+	char artist[30];
+	char album[30];
+	char song[30];
+	char genre[15];
+	Duration duration;
+	int timesPlayed;
+	Rating rating;
+	unsigned long id;
+
+} Record;
+```
+
+#### Node Struct
+```c
+typedef struct node {
+	Record record;
+	struct node *pNext;
+	struct node *pPrev;
+    
+} Node;
+```
+
+
+#### linked list struct
+```c
+typedef struct list {
+	Node *head;
+	Node *tail;
+
+	int length;
+
+
+} List;
+```
+void initList(List *l);
+
+void newRecord(Record *r, char artist[30], char album[30], char song[30], char genre[15],
+	int minutes, int second, int timesPlayed, Rating rating);
+
+Node* newNode(Record newRecord);
+
+void printListL2R(Node *nodePtr);
+
+void printListR2L(Node *nodePtr);
+
+void printListTop2Bottom(Node *nodePtr);
+
+int printAllByArtist(Node *nodePtr, char *artist);
+
+void printOneRecord(Node *nodePtr);
+
+int prepend(List *list, Record *newRecord);
+
+int append(List *list, Record *newRecord);
+
+int deleteAllByArtist(List *list, char *artistName);
+
+Node * findByID(List *list, unsigned long id);
+
+Node* findBySongName(List *list, char *searchName);
+
+int deleteSong(List *list, Record *record);
+
+int pop(List *list);
+
+int getLength(Node *listPtr, int startIdx);
+
+Node* getElementAtIndex(List *list, int searchIdx);
+
+void debugPtr(Node *listPtr);
+
+int listCompare(Node *l1, Node *l2);
+
+void bubbleSortArtist(List *list);
+
+int checkIfArtistSorted(List *list);
+
+void bubbleSortSong(List *list);
+
+int checkIfSongSorted(List *list);
+
+void bubbleSortAlbum(List *list);
+
+int checkIfAlbumSorted(List *list);
+
+void bubbleSortTimesPlayed(List *list);
+
+int checkIfTimesPlayedSorted(List *list);
+
+void bubbleSortRating(List *list);
+
+int checkIfRatingSorted(List *list);
+
+void swap2Nodes(List *list, Node *a, Node *b);
+
+void swap2NodesSimple(List *list, Node *a);
