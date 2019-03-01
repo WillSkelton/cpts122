@@ -142,21 +142,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="List.cpp" />
-    <ClCompile Include="ListApp.cpp" />
-    <ClCompile Include="ListNode.cpp" />
-    <ClCompile Include="main.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="List.h" />
-    <ClInclude Include="ListApp.h" />
-    <ClInclude Include="ListNode.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="ExamScores.csv" />
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="ExamStats.txt" />
+
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

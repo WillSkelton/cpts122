@@ -5,18 +5,18 @@ List::List() {
 	mpHead = nullptr;
 }
 
-// copy constructor - implicitly invoked copying a List object during construction of 
-// another List object, or when a List object is passed-by-value - must perform a deep copy, 
+// copy constructor - implicitly invoked copying a List object during construction of
+// another List object, or when a List object is passed-by-value - must perform a deep copy,
 // which means create new memory for each node copied!
 List::List(const List &copyList) {
 	// fill in your code here!
 	ListNode *copyIndex = copyList.getHeadPtr();
-	
+
 	if (copyIndex != nullptr) {
 		ListNode *destIndex = this->getHeadPtr();
 
 		ListNode *newHead = new ListNode(copyIndex->getData);
-		
+
 		copyIndex = copyIndex->getNextPtr();
 	}
 
@@ -75,7 +75,7 @@ bool List::insertAtFront(const int newData)     // inserts newData at the beginn
 }
 
 // insert newData in ascending order
-bool List::insertInOrder(const int newData)     
+bool List::insertInOrder(const int newData)
 {
 	bool success = false;
 
@@ -85,7 +85,7 @@ bool List::insertInOrder(const int newData)
 }
 
 // inserts newData at the end of the list
-bool List::insertAtEnd(const int newData)       
+bool List::insertAtEnd(const int newData)
 {
 	bool success = false;
 
@@ -94,16 +94,16 @@ bool List::insertAtEnd(const int newData)
 	return success;
 }
 
-// determines if the list is empty;  
+// determines if the list is empty;
 // returns true if the list is empty; false otherwise
-bool List::isEmpty()                           
+bool List::isEmpty()
 {
 	return (mpHead == nullptr);
 }
 
 // deletes the node at the front of the list and returns a copy of the data
 // precondition: list must not be empty
-int List::deleteAtFront()                       
+int List::deleteAtFront()
 {
 	int data = 0;
 
@@ -115,7 +115,7 @@ int List::deleteAtFront()
 // deletes the node with data == searchValue;
 // returns true if the value was found; false otherwise
 // precondition: list must not be empty
-bool List::deleteNode(const int searchValue)    
+bool List::deleteNode(const int searchValue)
 {
 	bool success = false;
 
@@ -126,7 +126,7 @@ bool List::deleteNode(const int searchValue)
 
 // deletes the node at the end of the list and returns a copy of the data
 // precondition: list must not be empty
-int List::deleteAtEnd()                         
+int List::deleteAtEnd()
 {
 	int data = 0;
 
@@ -136,7 +136,7 @@ int List::deleteAtEnd()
 }
 
 // visits each node, print the node's data
-void List::printList()                          
+void List::printList()
 {
 	ListNode *pCur = mpHead;
 
@@ -169,7 +169,7 @@ void List::destroyListHelper(ListNode * const pMem)
 }
 
 // deletes each node to free memory; will call in the destructor
-void List::destroyList()                        
+void List::destroyList()
 {
 	destroyListHelper(mpHead);
 }
