@@ -524,7 +524,7 @@ void printAttributes(void) {
 
 }
 
-void so	rt(List *playlist) {
+void sort(List *playlist) {
 
 	int choice = inputCheck(1, 5, printSortOptions);
 

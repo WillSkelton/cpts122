@@ -1,13 +1,11 @@
 # Programming Assignment 3:
 
 ## Table of Contents
-1. [ functions ](#functions)
-2. [ Linked List functions ](#linked-list)
+[[toc]]
 
-<a name="functions"></a>
 ## functions:
 
-#### menuREPL
+### menuREPL
 - Description: Main menu for the program.
 - Input Parameters: n/a
 - Returns: n/a
@@ -16,7 +14,7 @@
 void menuREPL(void);
 ```
 
-#### printBorder
+### printBorder
 - Description: prints a desired length of = or - depending on input
 - Input Parameters: size: (- or =), length: (number of = or -)
 - Returns: n/a
@@ -25,7 +23,7 @@ void menuREPL(void);
 void printBorder(int size, int length);
 ```
 
-#### inputCheck
+### inputCheck
 - Description: prints a menu and then gets user input between upper and lower bounds.
 - Input Parameters: lower and upper bounds of acceptable input, menu to print
 - Returns: the user's choice
@@ -34,7 +32,7 @@ void printBorder(int size, int length);
 int inputCheck(int lowerBound, int upperBound, void(*printMenu)());
 ```
 
-#### printMessage
+### printMessage
 - Description: print a message surrounded by = and ||
 - Input Parameters: char* message
 - Returns: n/a
@@ -43,7 +41,7 @@ int inputCheck(int lowerBound, int upperBound, void(*printMenu)());
 void printMessage(char *message);
 ```
 
-#### printMenu
+### printMenu
 - Description: prints main menu
 - Input Parameters: n/a
 - Returns: n/a
@@ -52,7 +50,7 @@ void printMessage(char *message);
 void printMenu(void);
 ```
 
-#### load
+### load
 - Description: traverses file and loads contents into a linked list
 - Input Parameters: pointer to linked list
 - Returns: n/a
@@ -61,7 +59,7 @@ void printMenu(void);
 void load(List *listplaylist, FILE *infile);
 ```
 
-#### parseLine
+### parseLine
 - Description: reads a line from a file and creates a node for a linked list based on that information
 - Input Parameters: placeholder node and char array for information
 - Returns: n/a
@@ -70,7 +68,7 @@ void load(List *listplaylist, FILE *infile);
 void parseLine(Node *tempRecord, char line[100]);
 ```
 
-#### store
+### store
 - Description: traverses linked list and writes all information to the file
 - Input Parameters: pointer to the playlist
 - Returns: n/a
@@ -79,7 +77,7 @@ void parseLine(Node *tempRecord, char line[100]);
 void store(List *playlist);
 ```
 
-#### display
+### display
 - Description: displays either all records or all records by a certain artist specified by the user
 - Input Parameters: pointer to the playlist
 - Returns: n/a
@@ -88,7 +86,7 @@ void store(List *playlist);
 void display(List *playlist);
 ```
 
-#### printDisplayOptions
+### printDisplayOptions
 - Description: prints options to either display ALL records or all of a specific artist's records
 - Input Parameters: n/a
 - Returns: n/a
@@ -97,7 +95,7 @@ void display(List *playlist);
 void printDisplayOptions(void);
 ```
 
-#### insert
+### insert
 - Description: inserts a record at the beginning of the playlist
 - Input Parameters: pointer to the playlist
 - Returns: n/a
@@ -106,7 +104,7 @@ void printDisplayOptions(void);
 void insert(List *playlist);
 ```
 
-#### del
+### del
 - Description: deletes a certain record
 - Input Parameters: pointer to the playlist
 - Returns: n/a
@@ -115,7 +113,7 @@ void insert(List *playlist);
 void del(List *playlist);
 ```
 
-#### findSongBySongName
+### findSongBySongName
 - Description: gets a song name from the user and tries to find it
 - Input Parameters: pointer to the playlist
 - Returns: n/a
@@ -124,7 +122,7 @@ void del(List *playlist);
 Node* findSongBySongName(List *playlist);
 ```
 
-#### edit
+### edit
 - Description: finds a song, and lets the user go through and edit any of the properties before saving it.
 - Input Parameters: pointer to the playlist
 - Returns: n/a
@@ -133,7 +131,7 @@ Node* findSongBySongName(List *playlist);
 void edit(List *playlist);
 ```
 
-#### printAttributes
+### printAttributes
 - Description: prints all the attributes that are available for editing
 - Input Parameters: n/a
 - Returns: n/a
@@ -142,7 +140,7 @@ void edit(List *playlist);
 void printAttributes(void);
 ```
 
-#### sort
+### sort
 - Description: uses bubble sort to sort the playlist based on a few categories
 - Input Parameters: pointer to the playlist
 - Returns: n/a
@@ -151,7 +149,7 @@ void printAttributes(void);
 void sort(List *playlist);
 ```
 
-#### printSortOptions
+### printSortOptions
 - Description: prints the categories that the user can sort the playlist by
 - Input n/a
 - Returns: n/a
@@ -160,7 +158,7 @@ void sort(List *playlist);
 void printSortOptions(void);
 ```
 
-#### findSongByArtist
+### findSongByArtist
 - Description: asks the user for an artist name and finds all the songs by that artist
 - Input Parameters: pointer to the playlist
 - Returns: n/a
@@ -169,7 +167,7 @@ void printSortOptions(void);
 Node* findSongByArtist(List *playlist);
 ```
 
-#### rate
+### rate
 - Description: allows the user to pick a song and change it's rating
 - Input Parameters: pointer to the playlist
 - Returns: n/a
@@ -178,7 +176,7 @@ Node* findSongByArtist(List *playlist);
 void rate(List *playlist);
 ```
 
-#### printStarOptions
+### printStarOptions
 - Description: prints list of ratings the user can pick
 - Input Parameters: n/a
 - Returns: n/a
@@ -187,7 +185,7 @@ void rate(List *playlist);
 void printStarOptions(void);
 ```
 
-#### play
+### play
 - Description: traverses the playlist and 'plays' them at 10x speed for time's sake
 - Input Parameters: pointer to the playlist
 - Returns: n/a
@@ -196,7 +194,7 @@ void printStarOptions(void);
 void play(List *playlist);
 ```
 
-#### shufflePlay
+### shufflePlay
 - Description: randomly picks a song and goes in a random direction for a random number of songs to find the next song switching directions at the head and tail of the list.
 - Input Parameters: pointer to the playlist
 - Returns: an integer that represents the number of times the playlist was out of order. This is only used for testing.
@@ -205,7 +203,7 @@ void play(List *playlist);
 int shufflePlay(List *playlist);
 ```
 
-#### loadingBar
+### loadingBar
 - Description: prints a simulated loading bar for the song
 - Input Parameters: an integer representing the length of the son in seconds
 - Returns: n/a
@@ -214,7 +212,7 @@ int shufflePlay(List *playlist);
 void loadingBar(int time);
 ```
 
-#### exit
+### exit
 - Description: prints "Goodbye!"
 - Input Parameters: n/a
 - Returns: n/a
@@ -223,7 +221,7 @@ void loadingBar(int time);
 void exit(void);
 ```
 
-#### runTests
+### runTests
 - Description: run all the test functions
 - Input Parameters: n/a
 - Returns: n/a
@@ -232,7 +230,7 @@ void exit(void);
 void runTests(void);
 ```
 
-#### testInsert
+### testInsert
 - Description: tests the insert function
 - Input Parameters: n/a
 - Returns: n/a
@@ -241,7 +239,7 @@ void runTests(void);
 void testInsert(void);
 ```
 
-#### testDelete
+### testDelete
 - Description: tests the del function
 - Input Parameters: n/a
 - Returns: n/a
@@ -250,7 +248,7 @@ void testInsert(void);
 void testDelete(void);
 ```
 
-#### testSuffle
+### testSuffle
 - Description: tests the shuffle function`
 - Input Parameters: n/a
 - Returns: n/a
@@ -259,17 +257,16 @@ void testDelete(void);
 void testSuffle(void);
 ```
 
-<a name="linked-list"></a>
-## Linked List functions
+## Linked-List
 
-#### Rating Enum:
+### Rating Enum:
 ```c
 typedef enum rating {
 	NONE = 0, ONESTAR = 1, TWOSTAR = 2, THREESTAR = 3, FOURSTAR = 4, FIVESTAR = 5
 } Rating;
 ```
 
-#### Duration Struct
+### Duration Struct
 ```c
 typedef struct duration {
 	int min;
@@ -277,7 +274,7 @@ typedef struct duration {
 } Duration;
 ```
 
-#### Record Struct
+### Record Struct
 ```c
 typedef struct record {
 	char artist[30];
@@ -292,18 +289,18 @@ typedef struct record {
 } Record;
 ```
 
-#### Node Struct
+### Node Struct
 ```c
 typedef struct node {
 	Record record;
 	struct node *pNext;
 	struct node *pPrev;
-    
+
 } Node;
 ```
 
 
-#### linked list struct
+### linked list struct
 ```c
 typedef struct list {
 	Node *head;
@@ -314,65 +311,250 @@ typedef struct list {
 
 } List;
 ```
+
+
+### initList
+- Description:  Initialize list
+- Input Parameters: a pointer to a list struct
+- Returns: n/a
+- Declaration:
+```c
 void initList(List *l);
+```
 
-void newRecord(Record *r, char artist[30], char album[30], char song[30], char genre[15],
-	int minutes, int second, int timesPlayed, Rating rating);
+### newRecord
+- Description: Creates a new record
+- Input Parameters: a pointer to a record struct and all of the necessary information for a record
+- Returns: n/a
+- Declaration:
+```c
+void newRecord(
+  Record *r,
+  char artist[30], 
+  char album[30], 
+  char song[30], 
+  char genre[15], 
+  int minutes, 
+  int second, 
+  int timesPlayed, 
+  Rating rating
+);
+```
 
+### newNode
+- Description: makes a new node containing a record
+- Input Parameters: a record struct
+- Returns: pointer to the new node
+- Declaration:
+```c
 Node* newNode(Record newRecord);
-
+```
+### printListL2R
+- Description: recursively prints the list from left to right (Head to tail)
+- Input Parameters: pointer to the head of the list (or wherever you want to start printing)
+- Returns: n/a
+- Declaration:
+```c
 void printListL2R(Node *nodePtr);
-
+```
+### printListR2L
+- Description: recursively prints the list from right to left (tail to Head)
+- Input Parameters: a pointer to the left most nod you want to start at
+- Returns: n/a
+- Declaration:
+```c
 void printListR2L(Node *nodePtr);
-
+```
+### printListTop2Bottom
+- Description: same as printListL2R but formatted differently 
+- Input Parameters: pointer to head node
+- Returns:n/a
+- Declaration:
+```c
 void printListTop2Bottom(Node *nodePtr);
-
+```
+### printAllByArtist
+- Description: prints all the records by a certain artist
+- Input Parameters: pointer to head node and a char* containing the artist name
+- Returns: the number of songs by that artist
+- Declaration:
+```c
 int printAllByArtist(Node *nodePtr, char *artist);
-
+```
+### printOneRecord
+- Description: print a given record in the same format as `printListTop2Bottom`
+- Input Parameters: pointer to a node
+- Returns: n/a
+- Declaration:
+```c
 void printOneRecord(Node *nodePtr);
-
+```
+### prepend
+- Description:  adds a record to the head of the list
+- Input Parameters: pointers to list and record
+- Returns: 1 for success, 0 for fail
+- Declaration:
+```c
 int prepend(List *list, Record *newRecord);
-
+```
+### append
+- Description:  adds a record to the tail of the list
+- Input Parameters: pointers to list and record
+- Returns: 1 for success, 0 for fail
+- Declaration:
+```c
 int append(List *list, Record *newRecord);
-
+```
+### deleteAllByArtist
+- Description: traverses the list and deletes all songs by a certain artist
+- Input Parameters: pointer to list and a char* wit the artist name
+- Returns: 1 for success, 0 for fail
+- Declaration:
+```c
 int deleteAllByArtist(List *list, char *artistName);
-
+```
+### findByID
+- Description: finds a record with it's id
+- Input Parameters: list pointer and id
+- Returns: pointer to the record or NULL if not found
+- Declaration:
+```c
 Node * findByID(List *list, unsigned long id);
-
+```
+### findBySongName
+- Description: finds a song by song name
+- Input Parameters: list pointer and char* with song name to find
+- Returns: pointer to node or NUll if not found
+- Declaration:
+```c
 Node* findBySongName(List *list, char *searchName);
-
+```
+### deleteSong
+- Description: deletes a song
+- Input Parameters: list pointer and pointer to the record to delete
+- Returns: success
+- Declaration:
+```c
 int deleteSong(List *list, Record *record);
-
+```
+### pop
+- Description: removes the head of the list and shifts the head over one index
+- Input Parameters: list pointer
+- Returns: success
+- Declaration:
+```c
 int pop(List *list);
-
+```
+### getLength
+- Description: returns the length of the list. NOTE: Not used
+- Input Parameters: list pointer, start index
+- Returns: number of items in the list/sub-list
+- Declaration:
+```c
 int getLength(Node *listPtr, int startIdx);
-
+```
+### getElementAtIndex
+- Description: returns the element at a given index
+- Input Parameters: list pointer and an index
+- Returns: poiter to a node
+- Declaration:
+```c
 Node* getElementAtIndex(List *list, int searchIdx);
+```
 
-void debugPtr(Node *listPtr);
-
-int listCompare(Node *l1, Node *l2);
-
+### bubbleSortArtist
+- Description: bubble sorts based on artist
+- Input Parameters:list pointer
+- Returns: n/a
+- Declaration:
+```c
 void bubbleSortArtist(List *list);
-
+```
+### checkIfArtistSorted
+- Description: checks if the list is sorted based on artist 
+- Input Parameters: list pointer
+- Returns: 1 if list is sorted 0 if not
+- Declaration:
+```c
 int checkIfArtistSorted(List *list);
-
+```
+### bubbleSortSong
+- Description: bubble sorts based on song name
+- Input Parameters:list pointer
+- Returns: n/a
+- Declaration:
+```c
 void bubbleSortSong(List *list);
-
+```
+### checkIfSongSorted
+- Description: checks if the list is sorted based on song name
+- Input Parameters: list pointer
+- Returns: 1 if list is sorted 0 if not
+- Declaration:
+```c
 int checkIfSongSorted(List *list);
-
+```
+### bubbleSortAlbum
+- Description: bubble sorts based on album name
+- Input Parameters:list pointer
+- Returns: n/a
+- Declaration:
+```c
 void bubbleSortAlbum(List *list);
-
+```
+### checkIfAlbumSorted
+- Description: checks if the list is sorted based on album name
+- Input Parameters: list pointer
+- Returns: 1 if list is sorted 0 if not
+- Declaration:
+```c
 int checkIfAlbumSorted(List *list);
-
+```
+### bubbleSortTimesPlayed
+- Description: bubble sorts based on times played
+- Input Parameters:list pointer
+- Returns: n/a
+- Declaration:
+```c
 void bubbleSortTimesPlayed(List *list);
-
+```
+### checkIfTimesPlayedSorted
+- Description: checks if the list is sorted based on times played
+- Input Parameters: list pointer
+- Returns: 1 if list is sorted 0 if not
+- Declaration:
+```c
 int checkIfTimesPlayedSorted(List *list);
-
+```
+### bubbleSortRating
+- Description: bubble sorts based on rating
+- Input Parameters:list pointer
+- Returns: n/a
+- Declaration:
+```c
 void bubbleSortRating(List *list);
-
+```
+### checkIfRatingSorted
+- Description: checks if the list is sorted based on rating
+- Input Parameters: list pointer
+- Returns: 1 if list is sorted 0 if not
+- Declaration:
+```c
 int checkIfRatingSorted(List *list);
-
+```
+### swap2Nodes
+- Description: swaps any node with the any other node
+- Input Parameters: list pointer and pointers to the 2 nodes to swap
+- Returns: n/a
+- Declaration:
+```c
 void swap2Nodes(List *list, Node *a, Node *b);
-
+```
+### swap2NodesSimple
+- Description: swaps any node with the one in front of it 
+- Input Parameters: list pointer and pointer to node
+- Returns: n/a
+- Declaration:
+```c
 void swap2NodesSimple(List *list, Node *a);
+```

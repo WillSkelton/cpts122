@@ -6,7 +6,7 @@ void initList(List *l) {
 	l->length = 0;
 }
 
-void newRecord(Record *r, char artist[30], char album[30], char song[30], char genre[15], 
+void newRecord(Record *r, char artist[30], char album[30], char song[30], char genre[15],
 	int minutes, int seconds, int timesPlayed, Rating rating) {
 
 	static unsigned long id = 0;
@@ -15,7 +15,7 @@ void newRecord(Record *r, char artist[30], char album[30], char song[30], char g
 	strcpy(r->album, album);
 	strcpy(r->song, song);
 	strcpy(r->genre, genre);
-	
+
 	Duration d = { minutes, seconds };
 	r->duration = d;
 	r->timesPlayed = (timesPlayed >= 0) ? timesPlayed : 0;
@@ -55,7 +55,7 @@ void printListL2R(Node *nodePtr) {
 void printListR2L(Node *nodePtr) {
 
 	if (nodePtr != NULL) {
-		
+
 		printListR2L(nodePtr->pNext);
 		printf("<--- ");
 		printf("\"%s\" ", nodePtr->record.song);
@@ -86,7 +86,7 @@ void printListTop2Bottom(Node *nodePtr) {
 		printf("%d\n", nodePtr->record.rating);
 
 		printListTop2Bottom(nodePtr->pNext);
-		
+
 	}
 }
 
@@ -153,15 +153,15 @@ void printOneRecord(Node *nodePtr) {
 		printf("%s,", nodePtr->record.genre);
 		printf("%d:%d,", nodePtr->record.duration.min, nodePtr->record.duration.sec);
 		printf("%d,", nodePtr->record.timesPlayed);
-		printf("%d\n", nodePtr->record.rating);	
+		printf("%d\n", nodePtr->record.rating);
 	}
 }
 
 int prepend(List *list, Record *newRecord) {
-	
+
 	Node *tempPtr = NULL;
 	int success = 0;
-	
+
 
 	tempPtr = newNode(*newRecord);
 
@@ -174,7 +174,7 @@ int prepend(List *list, Record *newRecord) {
 		else {
 			list->tail = tempPtr;
 		}
-		
+
 		tempPtr->pNext = list->head;
 
 		list->head = tempPtr;
@@ -182,7 +182,7 @@ int prepend(List *list, Record *newRecord) {
 		list->length++;
 
 	}
-	
+
 	return success;
 }
 
@@ -195,7 +195,7 @@ int append(List *list, Record *newRecord) {
 	int success = 0;
 
 	tempPtr = newNode(*newRecord);
-	
+
 	if (tempPtr != NULL) {
 
 		// If list isn't empty
@@ -217,15 +217,15 @@ int append(List *list, Record *newRecord) {
 		}
 	}
 
-	
-	return success; 
+
+	return success;
 }
 
 int pop(List *list) {
 	int success = 0;
 
 	if (list != NULL && list->head != NULL) {
-		
+
 		int success = 1;
 		Node *tempPtr = list->head;
 
@@ -253,7 +253,7 @@ int deleteAllByArtist(List *list, char *artistName) {
 		success = -1;
 
 		for (int i = 0; i < list->length; ++i) {
-			
+
 			isMatch = strcmp(artistName, compare->record.artist);
 
 			if (isMatch == 0) {
@@ -287,7 +287,7 @@ int deleteAllByArtist(List *list, char *artistName) {
 				}
 				// move onto next song
 				compare = temp;
-		
+
 				// Keep track of songs on either side
 				tempNext = (compare != NULL) ? compare->pNext : NULL;
 				tempPrev = (compare != NULL) ? compare->pPrev : NULL;
@@ -350,7 +350,7 @@ int deleteSong(List *list, Record *record) {
 
 	Node *tempNext = NULL;
 	Node *tempPrev = NULL;
-	
+
 	Node *compare = list->head;
 
 	for (int i = 0; i < list->length; ++i) {
@@ -373,7 +373,7 @@ int deleteSong(List *list, Record *record) {
 	if (record->id == list->head->record.id) {
 		list->head = list->head->pNext;
 	}
-	
+
 	if (record->id == list->tail->record.id) {
 		list->tail = list->tail->pPrev;
 	}
@@ -382,7 +382,7 @@ int deleteSong(List *list, Record *record) {
 		free(compare);
 		list->length--;
 	}
-	
+
 
 	return success;
 }
@@ -394,7 +394,7 @@ int getLength(Node *listPtr, int startIdx) {
 	if (listPtr != NULL) {
 		tempIdx = getLength(listPtr->pNext, tempIdx + 1);
 	}
-	
+
 
 	return tempIdx;
 }
@@ -402,7 +402,7 @@ int getLength(Node *listPtr, int startIdx) {
 Node* getElementAtIndex(List *list, int searchIdx) {
 	int curIdx = 0;
 	Node *found = NULL;
-	
+
 	found = list->head;
 
 	while ((found != NULL) && (found->pNext != NULL)) {
@@ -458,7 +458,7 @@ int listCompare(Node *l1, Node *l2) {
 	else if (strcmp(l1->record.artist, l2->record.artist) == 0) {
 		++idx;
 		same = listCompare(l1->pNext, l2->pNext);
-	
+
 	}
 	else {
 		same = -2;
@@ -474,9 +474,9 @@ void bubbleSortArtist(List *list) {
 
 	if (tempNode != NULL) {
 		do {
-			
+
 			isSorted = checkIfArtistSorted(list);
-			
+
 			for (int i = 0; i < list->length; ++i) {
 
 				if (tempNode->pNext != NULL) {
@@ -507,7 +507,7 @@ void bubbleSortArtist(List *list) {
 
 int checkIfArtistSorted(List *list) {
 	int isSorted = 0;
-	
+
 	Node *tempNode = (list->head != NULL) ?	list->head : NULL;
 
 	if (tempNode != NULL){
@@ -559,7 +559,7 @@ void bubbleSortSong(List *list) {
 			}
 
 			tempNode = list->head;
-			
+
 		} while (isSorted != 1);
 	}
 
@@ -626,7 +626,7 @@ void bubbleSortAlbum(List *list) {
 	}
 
 	printf("Done!\n");
-	
+
 }
 
 int checkIfAlbumSorted(List *list) {
@@ -683,7 +683,7 @@ void bubbleSortTimesPlayed(List *list) {
 			}
 
 			tempNode = list->head;
-			
+
 		} while (isSorted != 1);
 	}
 
