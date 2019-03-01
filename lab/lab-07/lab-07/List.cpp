@@ -10,9 +10,17 @@ List::List() {
 // which means create new memory for each node copied!
 List::List(const List &copyList) {
 	// fill in your code here!
-	ListNode *iterator = copyList.getHeadPtr();
+	ListNode *copyIndex = copyList.getHeadPtr();
+	ListNode *destIndex = this->getHeadPtr();
+	
+	if (copyIndex != nullptr) {
+		ListNode *newHead = new ListNode(copyIndex->getData);
+		
+		copyIndex = copyIndex->getNextPtr();
+	}
 
-	while (iterator != nullptr) {
+	while (copyIndex != nullptr) {
+		// ListNode *tempNode = new ListNode(copyIndex->getData);
 
 	}
 
