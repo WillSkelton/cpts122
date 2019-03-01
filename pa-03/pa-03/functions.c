@@ -84,7 +84,7 @@ void menuREPL(void) {
 			break;
 		}
 
-	} while (choice != 11);
+	} while (choice != 12);
 }
 
 void printBorder(int size, int length) {
