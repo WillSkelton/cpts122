@@ -1,13 +1,16 @@
-#include "plan.h"
+#include "DietPlan.h"
 
 int main(void) {
 
 
-	time_t myTime = time(NULL);
+	//time_t myTime = time(NULL);
+	//string str = ctime(&myTime);
+	//cout << str.substr(8,2) << endl;
 
-	string str = ctime(&myTime);
+	DietPlan myPlan("Stuff", 345);
+	myPlan.setDate("3/11/2019");
 	
-	cout << str.substr(8,2) << endl;
+	cout << myPlan.getDate() << "\n";
 
 	return 0;
 }

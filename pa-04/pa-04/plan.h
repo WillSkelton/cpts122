@@ -17,29 +17,50 @@ class Plan {
 public:
 	// Ctors
 	Plan();
-	Plan(int month, int day, int year);
 
 	// Cpy Ctors
 	Plan(Plan &src);
 
 	// Dtor
-	~Plan();
+	//~Plan();
 	
 	// Getters
-	int getGoal(void);
-	string getname(void);
+	string getName(void);
 	string getDate(void);
 
 	// Setters
-	void setGoal(int newGoal);
 	void setName(string newName);
-	void setDate(int month, int day, int year);
+	void setDate(string newDate);
 
-private:
-
-	int goal;
+protected:
 
 	string name;
 
-	int date[3];
+	string date;
 };
+
+#include "plan.h"
+
+
+// Ctors
+Plan::Plan() {
+	this->name = "";
+	this->date = "1/1/2000";
+}
+
+string Plan::getName(void) {
+	return this->name;
+}
+
+string Plan::getDate(void) {
+
+	return this->date;
+}
+
+// Setters
+void Plan::setName(string newName) {
+
+}
+void Plan::setDate(string newDate) {
+	this->date = newDate;
+}
