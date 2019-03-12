@@ -1,16 +1,16 @@
 #pragma once
 
 #include <iostream>
+#include <fstream>
 #include <string>
 #include <vector>
-#include <ctime>
 
 using std::cout;
 using std::string;
 using std::endl;
 using std::array;
 using std::vector;
-
+using std::ifstream;
 
 class Plan {
 

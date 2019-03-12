@@ -1,22 +1,30 @@
-#include "DietPlan.h"
-#include "ExercizePlan.h"
+#include "FitnessApplicationWrapper.h"
+
+//#include <iostream>
+//#include <fstream>
+//#include <string>
+//#include <vector>
+//
+//using std::cout;
+//using std::string;
+//using std::endl;
+//using std::array;
+//using std::vector;
+//using std::fstream;
 
 int main(void) {
-
 
 	//time_t myTime = time(NULL);
 	//string str = ctime(&myTime);
 	//cout << str.substr(8,2) << endl;
 
-	ExercizePlan myPlan("Stuff", 345);
-	myPlan.setDate("3/11/2019");
-	
-	myPlan.setStepGoal(375);
+	//fstream infile("test.txt");
+	//// infile.open("test.txt");
+	//string line;
 
+	FitnessAppWrapper app;
 	
-	myPlan.setName("Horkey");
-
-	cout << "Name: " << myPlan.getName() << " | Goal: " <<  myPlan.getStepGoal() << "\n";
+	app.runApp();
 
 	return 0;
 }
