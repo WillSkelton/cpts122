@@ -39,6 +39,8 @@ DietPlan::DietPlan(string name, int initialGoal) {
 
 // CCTOR
 DietPlan::DietPlan(DietPlan &src) {
+	this->name = src.name;
+	this->date = src.date;
 	this->calorieGoal = new int(*(src.calorieGoal));
 }
 

@@ -1,4 +1,5 @@
 #include "DietPlan.h"
+#include "ExercizePlan.h"
 
 int main(void) {
 
@@ -7,10 +8,14 @@ int main(void) {
 	//string str = ctime(&myTime);
 	//cout << str.substr(8,2) << endl;
 
-	DietPlan myPlan("Stuff", 345);
+	ExercizePlan myPlan("Stuff", 345);
 	myPlan.setDate("3/11/2019");
 	
-	cout << myPlan.getDate() << "\n";
+	myPlan.setStepGoal(375);
+
+	
+	
+	cout << myPlan.getStepGoal() << "\n";
 
 	return 0;
 }
