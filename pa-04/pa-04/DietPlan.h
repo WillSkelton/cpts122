@@ -32,7 +32,7 @@ DietPlan::DietPlan() {
 
 DietPlan::DietPlan(string name, int initialGoal) {
 
-	this->name = name;
+	*(this->name) = name;
 	this->calorieGoal = new int(initialGoal);
 
 }

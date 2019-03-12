@@ -30,7 +30,7 @@ ExercizePlan::ExercizePlan() {
 
 ExercizePlan::ExercizePlan(string name, int initialGoal){
 
-	this->name = name;
+	*(this->name) = name;
 	this->stepGoal = new int(initialGoal);
 }
 

@@ -14,8 +14,9 @@ int main(void) {
 	myPlan.setStepGoal(375);
 
 	
-	
-	cout << myPlan.getStepGoal() << "\n";
+	myPlan.setName("Horkey");
+
+	cout << "Name: " << myPlan.getName() << " | Goal: " <<  myPlan.getStepGoal() << "\n";
 
 	return 0;
 }

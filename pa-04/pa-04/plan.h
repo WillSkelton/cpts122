@@ -34,9 +34,9 @@ public:
 
 protected:
 
-	string name;
+	string * name;
 
-	string date;
+	string * date;
 };
 
 #include "plan.h"
@@ -44,23 +44,27 @@ protected:
 
 // Ctors
 Plan::Plan() {
-	this->name = "";
-	this->date = "1/1/2000";
+	this->name = new string("");
+	this->date = new string("1/1/2000");
 }
 
 string Plan::getName(void) {
-	return this->name;
+	return *(this->name);
 }
 
 string Plan::getDate(void) {
 
-	return this->date;
+	return *(this->date);
 }
 
 // Setters
 void Plan::setName(string newName) {
+	delete this->name;
 
+	this->name = new string(newName);
 }
 void Plan::setDate(string newDate) {
-	this->date = newDate;
+	delete this->date;
+
+	this->date = new string(newDate);
 }
