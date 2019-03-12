@@ -106,14 +106,8 @@ void FitnessAppWrapper::loadDailyPlan(ifstream &fileStream, DietPlan &plan) {
 	ifstream infile;
 	infile.open("test.txt");
 	string line;
-	string line2;
-
-	//this->dietFile.open("dietPlans.txt");
-	//this->dietFile
-	infile >> line;
-	this->dietFile >> line2;
-	this->dietFile >> line2;
-	cout << line2 << endl;
+	this->dietFile >> line;
+	cout << line << endl;
 	cout << "here" << endl;
 }
 
