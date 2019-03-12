@@ -103,12 +103,22 @@ void FitnessAppWrapper::runApp(void) {
 }
 
 void FitnessAppWrapper::loadDailyPlan(ifstream &fileStream, DietPlan &plan) {
-	ifstream infile;
-	infile.open("test.txt");
+	//ifstream infile;
+	//infile.open("test.txt");
 	string line;
 	this->dietFile >> line;
-	cout << line << endl;
-	cout << "here" << endl;
+	plan.setName(line);
+
+	this->dietFile >> line;
+	plan.setCalorieGoal(stoi(line));
+
+	this->dietFile >> line;
+	plan.setDate(line);
+
+	cout << "Name: " << plan.getName() << endl;
+	cout << "Goal: " << plan.getCalorieGoal() << endl;
+	cout << "Date: " << plan.getDate() << endl;
+
 }
 
 void FitnessAppWrapper::loadWeeklyPlan(ifstream &fileStream, vector<DietPlan> &weeklyPlan) {

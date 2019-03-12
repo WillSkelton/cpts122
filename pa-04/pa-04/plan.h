@@ -22,7 +22,7 @@ public:
 	Plan(Plan &src);
 
 	// Dtor
-	//~Plan();
+	~Plan();
 	
 	// Getters
 	string getName(void);
@@ -48,6 +48,18 @@ Plan::Plan() {
 	this->date = new string("1/1/2000");
 }
 
+Plan::Plan(Plan &src) {
+	this->name = new string(*(src.name));
+	this->date = new string(*(src.date));
+}
+
+// DTOR
+Plan::~Plan() {
+	delete this->date;
+	delete this->name;
+}
+
+// Getters
 string Plan::getName(void) {
 	return *(this->name);
 }
