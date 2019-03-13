@@ -10,10 +10,12 @@ using std::string;
 using std::endl;
 using std::array;
 using std::vector;
-using std::ifstream;
+using std::fstream;
+using std::ofstream;
 using std::ostream;
 using std::istream;
 using std::to_string;
+using std::ios;
 
 class Plan {
 
