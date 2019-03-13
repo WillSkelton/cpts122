@@ -36,7 +36,7 @@ public:
 
 	void FitnessAppWrapper::storeWeeklyDietPlan(void);
 
-	void FitnessAppWrapper::storeDailyExercizePlan(void);
+	void FitnessAppWrapper::storeDailyExercizePlan(ExercizePlan &plan);
 
 	void FitnessAppWrapper::storeWeeklyExercizePlan(void);
 
@@ -130,8 +130,12 @@ void FitnessAppWrapper::runApp(void) {
 
 
 	this->storeWeeklyDietPlan();
-	
+
 	this->closeFiles();
+
+	/*this->storeWeeklyExercizePlan();
+
+	this->closeFiles();*/
 
 	//this->~FitnessAppWrapper();
 }
@@ -235,13 +239,11 @@ void FitnessAppWrapper::displayWeeklyExercizePlan(void) {
 // PUT
 void FitnessAppWrapper::storeDailyDietPlan(DietPlan &plan) {
 	
-
-	this->dietFile << plan.getName() << endl
+	/*this->dietFile << plan.getName() << endl
 		<< to_string(plan.getCalorieGoal()) << endl
 		<< plan.getDate() << endl
-		<< endl;
-
-	
+		<< endl;*/
+	this->dietFile << plan;
 }
 
 void FitnessAppWrapper::storeWeeklyDietPlan(void) {
@@ -251,7 +253,7 @@ void FitnessAppWrapper::storeWeeklyDietPlan(void) {
 	int weeklyDietPlanSize = this->weeklyDietPlan.size();
 
 	for (int i = 0; i < weeklyDietPlanSize; i++) {
-		storeDailyDietPlan(*(this->weeklyDietPlan[i]));
+		this->storeDailyDietPlan(*(this->weeklyDietPlan[i]));
 	}
 
 	this->closeFiles();
@@ -259,12 +261,22 @@ void FitnessAppWrapper::storeWeeklyDietPlan(void) {
 
 }
 
-void FitnessAppWrapper::storeDailyExercizePlan(void) {
-
+void FitnessAppWrapper::storeDailyExercizePlan(ExercizePlan &plan) {
+	this->exercizeFile << plan;
 }
 
 void FitnessAppWrapper::storeWeeklyExercizePlan(void) {
+	
+	this->exercizeFile.open("test.txt", ios::out);
 
+	int weeklyExercizePlanSize = this->weeklyExercizePlan.size();
+
+	for (int i = 0; i < weeklyExercizePlanSize; i++) {
+		this->storeDailyExercizePlan(*(weeklyExercizePlan[i]));
+	}
+
+
+	this->closeFiles();
 }
 
 
@@ -272,17 +284,19 @@ void FitnessAppWrapper::storeWeeklyExercizePlan(void) {
 // Operators
 //	- Insertion
 ostream & operator << (ostream &lhs, DietPlan &rhs) {
-	lhs << "Name: " << rhs.getName() << endl 
-		<< "Goal: " << rhs.getCalorieGoal() << " Max Calories" << endl
-		<< "Date: " << rhs.getDate() << endl;
-
+	
+	lhs << rhs.getName() << endl
+		<< to_string(rhs.getCalorieGoal()) << endl
+		<< rhs.getDate() << endl
+		<< endl;
 	return lhs;
 }
 
 ostream & operator << (ostream &lhs, ExercizePlan &rhs) {
-	lhs << "Name: " << rhs.getName() << endl
-		<< "Goal: " << rhs.getStepGoal() << " Steps" << endl
-		<< "Date: " << rhs.getDate() << endl;
+	lhs << rhs.getName() << endl
+		<< to_string(rhs.getStepGoal()) << endl
+		<< rhs.getDate() << endl
+		<< endl;
 
 	return lhs;
 }
