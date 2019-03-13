@@ -24,8 +24,11 @@ public:
 	void closeFiles(void);
 
 	// GET
-	void displayDailyPlan(void);
-	void displayWeeklyPlan(void);
+	void displayDailyDietPlan(DietPlan &plan);
+	void displayWeeklyDietPlan(void);
+
+	void displayDailyExercizePlan(ExercizePlan &plan);
+	void displayWeeklyExercizePlan(void);
 
 	// PUT
 	void storeDailyPlan(void);
@@ -81,8 +84,6 @@ private:
 FitnessAppWrapper::FitnessAppWrapper() {
 	this->exercizeFile.open("exercizePlans.txt");
 	this->dietFile.open("dietPlans.txt");
-
-	cout << "there" << endl;
 }
 
 
@@ -110,12 +111,16 @@ void FitnessAppWrapper::runApp(void) {
 
 	this->loadWeeklyPlan(this->dietFile, this->weeklyDietPlan);
 	this->loadWeeklyPlan(this->exercizeFile, this->weeklyExercizePlan);
+	
+	this->displayWeeklyDietPlan();
+	this->displayWeeklyExercizePlan();
 
+
+	this->~FitnessAppWrapper();
 }
 
 void FitnessAppWrapper::loadDailyPlan(ifstream &fileStream, DietPlan &plan) {
-	//ifstream infile;
-	//infile.open("test.txt");
+
 	string line;
 	this->dietFile >> line;
 	plan.setName(line);
@@ -126,33 +131,23 @@ void FitnessAppWrapper::loadDailyPlan(ifstream &fileStream, DietPlan &plan) {
 	this->dietFile >> line;
 	plan.setDate(line);
 
-	/*cout << "Name: " << plan.getName() << endl;
-	cout << "Goal: " << plan.getCalorieGoal() << endl;
-	cout << "Date: " << plan.getDate() << endl;*/
-
 }
 
 void FitnessAppWrapper::loadWeeklyPlan(ifstream &fileStream, vector<DietPlan *> &weeklyPlan) {
-	int i = 0;
+
 	while (fileStream.eof() != 1) {
+		
 		DietPlan *dailyPlan = new DietPlan;
+		
 		this->loadDailyPlan(this->dietFile, *(dailyPlan));
 
 		this->weeklyDietPlan.push_back(dailyPlan);
 
-		//dailyPlan->~DietPlan();
-
-		i++;
-		// cout << "i: " << i << endl;
 	}
 
-	for (int i = 0; i < 7; ++i) {
-		cout << this->weeklyDietPlan[i]->getName() << "-->";
-	}
-	cout << endl;
 }
 
-void FitnessAppWrapper::loadDailyPlan(ifstream &fileStream, ExercizePlan &plan) {
+void FitnessAppWrapper::loadDailyPlan(ifstream &fileStream,  ExercizePlan &plan) {
 	string line;
 	this->exercizeFile >> line;
 	plan.setName(line);
@@ -163,29 +158,19 @@ void FitnessAppWrapper::loadDailyPlan(ifstream &fileStream, ExercizePlan &plan) 
 	this->exercizeFile >> line;
 	plan.setDate(line);
 
-	cout << "Name: " << plan.getName() << endl;
-	cout << "Goal: " << plan.getStepGoal() << endl;
-	cout << "Date: " << plan.getDate() << endl;
 }
 
 void FitnessAppWrapper::loadWeeklyPlan(ifstream &fileStream, vector<ExercizePlan *> &weeklyPlan) {
-	int i = 0;
+
 	while (fileStream.eof() != 1) {
+		
 		ExercizePlan *dailyPlan = new ExercizePlan;
+		
 		this->loadDailyPlan(this->dietFile, *(dailyPlan));
 
 		this->weeklyExercizePlan.push_back(dailyPlan);
 
-		//dailyPlan->~DietPlan();
-
-		i++;
-		cout << "i: " << i << endl;
 	}
-
-	for (int i = 0; i < 7; ++i) {
-		cout << this->weeklyExercizePlan[i]->getName() << "-->";
-	}
-	cout << endl;
 }
 
 void FitnessAppWrapper::displayMenu(void) {
@@ -198,11 +183,42 @@ void FitnessAppWrapper::closeFiles(void) {
 }
 
 // GET
-void FitnessAppWrapper::displayDailyPlan(void) {
+void FitnessAppWrapper::displayDailyDietPlan(DietPlan &plan) {
+	cout << "Name: " << plan.getName() << endl;
+	cout << "Goal: " << plan.getCalorieGoal() << " Max Calories" << endl;
+	cout << "Date: " << plan.getDate() << endl;
+}
+
+void FitnessAppWrapper::displayWeeklyDietPlan(void) {
+	cout << "===== Weekly Diet Plan: =====" << endl;
+	int weeklyDietPlanSize = this->weeklyDietPlan.size();
+
+	for (int i = 0; i < weeklyDietPlanSize; i++) {
+		cout << "----- Day: " << i + 1 << " -----" << endl;
+		displayDailyDietPlan(*(this->weeklyDietPlan[i]));
+		cout << "------------------" << endl << endl;
+	}
+	cout << "=============================" << endl;
 
 }
 
-void FitnessAppWrapper::displayWeeklyPlan(void) {
+void FitnessAppWrapper::displayDailyExercizePlan(ExercizePlan &plan) {
+	cout << "Name: " << plan.getName() << endl;
+	cout << "Goal: " << plan.getStepGoal() << " Steps" << endl;
+	cout << "Date: " << plan.getDate() << endl;
+}
+
+void FitnessAppWrapper::displayWeeklyExercizePlan(void) {
+	int weeklyExercizePlanSize = this->weeklyExercizePlan.size();
+
+	cout << "=== Weekly Exercize Plan: ===" << endl;
+
+	for (int i = 0; i < weeklyExercizePlanSize; i++) {
+		cout << "----- Day: " << i + 1 << " -----" << endl;
+		displayDailyExercizePlan(*(this->weeklyExercizePlan[i]));
+		cout << "------------------" << endl << endl;
+	}
+	cout << "=============================" << endl;
 
 }
 
