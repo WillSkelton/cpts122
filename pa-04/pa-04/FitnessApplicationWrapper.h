@@ -8,19 +8,16 @@ public:
 	// CTOR
 	FitnessAppWrapper();
 	
-	// CCTOR
-	
-
 	// DTOR
 	~FitnessAppWrapper();
 
 	// Utility
 	void runApp(void);
 	void loadDailyPlan(ifstream &ifileStream, DietPlan &plan);
-	void loadWeeklyPlan(ifstream &ifileStream, vector<DietPlan> &weeklyPlan);
+	void loadWeeklyPlan(ifstream &ifileStream, vector<DietPlan *> &weeklyPlan);
 
 	void loadDailyPlan(ifstream &ifileStream, ExercizePlan &plan);
-	void loadWeeklyPlan(ifstream &ifileStream, vector<ExercizePlan> &weeklyPlan);
+	void loadWeeklyPlan(ifstream &ifileStream, vector<ExercizePlan *> &weeklyPlan);
 
 	void displayMenu(void);
 
@@ -35,8 +32,8 @@ public:
 	void storeWeeklyPlan(void);
 	
 private:
-	vector<ExercizePlan> weeklyExercizePlan;
-	vector<DietPlan> weeklyDietPlan;
+	vector<ExercizePlan *> weeklyExercizePlan;
+	vector<DietPlan *> weeklyDietPlan;
 
 	ifstream exercizeFile;
 	ifstream dietFile;
@@ -99,7 +96,7 @@ FitnessAppWrapper::~FitnessAppWrapper() {
 void FitnessAppWrapper::runApp(void) {
 	DietPlan dietPlan;
 
-	loadDailyPlan(this->dietFile, dietPlan);
+	this->loadWeeklyPlan(this->dietFile, this->weeklyDietPlan);
 }
 
 void FitnessAppWrapper::loadDailyPlan(ifstream &fileStream, DietPlan &plan) {
@@ -121,15 +118,30 @@ void FitnessAppWrapper::loadDailyPlan(ifstream &fileStream, DietPlan &plan) {
 
 }
 
-void FitnessAppWrapper::loadWeeklyPlan(ifstream &fileStream, vector<DietPlan> &weeklyPlan) {
+void FitnessAppWrapper::loadWeeklyPlan(ifstream &fileStream, vector<DietPlan *> &weeklyPlan) {
+	int i = 0;
+	while (fileStream.eof() != 1) {
+		DietPlan *dailyPlan = new DietPlan;
+		this->loadDailyPlan(this->dietFile, *(dailyPlan));
 
+		this->weeklyDietPlan.push_back(dailyPlan);
+
+
+		i++;
+		cout << "i: " << i << endl;
+	}
+
+	for (int i = 0; i < 7; ++i) {
+		cout << this->weeklyDietPlan[i]->getName() << "-->";
+	}
+	cout << endl;
 }
 
 void FitnessAppWrapper::loadDailyPlan(ifstream &fileStream, ExercizePlan &plan) {
 
 }
 
-void FitnessAppWrapper::loadWeeklyPlan(ifstream &fileStream, vector<ExercizePlan> &weeklyPlan) {
+void FitnessAppWrapper::loadWeeklyPlan(ifstream &fileStream, vector<ExercizePlan *> &weeklyPlan) {
 
 }
 

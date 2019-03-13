@@ -8,7 +8,7 @@ public:
 	DietPlan(string name, int initialGoal);
 
 	// CCTOR
-	DietPlan(DietPlan &src);
+	DietPlan(const DietPlan &src);
 
 	// DTOR
 	~DietPlan();
@@ -38,7 +38,7 @@ DietPlan::DietPlan(string name, int initialGoal) {
 }
 
 // CCTOR
-DietPlan::DietPlan(DietPlan &src) {
+DietPlan::DietPlan(const DietPlan &src) {
 	this->name = src.name;
 	this->date = src.date;
 	this->calorieGoal = new int(*(src.calorieGoal));

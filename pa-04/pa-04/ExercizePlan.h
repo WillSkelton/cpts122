@@ -8,7 +8,7 @@ public:
 	ExercizePlan(string name, int initialGoal);
 
 	// CCTOR
-	ExercizePlan(ExercizePlan &src);
+	ExercizePlan(const ExercizePlan &src);
 
 	// DTOR
 	~ExercizePlan();
@@ -35,7 +35,7 @@ ExercizePlan::ExercizePlan(string name, int initialGoal){
 }
 
 // CCTOR
-ExercizePlan::ExercizePlan(ExercizePlan &src){
+ExercizePlan::ExercizePlan(const ExercizePlan &src){
 	this->date = src.date;
 	this->name = src.name;
 	this->stepGoal = new int(*(src.stepGoal));

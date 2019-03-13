@@ -19,7 +19,7 @@ public:
 	Plan();
 
 	// Cpy Ctors
-	Plan(Plan &src);
+	Plan(const Plan &src);
 
 	// Dtor
 	~Plan();
@@ -48,7 +48,7 @@ Plan::Plan() {
 	this->date = new string("1/1/2000");
 }
 
-Plan::Plan(Plan &src) {
+Plan::Plan(const Plan &src) {
 	this->name = new string(*(src.name));
 	this->date = new string(*(src.date));
 }
