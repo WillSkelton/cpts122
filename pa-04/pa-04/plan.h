@@ -13,6 +13,7 @@ using std::vector;
 using std::ifstream;
 using std::ostream;
 using std::istream;
+using std::to_string;
 
 class Plan {
 

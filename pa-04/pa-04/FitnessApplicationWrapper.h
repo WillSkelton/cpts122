@@ -35,8 +35,11 @@ public:
 	void storeWeeklyPlan(void);
 
 	// Operators
-	friend ostream & operator<< (ostream &lhs, DietPlan &rhs);
-	friend ostream & operator<< (ostream &lhs, ExercizePlan &rhs);
+	friend ostream & operator << (ostream &lhs, DietPlan &rhs);
+	friend ostream & operator << (ostream &lhs, ExercizePlan &rhs);
+
+	friend istream & operator >> (istream &lhs, DietPlan &rhs);
+	friend istream & operator >> (istream &lhs, ExercizePlan &rhs);
 	
 private:
 	vector<ExercizePlan *> weeklyExercizePlan;
@@ -124,17 +127,7 @@ void FitnessAppWrapper::runApp(void) {
 }
 
 void FitnessAppWrapper::loadDailyPlan(ifstream &fileStream, DietPlan &plan) {
-
-	string line;
-	this->dietFile >> line;
-	plan.setName(line);
-
-	this->dietFile >> line;
-	plan.setCalorieGoal(stoi(line));
-
-	this->dietFile >> line;
-	plan.setDate(line);
-
+	fileStream >> plan;
 }
 
 void FitnessAppWrapper::loadWeeklyPlan(ifstream &fileStream, vector<DietPlan *> &weeklyPlan) {
@@ -152,15 +145,7 @@ void FitnessAppWrapper::loadWeeklyPlan(ifstream &fileStream, vector<DietPlan *> 
 }
 
 void FitnessAppWrapper::loadDailyPlan(ifstream &fileStream,  ExercizePlan &plan) {
-	string line;
-	this->exercizeFile >> line;
-	plan.setName(line);
-
-	this->exercizeFile >> line;
-	plan.setStepGoal(stoi(line));
-
-	this->exercizeFile >> line;
-	plan.setDate(line);
+	fileStream >> plan;
 
 }
 
@@ -170,7 +155,7 @@ void FitnessAppWrapper::loadWeeklyPlan(ifstream &fileStream, vector<ExercizePlan
 		
 		ExercizePlan *dailyPlan = new ExercizePlan;
 		
-		this->loadDailyPlan(this->dietFile, *(dailyPlan));
+		this->loadDailyPlan(this->exercizeFile, *(dailyPlan));
 
 		this->weeklyExercizePlan.push_back(dailyPlan);
 
@@ -188,10 +173,6 @@ void FitnessAppWrapper::closeFiles(void) {
 
 // GET
 void FitnessAppWrapper::displayDailyDietPlan(DietPlan &plan) {
-	/*cout << "Name: " << plan.getName() << endl;
-	cout << "Goal: " << plan.getCalorieGoal() << " Max Calories" << endl;
-	cout << "Date: " << plan.getDate() << endl;*/
-
 	cout << plan;
 }
 
@@ -244,7 +225,7 @@ void FitnessAppWrapper::storeWeeklyPlan(void) {
 // Non-Member
 //// Operators
 //	- Insertion
-ostream & operator<< (ostream &lhs, DietPlan &rhs) {
+ostream & operator << (ostream &lhs, DietPlan &rhs) {
 	lhs << "Name: " << rhs.getName() << endl 
 		<< "Goal: " << rhs.getCalorieGoal() << " Max Calories" << endl
 		<< "Date: " << rhs.getDate() << endl;
@@ -252,7 +233,7 @@ ostream & operator<< (ostream &lhs, DietPlan &rhs) {
 	return lhs;
 }
 
-ostream & operator<< (ostream &lhs, ExercizePlan &rhs) {
+ostream & operator << (ostream &lhs, ExercizePlan &rhs) {
 	lhs << "Name: " << rhs.getName() << endl
 		<< "Goal: " << rhs.getStepGoal() << " Steps" << endl
 		<< "Date: " << rhs.getDate() << endl;
@@ -261,3 +242,32 @@ ostream & operator<< (ostream &lhs, ExercizePlan &rhs) {
 }
 
 //	- Extraction
+istream & operator >> (istream &lhs, DietPlan &rhs) {
+	string line;
+	
+	lhs >> line;
+	rhs.setName(line);
+
+	lhs >> line;
+	rhs.setCalorieGoal(stoi(line));
+
+	lhs >> line;
+	rhs.setDate(line);
+
+	return lhs;
+}
+
+istream & operator >> (istream &lhs, ExercizePlan &rhs) {
+	string line;
+
+	lhs >> line;
+	rhs.setName(line);
+
+	lhs >> line;
+	rhs.setStepGoal(stoi(line));
+
+	lhs >> line;
+	rhs.setDate(line);
+
+	return lhs;
+}
