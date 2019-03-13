@@ -33,6 +33,10 @@ public:
 	// PUT
 	void storeDailyPlan(void);
 	void storeWeeklyPlan(void);
+
+	// Operators
+	friend ostream & operator<< (ostream &lhs, DietPlan &rhs);
+	friend ostream & operator<< (ostream &lhs, ExercizePlan &rhs);
 	
 private:
 	vector<ExercizePlan *> weeklyExercizePlan;
@@ -184,9 +188,11 @@ void FitnessAppWrapper::closeFiles(void) {
 
 // GET
 void FitnessAppWrapper::displayDailyDietPlan(DietPlan &plan) {
-	cout << "Name: " << plan.getName() << endl;
+	/*cout << "Name: " << plan.getName() << endl;
 	cout << "Goal: " << plan.getCalorieGoal() << " Max Calories" << endl;
-	cout << "Date: " << plan.getDate() << endl;
+	cout << "Date: " << plan.getDate() << endl;*/
+
+	cout << plan;
 }
 
 void FitnessAppWrapper::displayWeeklyDietPlan(void) {
@@ -203,9 +209,12 @@ void FitnessAppWrapper::displayWeeklyDietPlan(void) {
 }
 
 void FitnessAppWrapper::displayDailyExercizePlan(ExercizePlan &plan) {
-	cout << "Name: " << plan.getName() << endl;
+	/*cout << "Name: " << plan.getName() << endl;
 	cout << "Goal: " << plan.getStepGoal() << " Steps" << endl;
-	cout << "Date: " << plan.getDate() << endl;
+	cout << "Date: " << plan.getDate() << endl;*/
+
+	cout << plan;
+
 }
 
 void FitnessAppWrapper::displayWeeklyExercizePlan(void) {
@@ -231,3 +240,24 @@ void FitnessAppWrapper::storeWeeklyPlan(void) {
 
 }
 
+
+// Non-Member
+//// Operators
+//	- Insertion
+ostream & operator<< (ostream &lhs, DietPlan &rhs) {
+	lhs << "Name: " << rhs.getName() << endl 
+		<< "Goal: " << rhs.getCalorieGoal() << " Max Calories" << endl
+		<< "Date: " << rhs.getDate() << endl;
+
+	return lhs;
+}
+
+ostream & operator<< (ostream &lhs, ExercizePlan &rhs) {
+	lhs << "Name: " << rhs.getName() << endl
+		<< "Goal: " << rhs.getStepGoal() << " Steps" << endl
+		<< "Date: " << rhs.getDate() << endl;
+
+	return lhs;
+}
+
+//	- Extraction

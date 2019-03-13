@@ -11,6 +11,8 @@ using std::endl;
 using std::array;
 using std::vector;
 using std::ifstream;
+using std::ostream;
+using std::istream;
 
 class Plan {
 
