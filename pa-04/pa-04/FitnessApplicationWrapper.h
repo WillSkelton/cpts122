@@ -88,6 +88,18 @@ FitnessAppWrapper::FitnessAppWrapper() {
 
 // DTOR
 FitnessAppWrapper::~FitnessAppWrapper() {
+	
+	int weeklyDietPlanSize = this->weeklyDietPlan.size();
+	int weeklyExercizePlanSize = this->weeklyExercizePlan.size();
+
+	for (int i = 0; i < weeklyDietPlanSize; i++) {
+		delete this->weeklyDietPlan[i];
+	}
+
+	for (int i = 0; i < weeklyExercizePlanSize; i++) {
+		delete this->weeklyExercizePlan[i];
+	}
+
 	this->closeFiles();
 
 }
@@ -97,6 +109,8 @@ void FitnessAppWrapper::runApp(void) {
 	DietPlan dietPlan;
 
 	this->loadWeeklyPlan(this->dietFile, this->weeklyDietPlan);
+	this->loadWeeklyPlan(this->exercizeFile, this->weeklyExercizePlan);
+
 }
 
 void FitnessAppWrapper::loadDailyPlan(ifstream &fileStream, DietPlan &plan) {
@@ -112,9 +126,9 @@ void FitnessAppWrapper::loadDailyPlan(ifstream &fileStream, DietPlan &plan) {
 	this->dietFile >> line;
 	plan.setDate(line);
 
-	cout << "Name: " << plan.getName() << endl;
+	/*cout << "Name: " << plan.getName() << endl;
 	cout << "Goal: " << plan.getCalorieGoal() << endl;
-	cout << "Date: " << plan.getDate() << endl;
+	cout << "Date: " << plan.getDate() << endl;*/
 
 }
 
@@ -126,9 +140,10 @@ void FitnessAppWrapper::loadWeeklyPlan(ifstream &fileStream, vector<DietPlan *> 
 
 		this->weeklyDietPlan.push_back(dailyPlan);
 
+		//dailyPlan->~DietPlan();
 
 		i++;
-		cout << "i: " << i << endl;
+		// cout << "i: " << i << endl;
 	}
 
 	for (int i = 0; i < 7; ++i) {
@@ -138,11 +153,39 @@ void FitnessAppWrapper::loadWeeklyPlan(ifstream &fileStream, vector<DietPlan *> 
 }
 
 void FitnessAppWrapper::loadDailyPlan(ifstream &fileStream, ExercizePlan &plan) {
+	string line;
+	this->exercizeFile >> line;
+	plan.setName(line);
 
+	this->exercizeFile >> line;
+	plan.setStepGoal(stoi(line));
+
+	this->exercizeFile >> line;
+	plan.setDate(line);
+
+	cout << "Name: " << plan.getName() << endl;
+	cout << "Goal: " << plan.getStepGoal() << endl;
+	cout << "Date: " << plan.getDate() << endl;
 }
 
 void FitnessAppWrapper::loadWeeklyPlan(ifstream &fileStream, vector<ExercizePlan *> &weeklyPlan) {
+	int i = 0;
+	while (fileStream.eof() != 1) {
+		ExercizePlan *dailyPlan = new ExercizePlan;
+		this->loadDailyPlan(this->dietFile, *(dailyPlan));
 
+		this->weeklyExercizePlan.push_back(dailyPlan);
+
+		//dailyPlan->~DietPlan();
+
+		i++;
+		cout << "i: " << i << endl;
+	}
+
+	for (int i = 0; i < 7; ++i) {
+		cout << this->weeklyExercizePlan[i]->getName() << "-->";
+	}
+	cout << endl;
 }
 
 void FitnessAppWrapper::displayMenu(void) {
