@@ -22,7 +22,9 @@ public:
 	void displayMenu(void);
 
 	void closeFiles(void);
-	void openFiles(void);
+	void openFilesForReading(void);
+	void openFilesForWriting(void);
+
 
 	// GET
 	void displayDailyDietPlan(DietPlan &plan);
@@ -95,7 +97,7 @@ private:
 
 // CTOR
 FitnessAppWrapper::FitnessAppWrapper() {
-	this->openFiles();
+	this->openFilesForReading();
 }
 
 // DTOR
@@ -118,35 +120,34 @@ FitnessAppWrapper::~FitnessAppWrapper() {
 
 // Utility
 void FitnessAppWrapper::runApp(void) {
-	DietPlan dietPlan;
-
+	// DietPlan dietPlan;
+	//openFilesForReading();
 	this->loadWeeklyPlan(this->dietFile, this->weeklyDietPlan);
 	this->loadWeeklyPlan(this->exercizeFile, this->weeklyExercizePlan);
-
-	this->closeFiles();
 
 	this->displayWeeklyDietPlan();
 	this->displayWeeklyExercizePlan();
 
-
 	this->storeWeeklyDietPlan();
 
+
+	//this->storeWeeklyExercizePlan();
+
 	this->closeFiles();
-
-	/*this->storeWeeklyExercizePlan();
-
-	this->closeFiles();*/
 
 	//this->~FitnessAppWrapper();
 }
 
-// Load Daily Diet Plan
+// GET
+//// Load Daily Diet Plan
 void FitnessAppWrapper::loadDailyPlan(fstream &fileStream, DietPlan &plan) {
 	fileStream >> plan;
 }
 
-// Load Weekly Diet Plan
+//// Load Weekly Diet Plan
 void FitnessAppWrapper::loadWeeklyPlan(fstream &fileStream, vector<DietPlan *> &weeklyPlan) {
+
+	this->openFilesForReading();
 
 	while (fileStream.eof() != 1) {
 		
@@ -157,19 +158,21 @@ void FitnessAppWrapper::loadWeeklyPlan(fstream &fileStream, vector<DietPlan *> &
 		this->weeklyDietPlan.push_back(dailyPlan);
 
 	}
+	
+	this->closeFiles();
 
 }
 
-// Load Daily Exercize Plan
+//// Load Daily Exercize Plan
 void FitnessAppWrapper::loadDailyPlan(fstream &fileStream,  ExercizePlan &plan) {
 	fileStream >> plan;
 
 }
 
-// Load Weekly Exercize Plan 
+//// Load Weekly Exercize Plan 
 void FitnessAppWrapper::loadWeeklyPlan(fstream &fileStream, vector<ExercizePlan *> &weeklyPlan) {
 
-
+	this->openFilesForReading();
 	while (fileStream.eof() != 1) {
 		
 		ExercizePlan *dailyPlan = new ExercizePlan;
@@ -179,15 +182,50 @@ void FitnessAppWrapper::loadWeeklyPlan(fstream &fileStream, vector<ExercizePlan 
 		this->weeklyExercizePlan.push_back(dailyPlan);
 
 	}
+
+	this->closeFiles();
 }
+
 
 void FitnessAppWrapper::displayMenu(void) {
 
 }
 
-void FitnessAppWrapper::openFiles(void){
-	this->exercizeFile.open("exercizePlans.txt", ios::in);
-	this->dietFile.open("dietPlans.txt", ios::in);
+void FitnessAppWrapper::openFilesForReading(void){
+	if (this->exercizeFile.is_open() == false) {
+		this->exercizeFile.open("exercizePlans.txt", ios::in);
+	}
+	else {
+		this->exercizeFile.close();
+		this->exercizeFile.open("exercizePlans.txt", ios::in);
+	}
+
+	if (this->dietFile.is_open() == false) {
+		this->dietFile.open("dietPlans.txt", ios::in);
+	}
+	else {
+		this->dietFile.close();
+		this->dietFile.open("dietPlans.txt", ios::in);
+
+	}
+}
+
+void FitnessAppWrapper::openFilesForWriting(void) {
+	if (this->exercizeFile.is_open() == false) {
+		this->exercizeFile.open("test.txt", ios::out);
+	}
+	else {
+		this->exercizeFile.close();
+		this->exercizeFile.open("test.txt", ios::out);
+	}
+
+	if (this->dietFile.is_open() == false) {
+		this->dietFile.open("test.txt", ios::out);
+	}
+	else {
+		this->dietFile.close();
+		this->dietFile.open("test.txt", ios::out);
+	}
 }
 
 void FitnessAppWrapper::closeFiles(void) {
@@ -195,7 +233,7 @@ void FitnessAppWrapper::closeFiles(void) {
 	this->dietFile.close();
 }
 
-// GET
+
 void FitnessAppWrapper::displayDailyDietPlan(DietPlan &plan) {
 	cout << "Name: " << plan.getName() << endl
 		<< "Goal: " << plan.getCalorieGoal() << " Max Calories" << endl
@@ -248,13 +286,18 @@ void FitnessAppWrapper::storeDailyDietPlan(DietPlan &plan) {
 
 void FitnessAppWrapper::storeWeeklyDietPlan(void) {
 
-	this->dietFile.open("test.txt", ios::out);
+	this->openFilesForWriting();
 
 	int weeklyDietPlanSize = this->weeklyDietPlan.size();
 
 	for (int i = 0; i < weeklyDietPlanSize; i++) {
 		this->storeDailyDietPlan(*(this->weeklyDietPlan[i]));
+		
+		if (i < weeklyDietPlanSize - 1) {
+			this->dietFile << endl << endl;
+		}
 	}
+
 
 	this->closeFiles();
 
@@ -263,16 +306,21 @@ void FitnessAppWrapper::storeWeeklyDietPlan(void) {
 
 void FitnessAppWrapper::storeDailyExercizePlan(ExercizePlan &plan) {
 	this->exercizeFile << plan;
+
 }
 
 void FitnessAppWrapper::storeWeeklyExercizePlan(void) {
 	
-	this->exercizeFile.open("test.txt", ios::out);
+	this->openFilesForWriting();
 
 	int weeklyExercizePlanSize = this->weeklyExercizePlan.size();
 
 	for (int i = 0; i < weeklyExercizePlanSize; i++) {
 		this->storeDailyExercizePlan(*(weeklyExercizePlan[i]));
+		
+		if (i < weeklyExercizePlanSize - 1) {
+			this->exercizeFile << endl << endl;
+		}
 	}
 
 
@@ -287,16 +335,17 @@ ostream & operator << (ostream &lhs, DietPlan &rhs) {
 	
 	lhs << rhs.getName() << endl
 		<< to_string(rhs.getCalorieGoal()) << endl
-		<< rhs.getDate() << endl
-		<< endl;
+		<< rhs.getDate();// << endl;
+		//<< endl;
+
 	return lhs;
 }
 
 ostream & operator << (ostream &lhs, ExercizePlan &rhs) {
 	lhs << rhs.getName() << endl
 		<< to_string(rhs.getStepGoal()) << endl
-		<< rhs.getDate() << endl
-		<< endl;
+		<< rhs.getDate();// << endl;
+		//<< endl;
 
 	return lhs;
 }
