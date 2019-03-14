@@ -51,23 +51,25 @@ DietPlan::~DietPlan() {
 	delete this->calorieGoal;
 }
 
-// Get
+// Getters
 int DietPlan::getCalorieGoal(void) {
 	return *(this->calorieGoal);
 }
 
-// PUT
+// Setters
 void DietPlan::setCalorieGoal(int goalValue) {
 	delete this->calorieGoal;
 
 	this->calorieGoal = new int(goalValue);
 }
 
+// Edit goal
 void DietPlan::editGoal(void) {
 	string name;
 	int goal;
 	string date;
 
+	// Prompts user for new information and changes it accordingly
 	cout << "Please enter a new name for this goal: ";
 	cin >> name;
 	cout << endl << "Please enter a new calorie goal for this goal: ";

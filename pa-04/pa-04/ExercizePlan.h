@@ -47,12 +47,12 @@ ExercizePlan::~ExercizePlan(){
 	delete this->stepGoal;
 }
 
-// Get
+// Getter
 int ExercizePlan::getStepGoal(void){
 	return *(this->stepGoal);
 }
 
-// PUT
+// Setter
 void ExercizePlan::setStepGoal(int goalValue){
 	delete this->stepGoal;
 	
@@ -60,11 +60,13 @@ void ExercizePlan::setStepGoal(int goalValue){
 
 }
 
+// Edit Goal
 void ExercizePlan::editGoal(void) {
 	string name;
 	int goal;
 	string date;
 
+	// Prompts user for new information and changes it accordingly
 	cout << "Please enter a new name for this goal: ";
 	cin >> name;
 	cout << endl << "Please enter a new calorie goal for this goal: ";

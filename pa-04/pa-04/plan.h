@@ -70,7 +70,6 @@ Plan::~Plan() {
 string Plan::getName(void) {
 	return *(this->name);
 }
-
 string Plan::getDate(void) {
 
 	return *(this->date);
