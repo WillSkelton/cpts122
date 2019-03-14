@@ -142,6 +142,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="DietPlan.h" />
+    <ClInclude Include="ExercizePlan.h" />
+    <ClInclude Include="FitnessApplicationWrapper.h" />
+    <ClInclude Include="plan.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="plan.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="dietPlans.txt" />
+    <Text Include="exercizePlans.txt" />
+    <Text Include="test.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

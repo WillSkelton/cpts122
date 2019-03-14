@@ -64,13 +64,13 @@ You must read in each of the daily plans by applying an overloaded stream extrac
 Observation: Inserting at the end of an array and vector requires (amortized) constant time. Inserting at the end of a linked list (with only a head pointer) requires linear time. Consider this idea as you develop your solution!
 
 The class FitnessAppWrapper is used to “wrap” the application. This class should contain two lists (must be an array, vector, or linked list) of weekly (7 days) plans: one diet and one exercise weekly plan. It must also contain two fstream objects (input/output file streams): one for each file. It must define the following member functions (some prototypes are given to you, but not all!) void runApp (void): starts the main application.
-- **void loadDailyPlan (fstream &fileStream, DietPlan &plan):** must define two of these functions; one for a DietPlan and one for an ExercisePlan. This function reads one record from the given stream. These will be considered overloaded functions! Precondition: file is already open!
-- **void loadWeeklyPlan (fstream &fileStream, DietPlan weeklyPlan[ ]):** must define two of these functions; one for a DietPlan and one for an ExercisePlan. This function must read in all seven daily plans from the given stream. Note: the array parameter would change if using a vector or linked list! This function should call loadDailyPlan () directly. Precondition: file is already open!
-- **displayDailyPlan ():** writes a daily plan to the screen. You must apply the overloaded stream insertion operator here! Note: you must determine the appropriate parameters and return type. Once again you must define two of these!
-- **displayWeeklyPlan ():** writes a weekly plan to the screen. This function must call displayDailyPlan (). Note: you must determine the appropriate parameters and return type. Once again you must define two of these!
-- **storeDailyPlan ():** writes a daily plan to a file. You must apply the overloaded stream insertion operator here! Note: you must determine the appropriate parameters and return type. Once again you must define two of these!
-- **storeWeeklyPlan ():** writes a weekly plan to a file. This function must call storeDailyPlan (). You must apply the overloaded stream insertion operator here! Note: you must determine the appropriate parameters and return type. Once again you must define two of these!
-- **displayMenu ():** displays nine menu options. These include:
+- [x] **void loadDailyPlan (fstream &fileStream, DietPlan &plan):** must define two of these functions; one for a DietPlan and one for an ExercisePlan. This function reads one record from the given stream. These will be considered overloaded functions! Precondition: file is already open!
+- [x] **void loadWeeklyPlan (fstream &fileStream, DietPlan weeklyPlan[ ]):** must define two of these functions; one for a DietPlan and one for an ExercisePlan. This function must read in all seven daily plans from the given stream. Note: the array parameter would change if using a vector or linked list! This function should call loadDailyPlan () directly. Precondition: file is already open!
+- [x] **displayDailyPlan ():** writes a daily plan to the screen. You must apply the overloaded stream insertion operator here! Note: you must determine the appropriate parameters and return type. Once again you must define two of these!
+- [x] **displayWeeklyPlan ():** writes a weekly plan to the screen. This function must call displayDailyPlan (). Note: you must determine the appropriate parameters and return type. Once again you must define two of these!
+- [x] **storeDailyPlan ():** writes a daily plan to a file. You must apply the overloaded stream insertion operator here! Note: you must determine the appropriate parameters and return type. Once again you must define two of these!
+- [x] **storeWeeklyPlan ():** writes a weekly plan to a file. This function must call storeDailyPlan (). You must apply the overloaded stream insertion operator here! Note: you must determine the appropriate parameters and return type. Once again you must define two of these!
+- [ ] **displayMenu ():** displays nine menu options. These include:
   1. Load weekly diet plan from file.
   2. Load weekly exercise plan from file.
   3. Store weekly diet plan to file.
@@ -94,38 +94,38 @@ Your project must build properly. The most points an assignment can receive if i
 
 ## V. Grading Guidelines:
 This assignment is worth 100 points. Your assignment will be evaluated based on a successful compilation and adherence to the program requirements. We will grade according to the following criteria:
-- [ ] 5 pts – Appropriate top-down design, style, and commenting according to class standards
+- [x] 5 pts – Appropriate top-down design, style, and commenting according to class standards
 - [ ] 18 pts – Appropriate design and implementation of Class DietPlan (including member functions and data members)
 
-  - [ ] 3 pts – 1 pt/each for declaring goal calories, plan name, and date
-  - [ ] 2 pts – declaring and defining a constructor
+  - [x] 3 pts – 1 pt/each for declaring goal calories, plan name, and date
+  - [x] 2 pts – declaring and defining a constructor
   - [ ] 2 pts – declaring and defining a copy constructor
-  - [ ] 1 pt – declaring and defining a destructor
-  - [ ] 4 pts – declaring and defining setters/getters
+  - [x] 1 pt – declaring and defining a destructor
+  - [x] 4 pts – declaring and defining setters/getters
   - [ ] 4 pts – declaring and defining an editGoal function
   - [ ] 2 pts – others?
 
 - [ ] 18 pts – Appropriate design and implementation of Class ExercisePlan (including member functions and data members)
-  - [ ] 3 pts – 1 pt/each for declaring goal steps, plan name, and date
-  - [ ] 2 pts – declaring and defining a constructor
-  - [ ] 2 pts – declaring and defining a copy constructor
-  - [ ] 1 pt – declaring and defining a destructor
-  - [ ] 4 pts – declaring and defining setters/getters
+  - [x] 3 pts – 1 pt/each for declaring goal steps, plan name, and date
+  - [x] 2 pts – declaring and defining a constructor
+  - [x] 2 pts – declaring and defining a copy constructor
+  - [x] 1 pt – declaring and defining a destructor
+  - [x] 4 pts – declaring and defining setters/getters
   - [ ] 4 pts – declaring and defining an editGoal function
   - [ ] 2 pts – others?
 
 - [ ] 47 pts – Appropriate implementation of Class FitnessAppWrapper (including menu options, etc.)
-  - [ ] 8 pts – 2 pts/each for declaring a list of diet plans, a list of exercise plans, a file stream associated with “dietPlans.txt”, and a file stream associated with “exercisePlans.txt”
-  - [ ] 4 pts – declaring and defining runApp function
-  - [ ] 4 pts – 2 pts/each for declaring and defining loadDailyPlan functions
-  - [ ] 4 pts – 2 pts/each for declaring and defining loadWeeklyPlan functions
-  - [ ] 4 pts – 2 pts/each for declaring and defining displayDailyPlan functions
-  - [ ] 4 pts – 2 pts/each for declaring and defining displayWeeklyPlan functions
-  - [ ] 4 pts – 2 pts/each for declaring and defining storeDailyPlan functions
-  - [ ] 4 pts – 2 pts/each for declaring and defining storeWeeklyPlan functions
+  - [x] 8 pts – 2 pts/each for declaring a list of diet plans, a list of exercise plans, a file stream associated with “dietPlans.txt”, and a file stream associated with “exercisePlans.txt”
+  - [x] 4 pts – declaring and defining runApp function
+  - [x] 4 pts – 2 pts/each for declaring and defining loadDailyPlan functions
+  - [x] 4 pts – 2 pts/each for declaring and defining loadWeeklyPlan functions
+  - [x] 4 pts – 2 pts/each for declaring and defining displayDailyPlan functions
+  - [x] 4 pts – 2 pts/each for declaring and defining displayWeeklyPlan functions
+  - [x] 4 pts – 2 pts/each for declaring and defining storeDailyPlan functions
+  - [x] 4 pts – 2 pts/each for declaring and defining storeWeeklyPlan functions
   - [ ] 2 pts – declaring and defining displayMenu function
-  - [ ] 4 pts – opening and closing the files
+  - [x] 4 pts – opening and closing the files
   - [ ] 5 pts – others?
   
-- [ ] 12 pts – 2 pts/each for the nonmember overloaded stream extraction and stream insertion operators (4 total stream insertion operators, 2 total stream extraction operators)
+- [x] 12 pts – 2 pts/each for the nonmember overloaded stream extraction and stream insertion operators (4 total stream insertion operators, 2 total stream extraction operators)
 - [ ] BONUS: Up to 10 pts – Linked list implementation using ListNode and List classes
