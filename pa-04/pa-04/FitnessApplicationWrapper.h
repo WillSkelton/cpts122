@@ -23,7 +23,7 @@ public:
 
 	void closeFiles(void);
 	void openFilesForReading(void);
-	void openFilesForWriting(void);
+	void openFilesForWriting(int whichFile);
 
 
 	// GET
@@ -233,28 +233,64 @@ void FitnessAppWrapper::openFilesForReading(void) {
 }
 
 // Open for Writing
-void FitnessAppWrapper::openFilesForWriting(void) {
-	if (this->exercizeFile.is_open() == false) {
-		// this->exercizeFile.open("exercize-test.txt", ios::out);
-		this->exercizeFile.open("exercizePlans.txt", ios::out);
-	}
-	else {
-		this->exercizeFile.close();
-		// this->exercizeFile.open("exercize-test.txt", ios::out);
-		this->exercizeFile.open("exercizePlans.txt", ios::out);
+void FitnessAppWrapper::openFilesForWriting(int whichFile) {
+	switch (whichFile) {
+	
+	// Just open Diet File
+	case 1:
+		if (this->dietFile.is_open() == false) {
+			// this->dietFile.open("diet-test.txt", ios::out);
+			this->dietFile.open("dietPlans.txt", ios::out);
 
-	}
+		}
+		else {
+			this->dietFile.close();
+			// this->dietFile.open("diet-test.txt", ios::out);
+			this->dietFile.open("dietPlans.txt", ios::out);
 
-	if (this->dietFile.is_open() == false) {
-		// this->dietFile.open("diet-test.txt", ios::out);
-		this->dietFile.open("dietPlans.txt", ios::out);
+		}
+		break;
 
-	}
-	else {
-		this->dietFile.close();
-		// this->dietFile.open("diet-test.txt", ios::out);
-		this->dietFile.open("dietPlans.txt", ios::out);
+	// Just open Exercize File
+	case 2:
+		if (this->exercizeFile.is_open() == false) {
+			// this->exercizeFile.open("exercize-test.txt", ios::out);
+			this->exercizeFile.open("exercizePlans.txt", ios::out);
+		}
+		else {
+			this->exercizeFile.close();
+			// this->exercizeFile.open("exercize-test.txt", ios::out);
+			this->exercizeFile.open("exercizePlans.txt", ios::out);
 
+		}
+		break;
+
+	// Open Both
+	case 3:
+		if (this->exercizeFile.is_open() == false) {
+			// this->exercizeFile.open("exercize-test.txt", ios::out);
+			this->exercizeFile.open("exercizePlans.txt", ios::out);
+		}
+		else {
+			this->exercizeFile.close();
+			// this->exercizeFile.open("exercize-test.txt", ios::out);
+			this->exercizeFile.open("exercizePlans.txt", ios::out);
+
+		}
+
+
+		if (this->dietFile.is_open() == false) {
+			// this->dietFile.open("diet-test.txt", ios::out);
+			this->dietFile.open("dietPlans.txt", ios::out);
+
+		}
+		else {
+			this->dietFile.close();
+			// this->dietFile.open("diet-test.txt", ios::out);
+			this->dietFile.open("dietPlans.txt", ios::out);
+
+		}
+		break;
 	}
 }
 
@@ -377,7 +413,7 @@ void FitnessAppWrapper::storeDailyDietPlan(DietPlan &plan) {
 // Weekly Diet
 void FitnessAppWrapper::storeWeeklyDietPlan(void) {
 
-	this->openFilesForWriting();
+	this->openFilesForWriting(1);
 
 	int weeklyDietPlanSize = this->weeklyDietPlan.size();
 
@@ -404,7 +440,7 @@ void FitnessAppWrapper::storeDailyExercizePlan(ExercizePlan &plan) {
 // Weekly Exercize
 void FitnessAppWrapper::storeWeeklyExercizePlan(void) {
 	
-	this->openFilesForWriting();
+	this->openFilesForWriting(2);
 
 	int weeklyExercizePlanSize = this->weeklyExercizePlan.size();
 
