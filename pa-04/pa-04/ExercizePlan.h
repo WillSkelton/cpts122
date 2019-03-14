@@ -18,6 +18,7 @@ public:
 
 	// PUT
 	void setStepGoal(int goalValue);
+	void editGoal(void);
 
 protected:
 	int * stepGoal;
@@ -57,4 +58,22 @@ void ExercizePlan::setStepGoal(int goalValue){
 	
 	this->stepGoal = new int(goalValue);
 
+}
+
+void ExercizePlan::editGoal(void) {
+	string name;
+	int goal;
+	string date;
+
+	cout << "Please enter a new name for this goal: ";
+	cin >> name;
+	cout << endl << "Please enter a new calorie goal for this goal: ";
+	cin >> goal;
+	cout << endl << "Please enter a new date for this goal: ";
+	cin >> date;
+	cout << endl;
+
+	this->setName(name);
+	this->setStepGoal(goal);
+	this->setDate(date);
 }

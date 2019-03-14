@@ -19,6 +19,8 @@ public:
 	// PUT
 	void setCalorieGoal(int goalValue);
 
+	void editGoal(void);
+
 
 protected:
 	int * calorieGoal;
@@ -59,4 +61,22 @@ void DietPlan::setCalorieGoal(int goalValue) {
 	delete this->calorieGoal;
 
 	this->calorieGoal = new int(goalValue);
+}
+
+void DietPlan::editGoal(void) {
+	string name;
+	int goal;
+	string date;
+
+	cout << "Please enter a new name for this goal: ";
+	cin >> name;
+	cout << endl << "Please enter a new calorie goal for this goal: ";
+	cin >> goal;
+	cout << endl << "Please enter a new date for this goal: ";
+	cin >> date;
+	cout << endl;
+
+	this->setName(name);
+	this->setCalorieGoal(goal);
+	this->setDate(date);
 }

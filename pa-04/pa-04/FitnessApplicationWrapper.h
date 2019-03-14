@@ -42,6 +42,11 @@ public:
 
 	void FitnessAppWrapper::storeWeeklyExercizePlan(void);
 
+	// Edit
+	void FitnessAppWrapper::editDailyDietPlan(void);
+
+	void FitnessAppWrapper::editDailyExercizePlan(void);
+
 	// Operators
 	friend ostream & operator << (ostream &lhs, DietPlan &rhs);
 	friend ostream & operator << (ostream &lhs, ExercizePlan &rhs);
@@ -118,7 +123,10 @@ FitnessAppWrapper::~FitnessAppWrapper() {
 
 }
 
-// Utility
+
+
+//// Utility
+// Run App
 void FitnessAppWrapper::runApp(void) {
 	int choice = 0;
 	do {
@@ -152,6 +160,7 @@ void FitnessAppWrapper::runApp(void) {
 
 		case 7:
 			// Edit Diet Plan
+			this->editDailyDietPlan();
 			break;
 
 		case 8:
@@ -170,72 +179,13 @@ void FitnessAppWrapper::runApp(void) {
 
 
 	} while (choice != 9);
-	/*this->loadWeeklyPlan(this->dietFile, this->weeklyDietPlan);
 	
-	this->loadWeeklyPlan(this->exercizeFile, this->weeklyExercizePlan);
-
-	this->displayWeeklyDietPlan();
-
-	this->displayWeeklyExercizePlan();
-
-	this->storeWeeklyDietPlan();
-
-	this->storeWeeklyExercizePlan();*/
-
 	this->closeFiles();
 
 	//this->~FitnessAppWrapper();
 }
 
-// GET
-//// Load Daily Diet Plan
-void FitnessAppWrapper::loadDailyPlan(fstream &fileStream, DietPlan &plan) {
-	fileStream >> plan;
-}
-
-//// Load Weekly Diet Plan
-void FitnessAppWrapper::loadWeeklyPlan(fstream &fileStream, vector<DietPlan *> &weeklyPlan) {
-
-	this->openFilesForReading();
-
-	while (fileStream.eof() != 1) {
-		
-		DietPlan *dailyPlan = new DietPlan;
-		
-		this->loadDailyPlan(this->dietFile, *(dailyPlan));
-
-		this->weeklyDietPlan.push_back(dailyPlan);
-
-	}
-	
-	this->closeFiles();
-
-}
-
-//// Load Daily Exercize Plan
-void FitnessAppWrapper::loadDailyPlan(fstream &fileStream,  ExercizePlan &plan) {
-	fileStream >> plan;
-
-}
-
-//// Load Weekly Exercize Plan 
-void FitnessAppWrapper::loadWeeklyPlan(fstream &fileStream, vector<ExercizePlan *> &weeklyPlan) {
-
-	this->openFilesForReading();
-	while (fileStream.eof() != 1) {
-		
-		ExercizePlan *dailyPlan = new ExercizePlan;
-		
-		this->loadDailyPlan(this->exercizeFile, *(dailyPlan));
-
-		this->weeklyExercizePlan.push_back(dailyPlan);
-
-	}
-
-	this->closeFiles();
-}
-
-
+// Menu
 int FitnessAppWrapper::displayMenu(void) {
 	int choice = 0;
 
@@ -256,13 +206,14 @@ int FitnessAppWrapper::displayMenu(void) {
 	} while (choice < 1 || choice > 9);
 
 
-	
-	cout << choice << endl; 
+
+	cout << choice << endl;
 
 	return choice;
 }
 
-void FitnessAppWrapper::openFilesForReading(void){
+// Open For Reading
+void FitnessAppWrapper::openFilesForReading(void) {
 	if (this->exercizeFile.is_open() == false) {
 		this->exercizeFile.open("exercizePlans.txt", ios::in);
 	}
@@ -281,36 +232,99 @@ void FitnessAppWrapper::openFilesForReading(void){
 	}
 }
 
+// Open for Writing
 void FitnessAppWrapper::openFilesForWriting(void) {
 	if (this->exercizeFile.is_open() == false) {
-		this->exercizeFile.open("exercize-test.txt", ios::out);
+		// this->exercizeFile.open("exercize-test.txt", ios::out);
+		this->exercizeFile.open("exercizePlans.txt", ios::out);
 	}
 	else {
 		this->exercizeFile.close();
-		this->exercizeFile.open("exercize-test.txt", ios::out);
+		// this->exercizeFile.open("exercize-test.txt", ios::out);
+		this->exercizeFile.open("exercizePlans.txt", ios::out);
+
 	}
 
 	if (this->dietFile.is_open() == false) {
-		this->dietFile.open("diet-test.txt", ios::out);
+		// this->dietFile.open("diet-test.txt", ios::out);
+		this->dietFile.open("dietPlans.txt", ios::out);
+
 	}
 	else {
 		this->dietFile.close();
-		this->dietFile.open("diet-test.txt", ios::out);
+		// this->dietFile.open("diet-test.txt", ios::out);
+		this->dietFile.open("dietPlans.txt", ios::out);
+
 	}
 }
 
+// Close Files
 void FitnessAppWrapper::closeFiles(void) {
 	this->exercizeFile.close();
 	this->dietFile.close();
 }
 
 
+
+//// Load
+// Load Daily Diet Plan
+void FitnessAppWrapper::loadDailyPlan(fstream &fileStream, DietPlan &plan) {
+	fileStream >> plan;
+}
+
+// Load Weekly Diet Plan
+void FitnessAppWrapper::loadWeeklyPlan(fstream &fileStream, vector<DietPlan *> &weeklyPlan) {
+
+	this->openFilesForReading();
+
+	while (fileStream.eof() != 1) {
+		
+		DietPlan *dailyPlan = new DietPlan;
+		
+		this->loadDailyPlan(this->dietFile, *(dailyPlan));
+
+		this->weeklyDietPlan.push_back(dailyPlan);
+
+	}
+	
+	this->closeFiles();
+
+}
+
+// Load Daily Exercize Plan
+void FitnessAppWrapper::loadDailyPlan(fstream &fileStream,  ExercizePlan &plan) {
+	fileStream >> plan;
+
+}
+
+// Load Weekly Exercize Plan 
+void FitnessAppWrapper::loadWeeklyPlan(fstream &fileStream, vector<ExercizePlan *> &weeklyPlan) {
+
+	this->openFilesForReading();
+	while (fileStream.eof() != 1) {
+		
+		ExercizePlan *dailyPlan = new ExercizePlan;
+		
+		this->loadDailyPlan(this->exercizeFile, *(dailyPlan));
+
+		this->weeklyExercizePlan.push_back(dailyPlan);
+
+	}
+
+	this->closeFiles();
+}
+
+
+
+//// Display
+// Daily Diet 
 void FitnessAppWrapper::displayDailyDietPlan(DietPlan &plan) {
 	cout << "Name: " << plan.getName() << endl
 		<< "Goal: " << plan.getCalorieGoal() << " Max Calories" << endl
 		<< "Date: " << plan.getDate() << endl;
 }
 
+// Weekly Diet
 void FitnessAppWrapper::displayWeeklyDietPlan(void) {
 	cout << "===== Weekly Diet Plan: =====" << endl;
 	int weeklyDietPlanSize = this->weeklyDietPlan.size();
@@ -324,6 +338,7 @@ void FitnessAppWrapper::displayWeeklyDietPlan(void) {
 
 }
 
+// Daily Exercize
 void FitnessAppWrapper::displayDailyExercizePlan(ExercizePlan &plan) {
 	cout << "Name: " << plan.getName() << endl
 		<< "Goal: " << plan.getStepGoal() << " Steps" << endl
@@ -331,6 +346,7 @@ void FitnessAppWrapper::displayDailyExercizePlan(ExercizePlan &plan) {
 
 }
 
+// Weekly Exercize
 void FitnessAppWrapper::displayWeeklyExercizePlan(void) {
 	int weeklyExercizePlanSize = this->weeklyExercizePlan.size();
 
@@ -345,7 +361,10 @@ void FitnessAppWrapper::displayWeeklyExercizePlan(void) {
 
 }
 
-// PUT
+
+
+//// Store
+// Daily Diet 
 void FitnessAppWrapper::storeDailyDietPlan(DietPlan &plan) {
 	
 	/*this->dietFile << plan.getName() << endl
@@ -355,6 +374,7 @@ void FitnessAppWrapper::storeDailyDietPlan(DietPlan &plan) {
 	this->dietFile << plan;
 }
 
+// Weekly Diet
 void FitnessAppWrapper::storeWeeklyDietPlan(void) {
 
 	this->openFilesForWriting();
@@ -375,11 +395,13 @@ void FitnessAppWrapper::storeWeeklyDietPlan(void) {
 
 }
 
+// Daily Exercize
 void FitnessAppWrapper::storeDailyExercizePlan(ExercizePlan &plan) {
 	this->exercizeFile << plan;
 
 }
 
+// Weekly Exercize
 void FitnessAppWrapper::storeWeeklyExercizePlan(void) {
 	
 	this->openFilesForWriting();
@@ -399,8 +421,65 @@ void FitnessAppWrapper::storeWeeklyExercizePlan(void) {
 }
 
 
-// Non-Member
-// Operators
+
+//// Edit
+void FitnessAppWrapper::editDailyDietPlan(void) {
+	int choice = 0;
+
+	do {
+		system("cls");
+		//       V Here V
+		this->displayWeeklyDietPlan();
+
+		cout << "Please enter a plan number:" << endl
+			<< ">>> ";
+		cin >> choice;
+
+	} while (choice < 1 || choice > 7);
+
+
+	//                 V Here V
+	cout << this->weeklyDietPlan[choice - 1]->getName() << endl;
+	
+	//        V Here V
+	this->weeklyDietPlan[choice - 1]->editGoal();
+	
+	//       V Here V
+	this->displayWeeklyDietPlan();
+	system("pause");
+
+}
+
+void FitnessAppWrapper::editDailyExercizePlan(void) {
+	int choice = 0;
+
+	do {
+		system("cls");
+		//       V Here V
+		this->displayWeeklyExercizePlan();
+
+		cout << "Please enter a plan number:" << endl
+			<< ">>> ";
+		cin >> choice;
+
+	} while (choice < 1 || choice > 7);
+
+
+	//                 V Here V
+	cout << this->weeklyExercizePlan[choice - 1]->getName() << endl;
+
+	//        V Here V
+	this->weeklyExercizePlan[choice - 1]->editGoal();
+
+	//       V Here V
+	this->displayWeeklyExercizePlan();
+	system("pause");
+}
+
+
+
+
+//// Operators
 //	- Insertion
 ostream & operator << (ostream &lhs, DietPlan &rhs) {
 	
