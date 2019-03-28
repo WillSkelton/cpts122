@@ -142,6 +142,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Data.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="Queue.cpp" />
+    <ClCompile Include="QueueNode.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Data.h" />
+    <ClInclude Include="Queue.h" />
+    <ClInclude Include="QueueNode.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="assignment.md" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

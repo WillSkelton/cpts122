@@ -4,7 +4,7 @@ class QueueNode {
 public:
 	// CTORS
 	// QueueNode();
-	QueueNode(Data newData);
+	QueueNode(Data &newData);
 	QueueNode(int customerNumber, int serviceTime, int totalTime);
 
 	// DTOR
@@ -13,6 +13,10 @@ public:
 	// Getters
 	Data * getData(void);
 	QueueNode * getNextNode(void);
+
+	// Setters
+	void setData(Data *newData);
+	void setNext(QueueNode *newNode);
 
 	
 

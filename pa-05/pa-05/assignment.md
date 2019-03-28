@@ -29,7 +29,12 @@ Before starting this programming assignment, participants should be able to:
 ## III. Overview & Requirements:
 **Note:** parts of this assignment were inspired by Deitel and Deitel’s Supermarket Simulation problem. We’ve all had the pleasant experience of standing in line at the grocery store. As I’m standing in line I’m always trying to figure out if I chose the line with the fastest service. In most cases, I fail miserably. Let’s write a program to simulate two lines in a grocery store, which will allow us to better understand how to select the fastest line. Note: you’ll be required to write some test cases for this program. I highly recommend that you start with your tests before you implement any other aspect of the program. Starting with your tests will also allow for you to better design and implement your main application code.
 
-For this assignment you will need to simulate two lines using queues. This will require that you develop enqueue ( ) (insert), dequeue ( ) (delete), and printQueue ( ) operations for a queue. Although you will instantiate two queues, each one of these will consist of the same kind of queue nodes. Define a queue node in the following manner:
+For this assignment you will need to simulate two lines using queues. This will require that you develop 
+- [ ] **enqueue ( )** (insert)
+- [ ] **dequeue ( )** (delete),
+- [ ] **printQueue ( )**
+
+operations for a queue. Although you will instantiate two queues, each one of these will consist of the same kind of queue nodes. Define a queue node in the following manner:
 
  
 ```cpp
