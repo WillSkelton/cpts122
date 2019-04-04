@@ -65,6 +65,7 @@ bool Queue::enqueue(Data &newData) {
 bool Queue::dequeue(void) {
 	QueueNode *tempNode = this->head;
 	this->head = this->head->getNextNode();
+	tempNode->setNext(nullptr);
 	delete tempNode;
 	this->incOrDecLength(-1);
 
