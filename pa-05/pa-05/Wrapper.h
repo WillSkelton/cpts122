@@ -12,7 +12,9 @@ public:
 	void REPL(void);
 	int printMenu(void);
 
-	void runSimulation(void);
+	void runSimulation(int duration);
+
+	void cleanQueues(void);
 
 	// Tests
 	bool runAllTests(void);

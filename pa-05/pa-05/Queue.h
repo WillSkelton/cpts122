@@ -26,9 +26,9 @@ public:
 	QueueNode * getTail(void);
 
 	void incOrDecLength(int modifier);
-	void setHead(QueueNode *newHead);
-	void setTail(QueueNode *newTail);
-
+	//void setHead(QueueNode *newHead);
+	//void setTail(QueueNode *newTail);
+	
 	// Queue Methods
 	bool enqueue(Data &newData);
 	bool dequeue(void);

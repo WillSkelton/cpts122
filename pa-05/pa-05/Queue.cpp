@@ -55,10 +55,18 @@ void Queue::incOrDecLength(int modifier) {
 // Queue Methods
 bool Queue::enqueue(Data &newData) {
 	QueueNode *tempNode = new QueueNode(newData);
-	this->tail->setNext(tempNode);
-	this->tail = tempNode;
-	this->incOrDecLength(1);
-
+	
+	if (this->head == nullptr) {
+		this->head = tempNode;
+		this->tail = tempNode;
+		this->incOrDecLength(1);
+	}
+	else {
+		this->tail->setNext(tempNode);
+		this->tail = tempNode;
+		this->incOrDecLength(1);
+	}
+	
 	return false;
 }
 
@@ -94,14 +102,16 @@ bool Queue::printQueue(string tag) {
 	if (tag == "-v") {
 		QueueNode *idx = this->head;
 
-		cout << "Queue Length: " << this->getLength() << endl;
+		cout << "Queue Length: " << this->getLength() << endl
+			<< "-------------" << endl;
 
 		for (int i = 0; i < this->getLength(); i++) {
 			if (idx != nullptr) {
 				cout << "Customer Number: " << idx->getData()->getCustomerNumber() << endl
 					<< "Service Time: " << idx->getData()->getServiceTime() << endl
 					<< "Total Time: " << idx->getData()->getTotalTime() << endl
-					<< "=====================================================================================" << endl;
+					//<< "=======================================" 
+					<< endl;
 				idx = idx->getNextNode();
 			}
 		}
