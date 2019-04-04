@@ -72,18 +72,41 @@ bool Queue::dequeue(void) {
 	return false;
 }
 
-bool Queue::printQueue(void) {
+bool Queue::printQueue() {
+
 	QueueNode *idx = this->head;
 
 	for (int i = 0; i < this->getLength(); i++) {
 		if (idx != nullptr) {
-			cout << "Customer Number: " << idx->getData()->getCustomerNumber() << endl
+			cout << "Butt Number: " << idx->getData()->getCustomerNumber() << endl
 				<< "Service Time: " << idx->getData()->getServiceTime() << endl
 				<< "Total Time: " << idx->getData()->getTotalTime() << endl
 				<< "=====================================================================================" << endl;
 			idx = idx->getNextNode();
 		}
 	}
+
+	return false;
+}
+
+bool Queue::printQueue(string tag) {
+
+	if (tag == "-v") {
+		QueueNode *idx = this->head;
+
+		cout << "Queue Length: " << this->getLength() << endl;
+
+		for (int i = 0; i < this->getLength(); i++) {
+			if (idx != nullptr) {
+				cout << "Customer Number: " << idx->getData()->getCustomerNumber() << endl
+					<< "Service Time: " << idx->getData()->getServiceTime() << endl
+					<< "Total Time: " << idx->getData()->getTotalTime() << endl
+					<< "=====================================================================================" << endl;
+				idx = idx->getNextNode();
+			}
+		}
+	}
+	
 	return false;
 }
 

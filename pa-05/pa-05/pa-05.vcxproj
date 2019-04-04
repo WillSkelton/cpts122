@@ -146,11 +146,13 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Queue.cpp" />
     <ClCompile Include="QueueNode.cpp" />
+    <ClCompile Include="Wrapper.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Data.h" />
     <ClInclude Include="Queue.h" />
     <ClInclude Include="QueueNode.h" />
+    <ClInclude Include="Wrapper.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="assignment.md" />

@@ -3,7 +3,9 @@
 #include "QueueNode.h";
 
 using std::cout;
+using std::cin;	
 using std::endl;
+using std::string;
 
 class Queue {
 public:
@@ -31,6 +33,8 @@ public:
 	bool enqueue(Data &newData);
 	bool dequeue(void);
 	bool printQueue(void);
+	bool printQueue(string tag);
+
 	
 private:
 	int length;
