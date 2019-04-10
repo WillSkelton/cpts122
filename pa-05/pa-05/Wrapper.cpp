@@ -107,21 +107,7 @@ void Wrapper::runSimulation(int duration){
 		if (((this->express->getHead()->getData()->getServiceTime()) + (this->express->getHead()->getData()->getTotalTime())) <= timeElapsed) {
 			this->express->dequeue();
 		}
-
-		/*if (timeElapsed % 10 == 0) {
-			
-			this->normal->printQueue("-v");
-			this->express->printQueue("-v");
-		}*/
 		
-		if (this->normal->getLength() != 6) {
-			cout << "Queue Length != 6 @ " << timeElapsed << " minutes." << endl;
-		}
-
-		/*if (this->normal->getHead()->getData()->getServiceTime() > 5) {
-			cout << "ServiceTime != 5 @ " << timeElapsed << " minutes." << endl;
-		}*/
-
 		cout << " ====== Time Elapsed: " << timeElapsed << " minutes ======" << endl;
 		this->normal->printQueue("-v");
 
