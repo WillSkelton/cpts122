@@ -80,8 +80,6 @@ void Wrapper::runSimulation(int duration){
 	int normalCustomerProgress = 0;
 	int expressCustomerProgress = 0;
 
-
-
 	for (int timeElapsed = 0; timeElapsed < duration; timeElapsed++) {
 		int normalRange = 8 - 3 + 1;
 		int expressRange = 5 - 1 + 1;
@@ -103,6 +101,12 @@ void Wrapper::runSimulation(int duration){
 		// Check if head of normal customer line has been at the front for their service time. If yes,
 		// they get dequeued and the normalCustomerProgress variable is reset to 0.
 		if ((this->normal->getHead()->getData()->getServiceTime()) == normalCustomerProgress) {
+
+			// TODO: See if I can maybe use the property on the customer object instead of normalCustomer Progress
+			// to represent the time they became the head of the line.
+
+			cout << "Customer number: [" << this->normal->getHead()->getData()->getCustomerNumber() << "] has finished checking out of the normal line." << endl;
+
 			this->normal->dequeue();
 			normalCustomerProgress = 0;
 		}
@@ -110,6 +114,9 @@ void Wrapper::runSimulation(int duration){
 		// Check if head of express customer line has been at the front for their service time. If yes,
 		// they get dequeued and the expressCustomerProgress variable is reset to 0.
 		if ((this->express->getHead()->getData()->getServiceTime()) == expressCustomerProgress) {
+
+			cout << "Customer number: [" << this->express->getHead()->getData()->getCustomerNumber() << "] has finished checking out of the express line." << endl;
+
 			this->express->dequeue();
 			expressCustomerProgress = 0;
 		}
@@ -117,7 +124,10 @@ void Wrapper::runSimulation(int duration){
 		//cout << "====== Time Elapsed: " << timeElapsed << " minutes ======" << endl;
 		//this->express->printQueue("-v");
 
-		
+
+		cout << "Customer number : [" << this->normal->getTail()->getData()->getCustomerNumber() << "] has entered the normal line." << endl;
+		cout << "Customer number : [" << this->express->getTail()->getData()->getCustomerNumber() << "] has entered the express line." << endl;
+
 		// Incremments the amount of time the customer at the front of the line has been helped 
 		normalCustomerProgress++;
 		expressCustomerProgress++;
