@@ -38,10 +38,7 @@ void Wrapper::REPL(void){
 			cout << "I don't know how you got here" << endl;
 			break;
 		}
-
-
 	}
-
 };
 
 int Wrapper::printMenu(void) {
@@ -75,7 +72,15 @@ void Wrapper::cleanQueues(void) {
 
 void Wrapper::runSimulation(int duration){
 
-	int customerNumber = 0;
+	// Unique Customer number
+	unsigned int customerNumber = 0;
+	
+	// Keeps track of how long the customer has been helped. Each iteration, this increments until
+	// it's equal to the head's service time. Then the customer gets dequeued and this number increments. 
+	int normalCustomerProgress = 0;
+	int expressCustomerProgress = 0;
+
+
 
 	for (int timeElapsed = 0; timeElapsed < duration; timeElapsed++) {
 		int normalRange = 8 - 3 + 1;
@@ -84,9 +89,6 @@ void Wrapper::runSimulation(int duration){
 		// Generate random numbers
 		int normalRandom = rand() % normalRange + 3;
 	    int expressRandom = rand() % expressRange + 1;
-
-
-		//cout << "normalRandom: " << normalRandom << endl;
 
 		// Add Customer to normal line
 		Data newNormalCustomer(customerNumber, normalRandom, timeElapsed);
@@ -98,21 +100,29 @@ void Wrapper::runSimulation(int duration){
 		this->express->enqueue(newExpressCusomer);
 		customerNumber++;
 
-		// Check if customer is done
-		if (((this->normal->getHead()->getData()->getServiceTime()) + (this->normal->getHead()->getData()->getTotalTime())) <= timeElapsed) {
+		// Check if head of normal customer line has been at the front for their service time. If yes,
+		// they get dequeued and the normalCustomerProgress variable is reset to 0.
+		if ((this->normal->getHead()->getData()->getServiceTime()) == normalCustomerProgress) {
 			this->normal->dequeue();
-		
+			normalCustomerProgress = 0;
 		}
 
-		if (((this->express->getHead()->getData()->getServiceTime()) + (this->express->getHead()->getData()->getTotalTime())) <= timeElapsed) {
+		// Check if head of express customer line has been at the front for their service time. If yes,
+		// they get dequeued and the expressCustomerProgress variable is reset to 0.
+		if ((this->express->getHead()->getData()->getServiceTime()) == expressCustomerProgress) {
 			this->express->dequeue();
+			expressCustomerProgress = 0;
 		}
 		
-		cout << " ====== Time Elapsed: " << timeElapsed << " minutes ======" << endl;
-		this->normal->printQueue("-v");
+		//cout << "====== Time Elapsed: " << timeElapsed << " minutes ======" << endl;
+		//this->express->printQueue("-v");
+
+		
+		// Incremments the amount of time the customer at the front of the line has been helped 
+		normalCustomerProgress++;
+		expressCustomerProgress++;
 
 
-		//cout << expressRandom << endl;
 	}
 	system("pause");
 
