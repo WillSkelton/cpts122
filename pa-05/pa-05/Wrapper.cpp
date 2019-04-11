@@ -3,8 +3,8 @@
 
 
 Wrapper::Wrapper(){
-	this->express = new Queue();
-	this->normal = new Queue();
+	this->express = new Queue("Express");
+	this->normal = new Queue("Normal");
 };
 
 Wrapper::~Wrapper(){
@@ -15,14 +15,22 @@ Wrapper::~Wrapper(){
 void Wrapper::REPL(void){
 
 	int choice = 0;
+	int numMinutes = 0;
+
 	while (choice != 3) {
 		choice = this->printMenu();
 
 		switch (choice) {
 
 		case 1:
+
+			cout << "Please entern a number of minutes you want to simulate. NOTE entering anything that's" << endl <<
+				"not a positive integer will break the program." << endl
+				<< ">>> ";
+			cin >> numMinutes;
+			
 			cout << "Starting Simulation..." << endl;
-			this->runSimulation(30);
+			this->runSimulation(numMinutes);
 			this->cleanQueues();
 			break;
 
@@ -65,8 +73,8 @@ int Wrapper::printMenu(void) {
 void Wrapper::cleanQueues(void) {
 	delete this->normal;
 	delete this->express;
-	this->express = new Queue();
-	this->normal = new Queue();
+	this->express = new Queue("Express");
+	this->normal = new Queue("Normal");
 }
 
 
@@ -87,11 +95,14 @@ void Wrapper::runSimulation(int duration){
 		// Generate random numbers
 		int normalRandom = rand() % normalRange + 3;
 	    int expressRandom = rand() % expressRange + 1;
-
+		
+		
 		// Add Customer to normal line
 		Data newNormalCustomer(customerNumber, normalRandom, timeElapsed);
 		this->normal->enqueue(newNormalCustomer);
 		customerNumber++;
+
+
 
 		// Add customer to express line
 		Data newExpressCusomer(customerNumber, expressRandom, timeElapsed);
@@ -128,6 +139,15 @@ void Wrapper::runSimulation(int duration){
 		cout << "Customer number : [" << this->normal->getTail()->getData()->getCustomerNumber() << "] has entered the normal line." << endl;
 		cout << "Customer number : [" << this->express->getTail()->getData()->getCustomerNumber() << "] has entered the express line." << endl;
 
+		if (timeElapsed == 19) {
+			cout << "Here" << endl;
+		}
+
+		if (timeElapsed % 10 == 0) {
+			this->normal->printQueue();
+			this->express->printQueue();
+		}
+
 		// Incremments the amount of time the customer at the front of the line has been helped 
 		normalCustomerProgress++;
 		expressCustomerProgress++;
@@ -150,7 +170,7 @@ bool Wrapper::basicTest(void){
 	Data d4 = Data(4, 40, 80);
 	Data d5 = Data(5, 50, 100);
 
-	Queue myQueue = Queue();
+	Queue myQueue = Queue("Test");
 	myQueue.printQueue("-v");
 
 	cout << endl << "D2" << endl << endl;;

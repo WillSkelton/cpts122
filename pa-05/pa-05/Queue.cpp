@@ -1,28 +1,37 @@
 #include "Queue.h"
+#include <string>
+
+using std::string;
 
 // CTORS
-Queue::Queue() {
+Queue::Queue(string name) {
+
+	this->name = name;
 	this->head = nullptr;
 	this->tail = nullptr;
 	this->length = 0;
 }
 
-Queue::Queue(Data &newData) {
+Queue::Queue(Data &newData, string name) {
 	QueueNode *firstNode = new QueueNode(newData);
+
+	this->name = name;
 	this->head = firstNode;
 	this->tail = firstNode;
 	this->length = 1;
 }
 
-Queue::Queue(QueueNode &newNode) {
+Queue::Queue(QueueNode &newNode, string name) {
+	
+	this->name = name;
 	this->head = &(newNode);
-	this-> tail = &(newNode);
+	this->tail = &(newNode);
 	this->length = 1;
 }
 
 // CCTOR
 Queue::Queue(Queue &src) {
-	 
+
 }
 
 // DTOR
@@ -55,7 +64,7 @@ void Queue::incOrDecLength(int modifier) {
 // Queue Methods
 bool Queue::enqueue(Data &newData) {
 	QueueNode *tempNode = new QueueNode(newData);
-	
+
 	if (this->head == nullptr) {
 		this->head = tempNode;
 		this->tail = tempNode;
@@ -66,7 +75,7 @@ bool Queue::enqueue(Data &newData) {
 		this->tail = tempNode;
 		this->incOrDecLength(1);
 	}
-	
+
 	return false;
 }
 
@@ -84,15 +93,35 @@ bool Queue::printQueue() {
 
 	QueueNode *idx = this->head;
 
+	cout << this->name << " Line" << endl;
+
+	cout << "| Customer Number | Service Time | Time Arrived |" << endl;
+	cout << "| :-------------: | :----------: | :----------: |" << endl;
+
 	for (int i = 0; i < this->getLength(); i++) {
 		if (idx != nullptr) {
-			cout << "Butt Number: " << idx->getData()->getCustomerNumber() << endl
-				<< "Service Time: " << idx->getData()->getServiceTime() << endl
-				<< "Total Time: " << idx->getData()->getTotalTime() << endl
-				<< "=====================================================================================" << endl;
+
+			if (idx->getData()->getCustomerNumber() < 10) {
+				cout << "|      " << idx->getData()->getCustomerNumber() << "          |     " << idx->getData()->getServiceTime() << "        |     "; //<< idx->getData()->getTotalTime() << "            | " << endl;
+
+			}
+			else {
+				cout << "|      " << idx->getData()->getCustomerNumber() << "         |     " << idx->getData()->getServiceTime() << "        |     ";// << idx->getData()->getTotalTime() << "            | " << endl;
+
+			}
+
+			if (idx->getData()->getTotalTime() < 10) {
+				cout << idx->getData()->getTotalTime() << "        |" << endl;
+			}
+			else {
+				cout << idx->getData()->getTotalTime() << "       |" << endl;
+			}
+
 			idx = idx->getNextNode();
 		}
 	}
+	cout << endl << endl;
+
 
 	return false;
 }

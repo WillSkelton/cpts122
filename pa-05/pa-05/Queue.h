@@ -10,9 +10,9 @@ using std::string;
 class Queue {
 public:
 	// CTORS
-	Queue();
-	Queue(Data &newData);
-	Queue(QueueNode &newNode);
+	Queue(string name);
+	Queue(Data &newData, string name);
+	Queue(QueueNode &newNode, string name);
 	
 	// CCTOR
 	Queue(Queue &src);
@@ -29,6 +29,10 @@ public:
 	//void setHead(QueueNode *newHead);
 	//void setTail(QueueNode *newTail);
 	
+
+	string name;
+
+
 	// Queue Methods
 	bool enqueue(Data &newData);
 	bool dequeue(void);
