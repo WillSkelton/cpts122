@@ -1,6 +1,7 @@
 
 
 #include "Queue.h"
+#include <assert.h>
 
 class Wrapper {
 public:
@@ -17,13 +18,23 @@ public:
 	void cleanQueues(void);
 
 	// Tests
-	bool runAllTests(void);
+	bool enqueueEmptyQueueTest(void);
+
+	bool enqueueQueueTest(void);
+
+	bool dequeueOneNodeQueue(void);
+
+	bool dequeueTwoNodeQueue(void);
+
+	bool yeeHawTest(void);
+
 	bool basicTest(void);
+
+	bool runAllTests(void);
 
 private:
 	Queue *normal;
 	Queue *express;
 
 	int timeElapsed;
-
 };

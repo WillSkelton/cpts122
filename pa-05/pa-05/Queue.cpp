@@ -65,28 +65,54 @@ void Queue::incOrDecLength(int modifier) {
 bool Queue::enqueue(Data &newData) {
 	QueueNode *tempNode = new QueueNode(newData);
 
+	bool success = false;
+
 	if (this->head == nullptr) {
 		this->head = tempNode;
 		this->tail = tempNode;
 		this->incOrDecLength(1);
+
+		success = true;
 	}
 	else {
 		this->tail->setNext(tempNode);
 		this->tail = tempNode;
 		this->incOrDecLength(1);
+
+		success = true;
 	}
 
-	return false;
+	return success;
 }
 
 bool Queue::dequeue(void) {
-	QueueNode *tempNode = this->head;
-	this->head = this->head->getNextNode();
-	tempNode->setNext(nullptr);
-	delete tempNode;
-	this->incOrDecLength(-1);
 
-	return false;
+	bool success = false;
+
+	if (this->head != nullptr) {
+		// Make Temp node to hold current head
+		QueueNode *tempNode = this->head;
+
+		// set queue head to 2nd node
+		this->head = this->head->getNextNode();
+		
+		// cut tie between tempnode and the rest of the queue
+		tempNode->setNext(nullptr);
+	
+		// delete the tempNode's memory
+		delete tempNode;
+		
+		// update length
+		this->incOrDecLength(-1);
+
+		// successfully dequeued
+		success = true;
+
+		if (this->head == nullptr) {
+			this->tail = this->head;
+		}
+	}
+	return success;
 }
 
 bool Queue::printQueue() {

@@ -1,5 +1,6 @@
 #include "Wrapper.h"
 #include <math.h>
+#include <string>
 
 
 Wrapper::Wrapper(){
@@ -36,6 +37,8 @@ void Wrapper::REPL(void){
 
 		case 2:
 			cout << "Starting Tests" << endl;
+			this->runAllTests();
+			system("pause");
 			break;
 
 		case 3:
@@ -160,8 +163,258 @@ void Wrapper::runSimulation(int duration){
 
 // Tests
 bool Wrapper::runAllTests(void){
+
+	this->enqueueEmptyQueueTest();
+	this->enqueueQueueTest();
+	this->dequeueOneNodeQueue();
+	this->dequeueTwoNodeQueue();
+
+	this->yeeHawTest();
+
 	return false;
 };
+
+bool Wrapper::enqueueEmptyQueueTest(void){
+	Data d1 = Data(1, 8, 20);
+
+	Queue myQueue = Queue("Test");
+
+	bool success = myQueue.enqueue(d1);
+
+	cout << "# Enqueue on empty Queue test:" << endl;
+	// ============================================
+	cout << "  - Should return true upon adding new item | ";
+	if (success == true) {
+		cout << "true" << endl;
+	}
+	else {
+		cout << "false" << endl;
+	}
+
+	// ============================================
+	cout << "  - Should have a customer number of 1 | ";
+	if (myQueue.getHead()->getData()->getCustomerNumber() == 1) {
+		cout << "true" << endl;
+	}
+	else {
+		cout << "false" << endl;
+	}
+
+	// ============================================
+	cout << "  - Should have a service time of 8 | ";
+	if (myQueue.getHead()->getData()->getServiceTime() == 8) {
+		cout << "true" << endl;
+	}
+	else {
+		cout << "false" << endl;
+	}
+
+	// ============================================
+	cout << "  - Should have a total time of 20 | ";
+	if (myQueue.getHead()->getData()->getTotalTime() == 20) {
+		cout << "true" << endl;
+	}
+	else {
+		cout << "false" << endl;
+	}
+	
+	// ============================================
+	cout << "  - Should have a Queue Length of 1 | ";
+	if (myQueue.getLength() == 1) {
+		cout << "true" << endl;
+	}
+	else {
+		cout << "false" << endl;
+	}
+	return false;
+}
+
+bool Wrapper::enqueueQueueTest(void) {
+
+	Data d1 = Data(1, 8, 20);
+	Data d2 = Data(2, 4, 21);
+
+	Queue myQueue = Queue("Test");
+
+	myQueue.enqueue(d1);
+
+	bool success = myQueue.enqueue(d2);
+
+	cout << "# Enqueue on Queue test:" << endl;
+	// ============================================
+	cout << "  - Should return true upon adding new item | ";
+	if (success == true) {
+		cout << "true" << endl;
+	}
+	else {
+		cout << "false" << endl;
+	}
+
+	// ============================================
+	cout << "  - Should have a customer number of 1 | ";
+	if (myQueue.getHead()->getData()->getCustomerNumber() == 1) {
+		cout << "true" << endl;
+	}
+	else {
+		cout << "false" << endl;
+	}
+
+	// ============================================
+	cout << "  - Should have a service time of 8 | ";
+	if (myQueue.getHead()->getData()->getServiceTime() == 8) {
+		cout << "true" << endl;
+	}
+	else {
+		cout << "false" << endl;
+	}
+
+	// ============================================
+	cout << "  - Should have a total time of 20 | ";
+	if (myQueue.getHead()->getData()->getTotalTime() == 20) {
+		cout << "true" << endl;
+	}
+	else {
+		cout << "false" << endl;
+	}
+
+	// ============================================
+	cout << "  - Should have a Queue Length of 2 | ";
+	if (myQueue.getLength() == 2) {
+		cout << "true" << endl;
+	}
+	else {
+		cout << "false" << endl;
+	}
+
+
+	return false;
+}
+
+bool Wrapper::dequeueOneNodeQueue(void){
+	Data d1 = Data(1, 8, 20);
+
+	Queue myQueue = Queue("Test");
+
+	myQueue.enqueue(d1);
+
+	bool success = myQueue.dequeue();
+
+	cout << "# Enqueue on Queue test:" << endl;
+	// ============================================
+	cout << "  - Should return true upon removing item | ";
+	if (success == true) {
+		cout << "true" << endl;
+	}
+	else {
+		cout << "false" << endl;
+	}
+
+	// ============================================
+	cout << "  - Should have head be nullptr | ";
+	if (myQueue.getHead() == nullptr) {
+		cout << "true" << endl;
+	}
+	else {
+		cout << "false" << endl;
+	}
+
+	// ============================================
+	cout << "  - Should have tail be nullptr | ";
+	if (myQueue.getHead() == nullptr) {
+		cout << "true" << endl;
+	}
+	else {
+		cout << "false" << endl;
+	}
+
+	// ============================================
+	cout << "  - Should have a Queue Length of 0 | ";
+	if (myQueue.getLength() == 0) {
+		cout << "true" << endl;
+	}
+	else {
+		cout << "false" << endl;
+	}
+
+	return false;
+}
+
+bool Wrapper::dequeueTwoNodeQueue(void){
+	Data d1 = Data(2, 4, 21);
+	Data d2 = Data(1, 8, 20);
+
+	Queue myQueue = Queue("Test");
+
+	myQueue.enqueue(d1);
+	myQueue.enqueue(d2);
+	bool success = myQueue.dequeue();
+
+	cout << "# Dequeue on Queue with 2 nodes test:" << endl;
+	// ============================================
+	cout << "  - Should return true upon adding new item | ";
+	if (success == true) {
+		cout << "true" << endl;
+	}
+	else {
+		cout << "false" << endl;
+	}
+
+	// ============================================
+	cout << "  - Should have a customer number of 1 | ";
+	if (myQueue.getHead()->getData()->getCustomerNumber() == 1) {
+		cout << "true" << endl;
+	}
+	else {
+		cout << "false" << endl;
+	}
+
+	// ============================================
+	cout << "  - Should have a service time of 8 | ";
+	if (myQueue.getHead()->getData()->getServiceTime() == 8) {
+		cout << "true" << endl;
+	}
+	else {
+		cout << "false" << endl;
+	}
+
+	// ============================================
+	cout << "  - Should have a total time of 20 | ";
+	if (myQueue.getHead()->getData()->getTotalTime() == 20) {
+		cout << "true" << endl;
+	}
+	else {
+		cout << "false" << endl;
+	}
+
+	// ============================================
+	cout << "  - Should have a Queue Length of 1 | ";
+	if (myQueue.getLength() == 1) {
+		cout << "true" << endl;
+	}
+	else {
+		cout << "false" << endl;
+	}
+
+
+	return false;
+}
+
+bool Wrapper::yeeHawTest(void) {
+
+	string areYouSure;
+
+	cout << "Are you sure you want to run the 24 hr test? You must type 'yes' or it won't run." << endl
+		<< ">>> ";
+
+	cin >> areYouSure;
+
+	if (areYouSure == "yes") {
+		int YEEHAW = 1440;
+
+		this->runSimulation(YEEHAW);
+	}
+	return false;
+}
 
 bool Wrapper::basicTest(void){
 	Data d1 = Data(1, 10, 20);
@@ -187,5 +440,9 @@ bool Wrapper::basicTest(void){
 
 	myQueue.dequeue();
 	myQueue.printQueue("-v");
+
+
+
+
 	return true;
 };
