@@ -106,25 +106,25 @@ Your project must build properly. The most points an assignment can receive if i
 This assignment is worth 100 points. Your assignment will be evaluated based on a successful compilation and adherence to the program requirements. We will grade according to the following criteria:
 
 - [ ] 5 pts – Appropriate top-down design, style, file organization (each class should be in its own .h file), and commenting according to class standards
-- [ ] 15 pts - Defining the BSTNode structure
-  - [ ] 4 pts correct data members in node (char, string, left and right pointers)
-  - [ ] 3 pts correct constructor
-  - [ ] 8 pts other member functions
-- [ ] 50 pts - Creating the BST code and create a Morse lookup BST
-  - [ ] 2 pts correct data member in BST (root)
-  - [ ] 10 pts correct insert ()
-  - [ ] 2 pts for opening “MorseTable.txt”
-  - [ ] 2 pts for closing “MorseTable.txt”
-  - [ ] 6 pts for reading contents of “MorseTable.txt”
-  - [ ] 5 pts for correct print ()
-  - [ ] 9 pts for correct search ()
-  - [ ] 6 pts for correct constructor
-  - [ ] 8 pts for correct destructor
+- [x] 15 pts - Defining the BSTNode structure
+  - [x] 4 pts correct data members in node (char, string, left and right pointers)
+  - [x] 3 pts correct constructor
+  - [x] 8 pts other member functions
+- [x] 50 pts - Creating the BST code and create a Morse lookup BST
+  - [x] 2 pts correct data member in BST (root)
+  - [x] 10 pts correct insert ()
+  - [x] 2 pts for opening “MorseTable.txt”
+  - [x] 2 pts for closing “MorseTable.txt”
+  - [x] 6 pts for reading contents of “MorseTable.txt”
+  - [x] 5 pts for correct print ()
+  - [x] 9 pts for correct search ()
+  - [x] 6 pts for correct constructor
+  - [x] 8 pts for correct destructor
 - [ ] 30 pts -  Putting the pieces together
-  - [ ] 5 pts for printing the tree
+  - [x] 5 pts for printing the tree
   - [ ] 2 pts for opening “Convert.txt”
   - [ ] 2 pts for closing “Convert.txt”
   - [ ] 6 pts for reading contents of “Convert.txt”
-  - [ ] 10 pts for performing conversion of English to Morse code
-  - [ ] 5 pts for echoing Morse code to screen
-- [ ] **#** 15 pts – Working BSTNode and BST class template
+  - [x] 10 pts for performing conversion of English to Morse code
+  - [x] 5 pts for echoing Morse code to screen
+- [ ] 15 pts – Working BSTNode and BST class template
