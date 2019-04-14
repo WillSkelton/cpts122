@@ -1,5 +1,10 @@
 #include "BST.h"
+
 #include <fstream>
+
+using std::fstream;
+using std::ios;
+using std::getline;
 
 class Wrapper {
 
