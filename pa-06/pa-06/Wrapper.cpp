@@ -32,7 +32,11 @@ void Wrapper::REPL(void) {
 
 		this->fillTree();
 
-		this->morseTable->printTreeInOrder();
+		//this->morseTable->printTreeInOrder();
+
+		this->translate("HeLlO wOrLd");
+
+		// cout << "A: " << this->morseTable->lookup('A') << endl;
 
 		message = "exit!";
 
@@ -43,9 +47,30 @@ void Wrapper::REPL(void) {
 string Wrapper::translate(string message) {
 	string translation = " ";
 
-	for (int i = 0; i < message.length(); i++) {
+	string uppercase = this->toUpper(message);
+
+	for (int i = 0; i < uppercase.length(); i++) {
+		
+		switch (uppercase[i]) {
+		case ' ':
+			cout << "   ";
+			break;
+
+		case '\n':
+			cout << endl;
+			break;
+
+		default:
+			cout << this->morseTable->lookup(uppercase[i]);
+
+			if (uppercase[i + 1] != ' ') cout << ' ';
+			
+			break;
+
+		}
 
 	}
+	cout << endl;
 
 	return translation;
 }
@@ -71,8 +96,25 @@ void Wrapper::fillTree(void) {
 		//cout << letter << ": " << morse << endl;
 
 		this->morseTable->addNode(letter, morse);
-
 	}
 
 	table.close();
+}
+
+string Wrapper::toUpper(string str) {
+	
+	string upper = "";
+
+	for (int i = 0; i < str.length(); i++) {
+		if (str[i] >= 'a' && str[i] <= 'z') {
+			upper += (str[i] - 32);
+		}
+		else {
+			upper += str[i];
+		}
+	}
+
+	cout << upper << endl;
+
+	return upper;
 }

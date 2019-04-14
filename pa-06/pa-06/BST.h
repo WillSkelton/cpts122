@@ -15,7 +15,8 @@ public:
 	~BST();
 
 	// Lookup
-	string lookup(const char srcLetter);
+	string lookup(char letter);
+	string BST::lookup(Node *root, char letter);
 
 	// Add Node
 	bool addNode(char letter, string morse);

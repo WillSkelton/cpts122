@@ -26,6 +26,9 @@ public:
 	// Fill File
 	void fillTree(void);
 
+	// to upper case
+	string toUpper(string str);
+
 private:
 
 	BST *morseTable;

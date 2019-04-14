@@ -11,11 +11,28 @@ BST::~BST() {
 }
 
 // Lookup
-string BST::lookup(const char srcLetter) {
-	string found = "Found";
+string BST::lookup(char letter) {
+	return this->lookup(this->root, letter);
 
+}
 
-	return found;
+string BST::lookup(Node *root, char letter) {
+	string morse = "";
+
+	if (root == nullptr) {
+		morse = "error";
+	}
+	else if (root->getLetter() == letter) {
+		morse = root->getMorse();
+	}
+	else if (root->getLetter() < letter) {
+		morse = lookup(root->getRight(), letter);
+	}
+	else {
+		morse = lookup(root->getLeft(), letter);
+	}
+
+	return morse;
 }
 
 
