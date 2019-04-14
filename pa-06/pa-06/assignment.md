@@ -120,11 +120,11 @@ This assignment is worth 100 points. Your assignment will be evaluated based on 
   - [x] 9 pts for correct search ()
   - [x] 6 pts for correct constructor
   - [x] 8 pts for correct destructor
-- [ ] 30 pts -  Putting the pieces together
+- [x] 30 pts -  Putting the pieces together
   - [x] 5 pts for printing the tree
-  - [ ] 2 pts for opening “Convert.txt”
-  - [ ] 2 pts for closing “Convert.txt”
-  - [ ] 6 pts for reading contents of “Convert.txt”
+  - [x] 2 pts for opening “Convert.txt”
+  - [x] 2 pts for closing “Convert.txt”
+  - [x] 6 pts for reading contents of “Convert.txt”
   - [x] 10 pts for performing conversion of English to Morse code
   - [x] 5 pts for echoing Morse code to screen
 - [ ] 15 pts – Working BSTNode and BST class template

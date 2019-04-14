@@ -13,12 +13,17 @@ Wrapper::~Wrapper() {}
 
 // REPL
 void Wrapper::REPL(void) {
+	
+	this->fillTree();
 
-	string message = "";
+	this->morseTable->printTreeInOrder();
 
+	string morse = this->translateFile();
+
+	/*string message = "";
 	do {
 
-		/*cout << "Please enter a phrase to translate into morse code or type `exit!` to quit:" << endl
+		cout << "Please enter a phrase to translate into morse code or type `exit!` to quit:" << endl
 			<< ">>> ";
 
 		cin >> message;
@@ -28,43 +33,44 @@ void Wrapper::REPL(void) {
 		if (message == "exit!") {
 			cout << "Goodbye" << endl;
 			break;
-		}*/
+		}
 
-		this->fillTree();
+		this->translate(message);
 
-		//this->morseTable->printTreeInOrder();
 
-		this->translate("HeLlO wOrLd");
 
-		// cout << "A: " << this->morseTable->lookup('A') << endl;
-
-		message = "exit!";
-
-	} while (message != "exit!");
+	} while (message != "exit!");*/
 
 }
 
 string Wrapper::translate(string message) {
-	string translation = " ";
-
+	string morseTranslation = "";
+	string morseLetter = "";
 	string uppercase = this->toUpper(message);
 
 	for (int i = 0; i < uppercase.length(); i++) {
 		
 		switch (uppercase[i]) {
 		case ' ':
+			morseTranslation += "   ";
 			cout << "   ";
 			break;
 
 		case '\n':
+			morseTranslation += '\n';
 			cout << endl;
 			break;
 
 		default:
-			cout << this->morseTable->lookup(uppercase[i]);
+			morseLetter = this->morseTable->lookup(uppercase[i]);
+			morseTranslation += morseLetter;
+			cout << morseLetter;
 
-			if (uppercase[i + 1] != ' ') cout << ' ';
-			
+			if (uppercase[i + 1] != ' ') {
+				morseTranslation += ' ';
+				cout << ' ';
+			}
+
 			break;
 
 		}
@@ -72,8 +78,32 @@ string Wrapper::translate(string message) {
 	}
 	cout << endl;
 
-	return translation;
+	return morseTranslation;
 }
+
+string Wrapper::translateFile(void) {
+	fstream message;
+	message.open("Convert.txt", ios::in);
+
+	string line;
+	string morse;
+
+	cout << "Morse Translation: " << endl;
+
+	while (message.eof() != 1) {
+		getline(message, line);
+		morse += this->translate(line);
+		morse += '\n';
+	}
+
+
+	//cout << morse << endl;
+
+	message.close();
+	return morse;
+}
+
+
 
 // Fill File
 void Wrapper::fillTree(void) {
@@ -114,7 +144,7 @@ string Wrapper::toUpper(string str) {
 		}
 	}
 
-	cout << upper << endl;
+	//cout << upper << endl;
 
 	return upper;
 }

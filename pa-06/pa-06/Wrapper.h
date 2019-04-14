@@ -22,6 +22,8 @@ public:
 
 	// Translate
 	string translate(string message);
+	string translateFile(void);
+
 
 	// Fill File
 	void fillTree(void);
