@@ -33,6 +33,7 @@ public:
 
 private:
 
+	// Table containing the morse translations
 	BST *morseTable;
 
 };

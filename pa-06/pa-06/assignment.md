@@ -105,7 +105,7 @@ Your project must build properly. The most points an assignment can receive if i
 
 This assignment is worth 100 points. Your assignment will be evaluated based on a successful compilation and adherence to the program requirements. We will grade according to the following criteria:
 
-- [ ] 5 pts – Appropriate top-down design, style, file organization (each class should be in its own .h file), and commenting according to class standards
+- [x] 5 pts – Appropriate top-down design, style, file organization (each class should be in its own .h file), and commenting according to class standards
 - [x] 15 pts - Defining the BSTNode structure
   - [x] 4 pts correct data members in node (char, string, left and right pointers)
   - [x] 3 pts correct constructor
