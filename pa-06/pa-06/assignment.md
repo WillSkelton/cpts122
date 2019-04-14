@@ -127,4 +127,4 @@ This assignment is worth 100 points. Your assignment will be evaluated based on 
   - [ ] 6 pts for reading contents of “Convert.txt”
   - [ ] 10 pts for performing conversion of English to Morse code
   - [ ] 5 pts for echoing Morse code to screen
-- [ ] BONUS 15 pts – Working BSTNode and BST class template
+- [ ] **#** 15 pts – Working BSTNode and BST class template
