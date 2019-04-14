@@ -1,5 +1,5 @@
 #include "BST.h"
-
+#include <fstream>
 
 class Wrapper {
 
@@ -14,6 +14,12 @@ public:
 
 	// REPL
 	void REPL(void);
+
+	// Translate
+	string translate(string message);
+
+	// Fill File
+	void fillTree(void);
 
 private:
 

@@ -14,22 +14,51 @@ Wrapper::~Wrapper() {}
 // REPL
 void Wrapper::REPL(void) {
 
-	string userChoice = "";
+	string message = "";
 
 	do {
 
 		cout << "Please enter a phrase to translate into morse code or type `exit!` to quit:" << endl
 			<< ">>> ";
 
-		cin >> userChoice;
+		cin >> message;
 
-		cout << "You entered: `" << userChoice << "`" << endl;
+		cout << "You entered: `" << message << "`" << endl;
 
-		if (userChoice == "exit!") {
+		if (message == "exit!") {
 			cout << "Goodbye" << endl;
 			break;
 		}
 
-	} while (userChoice != "exit!");
+		this->morseTable->addNode('2', "-");
+		this->morseTable->addNode('3', ".-- -");
+		this->morseTable->addNode('5', ".");
+		this->morseTable->addNode('#', ".");
+		this->morseTable->addNode('4', "...--");
+		this->morseTable->addNode('1', ".-");
+
+
+		this->morseTable->addNode('A', "-- -");
+
+		this->morseTable->printTreeInOrder();
+
+
+
+	} while (message != "exit!");
+
+}
+
+string Wrapper::translate(string message) {
+	string translation = " ";
+
+	for (int i = 0; i < message.length(); i++) {
+
+	}
+
+	return translation;
+}
+
+// Fill File
+void Wrapper::fillTree(void) {
 
 }

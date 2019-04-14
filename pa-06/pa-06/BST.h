@@ -18,12 +18,12 @@ public:
 	string lookup(const char srcLetter);
 
 	// Add Node
-	bool addNode(const Node);
+	bool addNode(char letter, string morse);
+	bool addNode(Node *tree, char letter, string morse);
 
 	// Print Tree
-	void printTreeA2Z(void);
-
-
+	void printTreeInOrder(void);
+	void printTreeInOrder(Node *tree);
 
 private:
 	Node *root;
