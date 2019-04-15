@@ -48,6 +48,66 @@ Records must be read from a comma-separated values (.csv) course file. A .csv fi
 
 You are required to use a dynamic singly linked list to store student records. As each record is imported from the file, the record must be inserted at the front of the list. Inserting at the front of a dynamic linked list is very efficient (constant time – O(1)). You are required to implement two class templates for the list, plus an additional two classes (not required to be class templates) for the Data and Stack. Each of the class templates will only require that one type is used: type T. One class template is the Node class, which contains a data member of type T (this will be replaced by the type class Data) when it is instantiated, along with a pointer to the next Node. The Data class stores the fields acquired from each record. In addition to the fields in the file, you are required to add two extra fields in to the class Data. These fields include number of absences and a stack (must be implemented using an array or std::vector) for storing the dates of absences. Remember, class Data is not a template!!! The most recent absence date will always be at the top (Last-In First-Out, LIFO)! The second class template is the List class, which is a container for the Nodes. The List class will be considered your master list. Lastly, you are required to implement only one class for the Stack. The Stack class will be implemented using an array or std::vector. The Stack class must support push (), pop (), peek (), and isEmpty () operations, but does not have to be a template. All of the stack operations should execute in constant time (O(1)).
 
+
+#### Templated Classes:
+- [ ] **List:** Singly linked list
+```cpp
+template <class t>
+class list {
+
+public:
+  // CTOR, DTOR, Getters, Setters...
+private:
+  Node<T> *head;
+}
+
+```
+- [ ] **Node:** 
+```cpp
+template<class T>
+class Node {
+  public:
+  // CTOR, DTOR, Getters, Setters...
+private:
+  Data *data
+  Node<T> *next;
+  
+}
+```
+- [ ] **Data:** 
+```cpp
+class Data {
+public:
+  // CTOR, DTOR, Getters, Setters...
+private:
+  // Records
+  int recordNumber; // (max 3 digits)
+  int ID; // (max 9 digits)
+  string name; // (last, first)
+  string emai;
+  int units // (number of credits for class or AU for audit)
+  string program // (major)
+  enum level // (freshman, sophomore, junior, senior, graduate)
+  
+  // Extra
+  int numAbsences;
+  Stack *absences;
+}
+```
+- [ ] **Stack:**
+```cpp
+class Stack {
+public:
+  // CTOR, DTOR, Getters, Setters...
+  // push
+  // pop  
+private;
+  int length;
+  vector<string> head;
+  
+}
+```
+
 ### Mark absences:
 The user of the program should be able to view the master list of students in the course and mark absences for the current day. This may be implemented by simply traversing the linked list (linear time (O(n)) and asking is the student absent? Yes or no? The date for the day must be derived from the computer’s date. The following fragment of code illustrates how to derive the date from the computer:
 
