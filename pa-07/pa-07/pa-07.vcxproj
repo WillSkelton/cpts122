@@ -144,6 +144,20 @@
   <ItemGroup>
     <None Include="assignment.md" />
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Data.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="Stack.cpp" />
+    <ClCompile Include="Wrapper.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Data.h" />
+    <ClInclude Include="dependencies.h" />
+    <ClInclude Include="List.h" />
+    <ClInclude Include="Node.h" />
+    <ClInclude Include="Stack.h" />
+    <ClInclude Include="Wrapper.h" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
