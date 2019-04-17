@@ -22,7 +22,8 @@ int main(void) {
 
 	cout << "Top: " << myStack.peek() << " | Length: " << myStack.getLength() << endl;
 
-	
+	enum level{f, s, j, sn};
+
 
 	return 0;
 }
