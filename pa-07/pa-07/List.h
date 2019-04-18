@@ -20,7 +20,7 @@ public:
 	void reportOne(void);
 
 	// Abcences Threshold Report
-	void reportTwo(void);
+	void reportTwo(int threshold);
 
 	// Get Length
 	int getLength(void);
@@ -82,16 +82,39 @@ void List<T>::print(){
 
 		temp = temp->getNext();
 	}
-
 }
 
 // All Students and their Absences Report
 template <class T>
-void List<T>::reportOne(void){}
+void List<T>::reportOne(void){
+	Node<T> *temp = this->head;
 
-// Abcences Threshold Report
+	while (temp != nullptr) {
+
+		cout << temp->getData()->getName() << ": " << temp->getData()->getAbsences()->peek() << endl;
+
+		temp = temp->getNext();
+	}
+}
+
+// Absences Threshold Report
 template <class T>
-void List<T>::reportTwo(void){}
+void List<T>::reportTwo(int threshold) {
+
+	Node<T> *temp = this->head;
+
+	while (temp != nullptr) {
+
+		if (temp->getData()->getNumAbsences() <= threshold) {
+
+			cout << temp->getData()->getName() << ": " << temp->getData()->getProgram() << endl;
+
+		}
+		temp = temp->getNext();
+
+	}
+
+}
 
 // Get Length
 template <class T>

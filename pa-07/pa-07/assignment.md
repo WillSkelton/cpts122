@@ -50,7 +50,7 @@ You are required to use a dynamic singly linked list to store student records. A
 
 
 #### Templated Classes:
-- [ ] **List:** Singly linked list
+- [x] **List:** Singly linked list
 ```cpp
 template <class t>
 class list {
