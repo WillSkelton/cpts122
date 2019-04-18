@@ -8,7 +8,7 @@ class Data {
 public:
 	// Ctor:
 	Data();
-	Data(int recordNumber, int ID, string name, string email, int units, string program, int year, int numAbsences, Stack *absences);
+	Data(int recordNumber, int ID, string name, string email, int units, string program, int year, int numAbsences);
 
 	// Dtor
 	~Data();

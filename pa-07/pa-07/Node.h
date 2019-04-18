@@ -5,7 +5,10 @@ class Node {
 public:
 	// CTOR, DTOR, Getters, Setters...
 	Node();
+	Node(Data *data);
 	Node(int recordNumber, int ID, string name, string email, int units, string program, int year, int numAbsences, Stack *absences);
+
+
 
 	~Node();
 
@@ -32,6 +35,14 @@ Node<T>::Node(int recordNumber, int ID, string name, string email, int units, st
 	this->data = newRecord;
 	this->next = nullptr;
 }
+template<class T>
+Node<T>::Node(Data *data) {
+
+	this->data = data;
+	this->next = nullptr;
+
+}
+
 
 template<class T>
 Node<T>::~Node(){

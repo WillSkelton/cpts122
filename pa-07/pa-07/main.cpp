@@ -1,28 +1,29 @@
 
-#include "Stack.h"
+#include "List.h"
 
 
 int main(void) {
 
-	Stack myStack;
+	List<string> students;
 
-	myStack.push("One");
+	students.print();
 
-	cout << "Top: " << myStack.peek() << " | Length: " << myStack.getLength() << endl;
+	Data *d1 = new Data(1, 1, "D1", "Email@email.com", 12, "Architecture", 0, 0);
+	Data *d2 = new Data(2, 2, "D2", "Email@email.com", 14, "CS", 2, 4);
+	Data *d3 = new Data(3, 3, "D3", "Email@email.com", 17, "Ecology", 2, 4);
 
-	myStack.push("two");
 
-	cout << "Top: " << myStack.peek() << " | Length: " << myStack.getLength() << endl;
+	students.prepend(d1);
+	students.print();
+	cout << endl;
 
-	myStack.push("three");
+	students.prepend(d2);
+	students.print();
+	cout << endl;
 
-	cout << "Top: " << myStack.peek() << " | Length: " << myStack.getLength() << endl;
-
-	myStack.pop();
-
-	cout << "Top: " << myStack.peek() << " | Length: " << myStack.getLength() << endl;
-
-	enum level{f, s, j, sn};
+	students.prepend(d3);
+	students.print();
+	cout << endl;
 
 
 	return 0;

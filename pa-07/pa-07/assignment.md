@@ -62,7 +62,7 @@ private:
 }
 
 ```
-- [ ] **Node:** 
+- [x] **Node:** 
 ```cpp
 template<class T>
 class Node {
@@ -74,7 +74,7 @@ private:
   
 }
 ```
-- [ ] **Data:** 
+- [x] **Data:** 
 ```cpp
 class Data {
 public:
@@ -94,7 +94,7 @@ private:
   Stack *absences;
 }
 ```
-- [ ] **Stack:**
+- [x] **Stack:**
 ```cpp
 class Stack {
 public:

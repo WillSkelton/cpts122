@@ -2,7 +2,7 @@
 
 // Ctor:
 Data::Data(){}
-Data::Data(int recordNumber, int ID, string name, string email, int units, string program, int year, int numAbsences, Stack *absences) {
+Data::Data(int recordNumber, int ID, string name, string email, int units, string program, int year, int numAbsences) {
 
 	string levels[5] = { "freshman", "sophomore", "junior", "senior", "graduate" };
 
@@ -14,7 +14,7 @@ Data::Data(int recordNumber, int ID, string name, string email, int units, strin
 	this->program = program;
 	this->year = levels[year];
 	this->numAbsences = numAbsences;
-	this->absences = absences;
+	this->absences = new Stack();
 }
 
 
