@@ -144,9 +144,10 @@ void Wrapper::printMenu(void){
 void Wrapper::import(void){
 	this->openFiles();
 
-	Node<string> *temp;
+	Data *temp;
 	string line = "";
 
+	int recordNumber = 0;
 	int id = 0;
 	string name = "";
 	string email = "";
@@ -157,6 +158,7 @@ void Wrapper::import(void){
 	// Gobble the first line
 	getline(this->infile, line);
 	getline(this->infile, line, ',');
+	recordNumber = std::stoi(line);
 
 
 	while (this->infile.eof() != 1) {
@@ -186,14 +188,14 @@ void Wrapper::import(void){
 		}
 		getline(this->infile, line, ',');
 
-		cout << this->infile.eof() << endl;
+		
+		temp = new Data(recordNumber, id, name, email, units, program, level, 0);
+
+		this->classList.prepend(temp);
+		this->classList.print();
+		cout << "==================" << endl;
 
 	}
-
-
-
-	//Node(int recordNumber, int ID, string name, string email, int units, string program, int year, int numAbsences, Stack *absences);
-
 
 }
 

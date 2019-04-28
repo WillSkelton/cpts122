@@ -6,7 +6,7 @@ public:
 	// CTOR, DTOR, Getters, Setters...
 	Node();
 	Node(Data *data);
-	Node(int recordNumber, int ID, string name, string email, int units, string program, int year, int numAbsences, Stack *absences);
+	Node(int recordNumber, int ID, string name, string email, int units, string program, string year, int numAbsences);
 
 
 
@@ -30,8 +30,8 @@ Node<T>::Node(){
 }
 
 template<class T>
-Node<T>::Node(int recordNumber, int ID, string name, string email, int units, string program, int year, int numAbsences, Stack *absences){
-	Data *newRecord = new Data(recordNumber, ID, name, email, units, program, year, numAbsences, absences);
+Node<T>::Node(int recordNumber, int ID, string name, string email, int units, string program, string year, int numAbsences){
+	Data *newRecord = new Data(recordNumber, ID, name, email, units, program, year, numAbsences);
 	this->data = newRecord;
 	this->next = nullptr;
 }
