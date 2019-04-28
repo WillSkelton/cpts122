@@ -143,6 +143,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <None Include="assignment.md" />
+    <None Include="classList.csv" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Data.cpp" />
