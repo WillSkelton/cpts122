@@ -8,6 +8,8 @@ Wrapper::Wrapper(){
 // DTOR
 Wrapper::~Wrapper(){
 	this->closeFiles();
+	
+	//delete this->classList;
 }
 
 // Start App
@@ -19,12 +21,8 @@ void Wrapper::REPL(void){
 	int choice = 0;
 
 	do {
-		cout << "1. Import course list" << endl
-			<< "2. Load master list" << endl
-			<< "3. Store master list" << endl
-			<< "4. Mark absences" << endl
-			<< "5. Generate report" << endl
-			<< "6. Exit" << endl;
+
+		this->printMenu();
 
 		choice = inputCheck(1, 6);
 
@@ -55,6 +53,8 @@ void Wrapper::router(int choice) {
 	switch (choice) {
 	case 1:
 		cout << "1. Import course list" << endl;
+		this->import();
+
 		break;
 
 	case 2:
@@ -100,7 +100,7 @@ void Wrapper::openFiles(void){
 		this->report1.open("report1.txt", ios::out);
 	}
 	else {
-		this->infile.close();
+		this->report1.close();
 		this->report1.open("report1.txt", ios::out);
 	}
 
@@ -109,7 +109,7 @@ void Wrapper::openFiles(void){
 		this->report2.open("report2.txt", ios::out);
 	}
 	else {
-		this->infile.close();
+		this->report2.close();
 		this->report2.open("report2.txt", ios::out);
 	}
 
@@ -132,9 +132,70 @@ void Wrapper::closeFiles(void){
 	}
 }
 
-void Wrapper::printMenu(void){}
+void Wrapper::printMenu(void){
+	cout << "1. Import course list" << endl
+		<< "2. Load master list" << endl
+		<< "3. Store master list" << endl
+		<< "4. Mark absences" << endl
+		<< "5. Generate report" << endl
+		<< "6. Exit" << endl;
+}
 
-void Wrapper::import(void){}
+void Wrapper::import(void){
+	this->openFiles();
+
+	Node<string> *temp;
+	string line = "";
+
+	int id = 0;
+	string name = "";
+	string email = "";
+	int units = 0;
+	string program = "";
+	string level = "";
+
+	// Gobble the first line
+	getline(this->infile, line);
+	getline(this->infile, line, ',');
+
+
+	while (this->infile.eof() != 1) {
+		
+		getline(this->infile, line, ',');
+		id = std::stoi(line);
+
+		getline(this->infile, line, '"');
+		getline(this->infile, line, '"');
+		name = line;
+
+		getline(this->infile, line, ',');
+		getline(this->infile, line, ',');
+		email = line;
+
+		getline(this->infile, line, ',');
+		units = (line == "AU") ? -1 : std::stoi(line);
+
+		getline(this->infile, line, ',');
+		program = line;
+
+		getline(this->infile, line, '\n');
+		level = line;
+
+		if (name == "Mort,Kris") {
+			cout << line << endl;
+		}
+		getline(this->infile, line, ',');
+
+		cout << this->infile.eof() << endl;
+
+	}
+
+
+
+	//Node(int recordNumber, int ID, string name, string email, int units, string program, int year, int numAbsences, Stack *absences);
+
+
+}
 
 void Wrapper::load(void){}
 

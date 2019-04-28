@@ -41,6 +41,8 @@ private:
 	fstream report1;
 	fstream report2;
 
+	List<string> classList;
+
 
 	
 };
