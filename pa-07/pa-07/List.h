@@ -16,7 +16,7 @@ public:
 	// Print
 	void print();
 	void print2File(fstream &outfile);
-	void print2File(fstream &outfile, Node<T> head);
+	void print2File(fstream &outfile, Node<T> *head);
 
 
 	// All Students and their Absences Report
@@ -89,17 +89,31 @@ void List<T>::print(){
 
 template <class T>
 void List<T>::print2File(fstream &outfile) {
+	outfile << ",ID,Name,Email,Units,Program,Level" << endl;
 	this->print2File(outfile, this->head);
 
 }
 
 template <class T>
-void List<T>::print2File(fstream &outfile, Node<T> head) {
-	Node<T> *temp = this->head;
+void List<T>::print2File(fstream &outfile, Node<T> *head) {
 
-	outfile << ",ID,Name,Email,Units,Program,Level" << endl;
 
-	while (temp != nullptr) {
+	if (head == nullptr) {
+		return;
+	}
+
+	print2File(outfile, head->getNext());
+
+	outfile << head->getData()->getRecordNumber() << ","
+		<< head->getData()->getID() << ","
+		<< "\"" << head->getData()->getName() << "\","
+		<< head->getData()->getEmail() << ","
+		<< head->getData()->getUnits() << ","
+		<< head->getData()->getProgram() << ","
+		<< head->getData()->getProgram() << ","
+		<< head->getData()->getYear() << endl;
+
+	/*while (temp != nullptr) {
 		outfile << temp->getData()->getRecordNumber() << ","
 			<< temp->getData()->getID() << ","
 			<< "\"" << temp->getData()->getName() << "\","
@@ -109,7 +123,7 @@ void List<T>::print2File(fstream &outfile, Node<T> head) {
 			<< temp->getData()->getProgram() << ","
 			<< temp->getData()->getYear() << endl;
 		temp = temp->getNext();
-	}
+	}*/
 }
 
 
