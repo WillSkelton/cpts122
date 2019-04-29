@@ -40,6 +40,7 @@ private:
 	fstream infile;
 	fstream report1;
 	fstream report2;
+	fstream masterFile;
 
 	List<string> classList;
 

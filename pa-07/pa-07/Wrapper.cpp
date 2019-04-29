@@ -143,6 +143,9 @@ void Wrapper::printMenu(void){
 
 void Wrapper::import(void){
 	this->openFiles();
+	this->masterFile.open("masterFile.txt", ios::out);
+
+	int hack = 0;
 
 	Data *temp;
 	string line = "";
@@ -162,7 +165,7 @@ void Wrapper::import(void){
 
 
 	while (this->infile.eof() != 1) {
-		
+
 		getline(this->infile, line, ',');
 		id = std::stoi(line);
 
@@ -193,9 +196,14 @@ void Wrapper::import(void){
 
 		this->classList.prepend(temp);
 		this->classList.print();
+
+		recordNumber++;
 		cout << "==================" << endl;
 
 	}
+	this->classList.print2File(this->masterFile);
+
+	this->masterFile.close();
 
 }
 

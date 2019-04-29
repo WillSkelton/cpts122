@@ -15,6 +15,9 @@ public:
 
 	// Print
 	void print();
+	void print2File(fstream &outfile);
+	void print2File(fstream &outfile, Node<T> head);
+
 
 	// All Students and their Absences Report
 	void reportOne(fstream &outfile);
@@ -83,6 +86,32 @@ void List<T>::print(){
 		temp = temp->getNext();
 	}
 }
+
+template <class T>
+void List<T>::print2File(fstream &outfile) {
+	this->print2File(outfile, this->head);
+
+}
+
+template <class T>
+void List<T>::print2File(fstream &outfile, Node<T> head) {
+	Node<T> *temp = this->head;
+
+	outfile << ",ID,Name,Email,Units,Program,Level" << endl;
+
+	while (temp != nullptr) {
+		outfile << temp->getData()->getRecordNumber() << ","
+			<< temp->getData()->getID() << ","
+			<< "\"" << temp->getData()->getName() << "\","
+			<< temp->getData()->getEmail() << ","
+			<< temp->getData()->getUnits() << ","
+			<< temp->getData()->getProgram() << ","
+			<< temp->getData()->getProgram() << ","
+			<< temp->getData()->getYear() << endl;
+		temp = temp->getNext();
+	}
+}
+
 
 // All Students and their Absences Report
 template <class T>
