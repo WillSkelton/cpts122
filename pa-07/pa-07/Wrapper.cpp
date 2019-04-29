@@ -2,7 +2,7 @@
 
 // CTOR
 Wrapper::Wrapper(){
-	this->openFiles();
+	//this->openFiles();
 }
 
 // DTOR
@@ -21,6 +21,7 @@ void Wrapper::REPL(void){
 	int choice = 0;
 
 	do {
+		system("cls");
 
 		this->printMenu();
 
@@ -59,6 +60,8 @@ void Wrapper::router(int choice) {
 
 	case 2:
 		cout << "2. Load master list" << endl;
+		this->load();
+		system("pause");
 		break;
 
 	case 3:
@@ -143,10 +146,58 @@ void Wrapper::printMenu(void){
 }
 
 void Wrapper::import(void){
-	this->openFiles();
-	//this->masterFile.open("masterFile.txt", ios::out);
+	//this->openFiles();
+	////this->masterFile.open("masterFile.txt", ios::out);
+	//Data *temp;
+	//string line = "";
+	//int recordNumber = 0;
+	//int id = 0;
+	//string name = "";
+	//string email = "";
+	//int units = 0;
+	//string program = "";
+	//string level = "";
+	//// Gobble the first line
+	//getline(this->infile, line);
+	//getline(this->infile, line, ',');
+	//recordNumber = std::stoi(line);
+	//while (this->infile.eof() != 1) {
+	//	getline(this->infile, line, ',');
+	//	id = std::stoi(line);
+	//	getline(this->infile, line, '"');
+	//	getline(this->infile, line, '"');
+	//	name = line;
+	//	getline(this->infile, line, ',');
+	//	getline(this->infile, line, ',');
+	//	email = line;
+	//	getline(this->infile, line, ',');
+	//	units = (line == "AU") ? -1 : std::stoi(line);
+	//	getline(this->infile, line, ',');
+	//	program = line;
+	//	getline(this->infile, line, '\n');
+	//	level = line;
+	//	if (name == "Mort,Kris") {
+	//		cout << line << endl;
+	//	}
+	//	getline(this->infile, line, ',');
+	//	
+	//	temp = new Data(recordNumber, id, name, email, units, program, level, 0);
+	//	this->classList.prepend(temp);
+	//	this->classList.print();
+	//	recordNumber++;
+	//	cout << "==================" << endl;
+	//}
+	//
+	//this->classList.print2File(this->masterFile);
+	//this->masterFile.close();
 
-	int hack = 0;
+	this->classList.nukeList();
+
+	this->read(this->infile, "classList.csv");
+}
+
+void Wrapper::read(fstream &infile, string filename) {
+	infile.open(filename, ios::in);
 
 	Data *temp;
 	string line = "";
@@ -160,39 +211,39 @@ void Wrapper::import(void){
 	string level = "";
 
 	// Gobble the first line
-	getline(this->infile, line);
-	getline(this->infile, line, ',');
+	getline(infile, line);
+	getline(infile, line, ',');
 	recordNumber = std::stoi(line);
 
 
-	while (this->infile.eof() != 1) {
+	while (infile.eof() != 1) {
 
-		getline(this->infile, line, ',');
+		getline(infile, line, ',');
 		id = std::stoi(line);
 
-		getline(this->infile, line, '"');
-		getline(this->infile, line, '"');
+		getline(infile, line, '"');
+		getline(infile, line, '"');
 		name = line;
 
-		getline(this->infile, line, ',');
-		getline(this->infile, line, ',');
+		getline(infile, line, ',');
+		getline(infile, line, ',');
 		email = line;
 
-		getline(this->infile, line, ',');
+		getline(infile, line, ',');
 		units = (line == "AU") ? -1 : std::stoi(line);
 
-		getline(this->infile, line, ',');
+		getline(infile, line, ',');
 		program = line;
 
-		getline(this->infile, line, '\n');
+		getline(infile, line, '\n');
 		level = line;
 
 		if (name == "Mort,Kris") {
 			cout << line << endl;
 		}
-		getline(this->infile, line, ',');
+		getline(infile, line, ',');
 
-		
+
 		temp = new Data(recordNumber, id, name, email, units, program, level, 0);
 
 		this->classList.prepend(temp);
@@ -202,13 +253,17 @@ void Wrapper::import(void){
 		cout << "==================" << endl;
 
 	}
-	
-	//this->classList.print2File(this->masterFile);
-	//this->masterFile.close();
-
+	infile.close();
 }
 
-void Wrapper::load(void){}
+
+void Wrapper::load(void){
+
+	this->classList.nukeList();
+	
+	this->read(this->masterFile, "masterFile.txt");
+
+}
 
 void Wrapper::store(void){
 

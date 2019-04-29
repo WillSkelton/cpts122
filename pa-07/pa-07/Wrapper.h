@@ -26,6 +26,8 @@ private:
 
 	void printMenu(void);
 
+	void read(fstream &infile, string filename);
+
 	void import(void);
 
 	void load(void);

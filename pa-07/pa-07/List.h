@@ -18,6 +18,7 @@ public:
 	void print2File(fstream &outfile);
 	void print2File(fstream &outfile, Node<T> *head);
 
+	void nukeList(void);
 
 	// All Students and their Absences Report
 	void reportOne(fstream &outfile);
@@ -73,6 +74,13 @@ bool List<T>::prepend(Data *record){
 	return true;
 
 }
+
+template <class T>
+void List<T>::nukeList(void) {
+	delete this->head;
+	this->head = nullptr;
+}
+
 
 // Print
 template <class T>
