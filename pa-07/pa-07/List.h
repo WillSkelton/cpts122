@@ -68,6 +68,7 @@ bool List<T>::prepend(Data *record){
 
 
 	this->head = temp;
+	this->length++;
 
 	return true;
 

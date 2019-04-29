@@ -63,6 +63,7 @@ void Wrapper::router(int choice) {
 
 	case 3:
 		cout << "3. Store master list" << endl;
+		this->store();
 		break;
 
 	case 4:
@@ -143,7 +144,7 @@ void Wrapper::printMenu(void){
 
 void Wrapper::import(void){
 	this->openFiles();
-	this->masterFile.open("masterFile.txt", ios::out);
+	//this->masterFile.open("masterFile.txt", ios::out);
 
 	int hack = 0;
 
@@ -201,15 +202,23 @@ void Wrapper::import(void){
 		cout << "==================" << endl;
 
 	}
-	this->classList.print2File(this->masterFile);
-
-	this->masterFile.close();
+	
+	//this->classList.print2File(this->masterFile);
+	//this->masterFile.close();
 
 }
 
 void Wrapper::load(void){}
 
-void Wrapper::store(void){}
+void Wrapper::store(void){
+
+	if (this->classList.getLength() > 0) {
+		this->masterFile.open("masterFile.txt", ios::out);
+		this->classList.print2File(this->masterFile);
+		this->masterFile.close();
+	}
+
+}
 
 void Wrapper::markAbsences(void){}
 
