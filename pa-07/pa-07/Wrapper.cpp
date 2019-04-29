@@ -53,24 +53,21 @@ void Wrapper::router(int choice) {
 
 	switch (choice) {
 	case 1:
-		cout << "1. Import course list" << endl;
 		this->import();
 
 		break;
 
 	case 2:
-		cout << "2. Load master list" << endl;
 		this->load();
 		system("pause");
 		break;
 
 	case 3:
-		cout << "3. Store master list" << endl;
 		this->store();
 		break;
 
 	case 4:
-		cout << "4. Mark absences" << endl;
+		this->markAbsences();
 		break;
 
 	case 5:
@@ -146,51 +143,7 @@ void Wrapper::printMenu(void){
 }
 
 void Wrapper::import(void){
-	//this->openFiles();
-	////this->masterFile.open("masterFile.txt", ios::out);
-	//Data *temp;
-	//string line = "";
-	//int recordNumber = 0;
-	//int id = 0;
-	//string name = "";
-	//string email = "";
-	//int units = 0;
-	//string program = "";
-	//string level = "";
-	//// Gobble the first line
-	//getline(this->infile, line);
-	//getline(this->infile, line, ',');
-	//recordNumber = std::stoi(line);
-	//while (this->infile.eof() != 1) {
-	//	getline(this->infile, line, ',');
-	//	id = std::stoi(line);
-	//	getline(this->infile, line, '"');
-	//	getline(this->infile, line, '"');
-	//	name = line;
-	//	getline(this->infile, line, ',');
-	//	getline(this->infile, line, ',');
-	//	email = line;
-	//	getline(this->infile, line, ',');
-	//	units = (line == "AU") ? -1 : std::stoi(line);
-	//	getline(this->infile, line, ',');
-	//	program = line;
-	//	getline(this->infile, line, '\n');
-	//	level = line;
-	//	if (name == "Mort,Kris") {
-	//		cout << line << endl;
-	//	}
-	//	getline(this->infile, line, ',');
-	//	
-	//	temp = new Data(recordNumber, id, name, email, units, program, level, 0);
-	//	this->classList.prepend(temp);
-	//	this->classList.print();
-	//	recordNumber++;
-	//	cout << "==================" << endl;
-	//}
-	//
-	//this->classList.print2File(this->masterFile);
-	//this->masterFile.close();
-
+	
 	this->classList.nukeList();
 
 	this->read(this->infile, "classList.csv");
@@ -247,7 +200,7 @@ void Wrapper::read(fstream &infile, string filename) {
 		temp = new Data(recordNumber, id, name, email, units, program, level, 0);
 
 		this->classList.prepend(temp);
-		this->classList.print();
+		//this->classList.print();
 
 		recordNumber++;
 		cout << "==================" << endl;
@@ -255,7 +208,6 @@ void Wrapper::read(fstream &infile, string filename) {
 	}
 	infile.close();
 }
-
 
 void Wrapper::load(void){
 
@@ -275,6 +227,39 @@ void Wrapper::store(void){
 
 }
 
-void Wrapper::markAbsences(void){}
+void Wrapper::markAbsences(void){
+
+	Node<string> *temp = this->classList.getHead();
+
+
+	auto now = std::chrono::system_clock::now();
+
+	std::time_t date = std::chrono::system_clock::to_time_t(now);
+
+	string today = std::ctime(&date);
+	today = today.substr(0, 10);
+
+	std::cout << "Today's date is: " << today << endl;
+
+	//system("pause");
+
+
+	while (temp != nullptr) {
+		
+		int isAbsent = 0;
+
+		cout << "Do you want to mark '" << temp->getData()->getName() << "' as absent?" << endl
+			<< "1. Yes" << endl
+			<< "2. No" << endl;
+		isAbsent = inputCheck(0, 1);
+
+		if (isAbsent == 1) {
+			temp->getData()->getAbsences()->push(today);
+		}
+
+		temp = temp->getNext();
+	}
+
+}
 
 void Wrapper::generateReport(void){}
