@@ -17,8 +17,14 @@ Stack::Stack(string initial){
 Stack::~Stack(){}
 
 string Stack::peek(void){
+
+	string recent = "N/A";
 	
-	return (*this->top)[0];
+	if (this->top->empty() == false) {
+		recent = (*this->top)[0];
+	}
+
+	return recent;
 
 }
 

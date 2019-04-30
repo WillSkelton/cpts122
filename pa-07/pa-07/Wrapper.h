@@ -36,7 +36,7 @@ private:
 
 	void markAbsences(void);
 
-	void generateReport(void);
+	void generateReports(void);
 
 	
 	fstream infile;

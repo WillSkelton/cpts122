@@ -50,7 +50,7 @@ string Data::getYear(void){
 }
 
 int Data::getNumAbsences(void){
-	return this->numAbsences;
+	return this->absences->getLength();;
 }
 
 Stack *Data::getAbsences(void){

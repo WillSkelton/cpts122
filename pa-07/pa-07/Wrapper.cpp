@@ -71,7 +71,7 @@ void Wrapper::router(int choice) {
 		break;
 
 	case 5:
-		cout << "5. Generate report" << endl;
+		this->generateReports();
 		break;
 
 	case 6:
@@ -191,11 +191,7 @@ void Wrapper::read(fstream &infile, string filename) {
 		getline(infile, line, '\n');
 		level = line;
 
-		if (name == "Mort,Kris") {
-			cout << line << endl;
-		}
 		getline(infile, line, ',');
-
 
 		temp = new Data(recordNumber, id, name, email, units, program, level, 0);
 
@@ -203,9 +199,10 @@ void Wrapper::read(fstream &infile, string filename) {
 		//this->classList.print();
 
 		recordNumber++;
-		cout << "==================" << endl;
+		//cout << "==================" << endl;
 
 	}
+	this->classList.print();
 	infile.close();
 }
 
@@ -251,7 +248,7 @@ void Wrapper::markAbsences(void){
 		cout << "Do you want to mark '" << temp->getData()->getName() << "' as absent?" << endl
 			<< "1. Yes" << endl
 			<< "2. No" << endl;
-		isAbsent = inputCheck(0, 1);
+		isAbsent = inputCheck(1, 2);
 
 		if (isAbsent == 1) {
 			temp->getData()->getAbsences()->push(today);
@@ -262,4 +259,48 @@ void Wrapper::markAbsences(void){
 
 }
 
-void Wrapper::generateReport(void){}
+void Wrapper::generateReports(void){
+
+	int choice;
+	int threshold = 0;
+
+	cout << "Would you like to..." << endl
+		<< "1. Generate report for all students; showing only the most recent absence for each student" << endl
+		<< "2. Generate report for students with absences that match or exceed a certain number of absences" << endl
+		<< "3. Cancel" << endl;
+
+	choice = inputCheck(1, 3);
+
+	switch (choice) {
+	case 1:
+		this->report1.open("report1.txt", ios::out);
+		this->classList.reportOne(this->report1);
+		this->report1.close();
+		break;
+
+	case 2:
+		cout << "Absence threshold:" << endl << ">>> ";
+		cin >> threshold;
+		
+		//this->report1.open("report1.txt", ios::out);
+		//cout << this->report1.is_open() << endl;
+
+		this->report2.open("report2.txt", ios::out);
+		cout << this->report2.is_open() << endl;
+
+		
+
+		this->classList.reportTwo(threshold, this->report2);
+		this->report2.close();
+		break;
+
+	case 3:
+		break;
+
+	default:
+		cout << "idk how you wound up here" << endl;
+		break;
+	}
+
+
+}

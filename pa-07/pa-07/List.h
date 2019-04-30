@@ -158,7 +158,7 @@ void List<T>::reportTwo(int threshold, fstream &outfile) {
 
 	while (temp != nullptr) {
 
-		if (temp->getData()->getNumAbsences() <= threshold) {
+		if (temp->getData()->getNumAbsences() >= threshold) {
 
 			cout << temp->getData()->getName() << ": " << temp->getData()->getProgram() << endl;
 			outfile << temp->getData()->getName() << ": " << temp->getData()->getProgram() << endl;
