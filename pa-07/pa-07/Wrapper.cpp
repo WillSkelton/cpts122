@@ -17,6 +17,7 @@ void Wrapper::startApp(void){
 	this->REPL();
 }
 
+// Main Menu Loop
 void Wrapper::REPL(void){
 	int choice = 0;
 
@@ -34,6 +35,7 @@ void Wrapper::REPL(void){
 
 }
 
+// Makes sure user's choice is between 2 numbers
 int Wrapper::inputCheck(int lower, int upper) {
 	int choice = lower - 1;
 
@@ -49,12 +51,13 @@ int Wrapper::inputCheck(int lower, int upper) {
 	return choice;
 }
 
+// routes user's menu choice to a function
 void Wrapper::router(int choice) {
 
 	switch (choice) {
 	case 1:
 		this->import();
-
+		system("pause");
 		break;
 
 	case 2:
@@ -86,6 +89,7 @@ void Wrapper::router(int choice) {
 	}
 }
 
+// Opens all files. Not Used
 void Wrapper::openFiles(void){
 	// Infile
 	if (this->infile.is_open() == false) {
@@ -116,6 +120,7 @@ void Wrapper::openFiles(void){
 
 }
 
+// Closes all file. Not used
 void Wrapper::closeFiles(void){
 	// Infile
 	if (this->infile.is_open() == true) {
@@ -133,6 +138,7 @@ void Wrapper::closeFiles(void){
 	}
 }
 
+// Print's main menu
 void Wrapper::printMenu(void){
 	cout << "1. Import course list" << endl
 		<< "2. Load master list" << endl
@@ -142,6 +148,7 @@ void Wrapper::printMenu(void){
 		<< "6. Exit" << endl;
 }
 
+// Impots files from classList.csv
 void Wrapper::import(void){
 	
 	this->classList.nukeList();
@@ -149,6 +156,7 @@ void Wrapper::import(void){
 	this->read(this->infile, "classList.csv");
 }
 
+// takes a fstream and a filename and reads the contents of that file to the wrapper class's list
 void Wrapper::read(fstream &infile, string filename) {
 	infile.open(filename, ios::in);
 
@@ -206,6 +214,7 @@ void Wrapper::read(fstream &infile, string filename) {
 	infile.close();
 }
 
+// Does basically the same thing as import but for the masterfile
 void Wrapper::load(void){
 
 	this->classList.nukeList();
@@ -214,6 +223,7 @@ void Wrapper::load(void){
 
 }
 
+// Saves the contents of the wrapper class's list to the materfile
 void Wrapper::store(void){
 
 	if (this->classList.getLength() > 0) {
@@ -224,6 +234,7 @@ void Wrapper::store(void){
 
 }
 
+// goes through each student and asks the user if they want to add today's date to the student's absence list
 void Wrapper::markAbsences(void){
 
 	Node<string> *temp = this->classList.getHead();
@@ -259,6 +270,7 @@ void Wrapper::markAbsences(void){
 
 }
 
+// Asks the user which report the want to generate and generates the corresponding report
 void Wrapper::generateReports(void){
 
 	int choice;

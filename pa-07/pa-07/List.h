@@ -57,7 +57,7 @@ List<T>::~List(){
 
 }
 
-// Prepend
+// Prepend (Basically push for the list)
 template <class T>
 bool List<T>::prepend(Data *record){
 
@@ -75,6 +75,8 @@ bool List<T>::prepend(Data *record){
 
 }
 
+
+// Deletes list
 template <class T>
 void List<T>::nukeList(void) {
 	delete this->head;
@@ -82,7 +84,7 @@ void List<T>::nukeList(void) {
 }
 
 
-// Print
+// Print to screen
 template <class T>
 void List<T>::print(){
 
@@ -96,6 +98,8 @@ void List<T>::print(){
 	}
 }
 
+
+// helper function to print list to a file
 template <class T>
 void List<T>::print2File(fstream &outfile) {
 	outfile << ",ID,Name,Email,Units,Program,Level" << endl;
@@ -103,6 +107,8 @@ void List<T>::print2File(fstream &outfile) {
 
 }
 
+
+// prints entire list to a file
 template <class T>
 void List<T>::print2File(fstream &outfile, Node<T> *head) {
 
@@ -158,6 +164,7 @@ void List<T>::reportTwo(int threshold, fstream &outfile) {
 
 	while (temp != nullptr) {
 
+		// If greater than threshold, print
 		if (temp->getData()->getNumAbsences() >= threshold) {
 
 			cout << temp->getData()->getName() << ": " << temp->getData()->getProgram() << endl;
